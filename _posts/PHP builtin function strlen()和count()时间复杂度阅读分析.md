@@ -8,14 +8,15 @@ date: 2017/01/23 14:00:25
 
 翻了下PHP内核的定义，大概心中也有了答案了
 
-count()和strlen()都是O(1)的时间复杂度
+`count()`和`strlen()`都是O(1)的时间复杂度
 
-试想一下如果strlen()需要O(N)的复杂度那未免也太慢了，字符串长度起来的话服务器不是要直接挂掉吗
+试想一下如果`strlen()`需要O(N)的复杂度那未免也太慢了，字符串长度起来的话服务器不是要直接挂掉吗
 
 这两个函数都是典型的空间换时间的做法
 
 我们可以先看看zvalue的结构：
 
+``` c
 typedef union _zvalue_value {
    long lval;             /* long value */
    double dval;            /* double value */
@@ -27,12 +28,14 @@ typedef union _zvalue_value {
    zend_object_value obj;
    zend_ast *ast;
 } zvalue_value;
+```
 这里用的是一个联合体，当变量类型是string类型的时候附加存储多了一个len的整型变量，显而易见需要取长度直接利用记录值就可以了，自然就是O(1)
 
-对于count()常用的参数类型应该为数组，对于继承Countable的类暂不作讨论
+对于`count()`常用的参数类型应该为数组，对于继承Countable的类暂不作讨论
 
 数组实现方式为Hashtable，直接看看他的结构吧
 
+``` c
 typedef struct _hashtable { 
     uint nTableSize;        // hash Bucket的大小，最小为8，以2x增长。
     uint nTableMask;        // nTableSize-1 ， 索引取值的优化
@@ -50,4 +53,5 @@ typedef struct _hashtable {
     int inconsistent;
 #endif
 } HashTable;
+```
 count直接获取nNumOfElements大小，所以也是O(1)
