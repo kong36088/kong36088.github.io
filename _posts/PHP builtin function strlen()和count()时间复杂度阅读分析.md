@@ -29,6 +29,8 @@ typedef union _zvalue_value {
    zend_ast *ast;
 } zvalue_value;
 ```
+<!--more-->
+
 这里用的是一个联合体，当变量类型是string类型的时候附加存储多了一个len的整型变量，显而易见需要取长度直接利用记录值就可以了，自然就是O(1)
 
 对于`count()`常用的参数类型应该为数组，对于继承Countable的类暂不作讨论

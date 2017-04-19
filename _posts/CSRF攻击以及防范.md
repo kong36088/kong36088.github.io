@@ -25,6 +25,8 @@ $value="someValueHere";
 setcookie("cookie",$value,time()+3600);
 ``` 
 
+<!--more-->
+
 ``` html
 <input type="hidden" name="hash" value="<?php echo md5($_COOKIE('cookie'));" />
 ``` 

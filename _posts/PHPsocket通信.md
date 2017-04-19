@@ -37,7 +37,7 @@ while ( 1 ) {
 }
 socket_close ( $socket );
 ``` 
-
+<!--more-->
 
 然后是client端的代码
 ``` php

@@ -9,6 +9,8 @@ date: 2015/11/16 14:24:25
 
 源码：
 
+<!--more-->
+
 ``` php
 // 爬虫
 class Crawler {

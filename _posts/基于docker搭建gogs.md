@@ -30,6 +30,8 @@ mysql:
       - "3306:3306"
     restart: always
 ```
+<!--more-->
+
 保存并退出 `:wq`，在同一目录下创建Dockerfile
 ``` bash
 vi Dockerfile

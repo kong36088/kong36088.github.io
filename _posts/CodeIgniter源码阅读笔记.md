@@ -33,6 +33,7 @@ register_shutdown_function('_shutdown_handler');
 
 该文件定义了一些全局当中需要用到的函数，辅助框架运行，如`is_cli()`判断来判断是否cli运行环境
 
+<!--more-->
 
 ## DB_query_builder.php
 

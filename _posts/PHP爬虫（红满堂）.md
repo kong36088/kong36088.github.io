@@ -8,6 +8,9 @@ date: 2015/11/16 20:24:25
 红满堂链接：http://hometown.scau.edu.cn/bbs/forum.php
 
 献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：
+
+<!--more-->
+
 ``` php
 // 红满堂爬虫
 class Crwaler {

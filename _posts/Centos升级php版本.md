@@ -15,6 +15,9 @@ yum list installed | grep php
 ``` bash
  yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64
 ``` 
+
+<!--more-->
+
 > Centos 5.X
 
   rpm -Uvh http://mirror.webtatic.com/yum/el5/latest.rpm

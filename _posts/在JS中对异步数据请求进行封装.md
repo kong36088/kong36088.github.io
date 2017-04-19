@@ -22,6 +22,8 @@ jQuery.ajax返回的是jqXHR对象，它是浏览器原生XMLHttpRequest对象�
 
 封装成两个文件，分别为逻辑层和视图层
 
+<!--more-->
+
 逻辑层
 
 ``` javascript

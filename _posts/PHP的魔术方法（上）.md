@@ -19,6 +19,8 @@ PHP所提供的"重载"（overloading）是指动态地"创建"类属性和方�
 
 当对不可访问属性调用 unset() 时，__unset() 会被调用。
 
+<!--more-->
+
 ``` php
 <?php
 class Train {

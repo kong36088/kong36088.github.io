@@ -51,6 +51,7 @@ function deal_way($channel) {
 
 ``` 
 接下来是创建charge对象的php代码：
+<!--more-->
 ``` php
 public function get_charge() {
 	$channel = 'alipay_wap';

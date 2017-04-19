@@ -32,7 +32,7 @@ source ~/.bashrc
 >Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies
 即说明安装成功。
 
-
+<!--more-->
 
 
 memcached扩展：

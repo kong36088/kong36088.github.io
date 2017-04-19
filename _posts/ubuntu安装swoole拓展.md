@@ -21,6 +21,8 @@ date: 2015/12/28 14:24:25
 
 pecl不可用的请确认php安装目录的bin目录已加入系统变量
 
+<!--more-->
+
 用pecl方式来安装
 ``` bash
 zzs@ubuntu:~$ sudo pecl install swoole

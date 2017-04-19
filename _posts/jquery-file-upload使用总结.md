@@ -23,6 +23,7 @@ date: 2016/05/01 01:24:25
     </div>
 </div>
 ```
+<!--more-->
 
 ``` javascript
 $("#weixin_image").fileupload({

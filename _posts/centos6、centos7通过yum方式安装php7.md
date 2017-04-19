@@ -18,6 +18,8 @@ centos7下面的安装方式
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 然后就可以安装php7了，安装方式如下
 
+<!--more-->
+
 ``` bash
 [root@VM_13_18_centos /]# php -v      
 PHP 7.0.4 (cli) (built: Mar  5 2016 00:55:49) ( NTS )

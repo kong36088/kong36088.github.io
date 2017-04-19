@@ -13,6 +13,9 @@ python2.7对于中文的支持实在是十分之蛋疼
 getImagesURL(max_number, word)
 
 max_number是要抓取图片的数量，word是搜索的关键字
+
+<!--more-->
+
 ``` python
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-

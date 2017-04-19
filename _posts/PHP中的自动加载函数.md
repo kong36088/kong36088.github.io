@@ -16,6 +16,8 @@ date: 2016/03/04 14:24:25
 
 __autoload只能被定义一次，自然spl_autoload_register更好用
 
+<!--more-->
+
 以下是代码：
 
 Main.php

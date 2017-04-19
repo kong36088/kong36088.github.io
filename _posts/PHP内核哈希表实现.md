@@ -31,6 +31,8 @@ typedef struct _hashtable {
 PHP的GC（内存回收）机制就是根据nNumOfElements大小来进行判断，当采取unset()时，该字段的值减一，在字段值为0时进行内存回收
 首先初始化HashTable的大小为8
 
+<!--more-->
+
 # 初始化
 
 ``` c

@@ -19,6 +19,9 @@ $ sudo apt-get install mysql-client unixodbc libpq5
 ``` bash
 $ sudo dpkg -i sphinxsearch_2.3.1-beta-0ubuntu11~trusty_amd64.deb
 ``` 
+
+<!--more-->
+
 通过PPA的方式 （仅限于ubuntu）
 
 用PPA的方式来安装Sphinx会简单许多

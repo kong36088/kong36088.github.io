@@ -25,6 +25,8 @@ date: 2015/11/16 19:24:25
 {$Think.server.script_name}和{$Think.SERVER.script_name}等效
 SESSION 、COOKIE还支持二维数组的输出
 
+<!--more-->
+
 例如：
 {$Think.CONFIG.user.user_name}
 {$Think.session.user.user_name}

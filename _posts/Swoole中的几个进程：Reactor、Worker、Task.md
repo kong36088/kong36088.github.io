@@ -25,6 +25,8 @@ swoole中worker/task进程都是由Manager进程Fork并管理的。
 将TCP客户端发来的数据缓冲、拼接、拆分成完整的一个请求数据包
 Reactor以多线程的方式运行
 
+<!--more-->
+
 ## Worker进程
 
 接受由Reactor线程投递的请求数据包，并执行PHP回调函数处理数据

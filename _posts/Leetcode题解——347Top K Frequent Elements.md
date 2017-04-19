@@ -21,6 +21,8 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 根据题目大意就是，给出一个数组，找出其中出现次数前K多的数字并以数组形式返回
 
+<!--more-->
+
 # 题解
 
 ## 利用优先队列

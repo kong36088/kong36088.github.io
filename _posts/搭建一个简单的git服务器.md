@@ -25,6 +25,8 @@ $ sudo adduser git
 ``` 
 第三步，创建证书登录：
 
+<!--more-->
+
 收集所有需要登录的用户的公钥，就是他们自己的id_rsa.pub文件，把所有公钥导入到/home/git/.ssh/authorized_keys文件里，一行一个。
 
 第四步，初始化Git仓库：

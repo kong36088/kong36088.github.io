@@ -24,6 +24,8 @@ print_r($response);
 
 >HTTP/1.1 200 OK Content-Type: application/json;encoding=utf-8 Access-Control-Allow-Origin: * Set-Cookie: key1=value1 Set-Cookie: key2=value2 {"header":{"handler_id":3001,"command_id":3004,"terminal":1001,"version":0,"reserved":0},"data":{"service_types":[{"name":"A号：收款、退费、科研经费入账","id":1,"count":0},{"name":"B号：请款、内部转账、出国业务咨询及报销","id":2,"count":0},{"name":"C号：报销（含劳务收入酬金报销）","id":3,"count":0},{"name":"D号：零余额优先报账","id":4,"count":0}],"code":1,"msgCode":23000,"msg":"获得排队业务清单请求成功"}}
 
+<!--more-->
+
 要获取分离body和header的数据可以用以下方法：
 ``` php
 if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == '200') {//判断是否成功获取数据
@@ -38,6 +40,7 @@ if (curl_getinfo($ch, CURLINFO_HTTP_CODE) == '200') {//判断是否成功获取�
     list($header, $body) = explode("\r\n\r\n", response, 2);
 }
 ``` 
+
 
 处理结果如下（body部分）：
 

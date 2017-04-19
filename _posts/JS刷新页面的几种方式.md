@@ -18,6 +18,9 @@ location=location
 ``` javascript
 location.assign(location) 
 ``` 
+
+<!--more-->
+
 ``` javascript
 document.execCommand('Refresh') 
 ``` 

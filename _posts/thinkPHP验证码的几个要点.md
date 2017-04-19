@@ -29,6 +29,9 @@ class IndexController extends Controller {
 		return $verify->check ( $code, $id );
 	}
 }
+
+<!--more-->
+
 ``` 
 在对应的模板文件：目录下新建文件Index_index.html，内容如下：
 ``` html

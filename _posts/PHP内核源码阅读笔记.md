@@ -49,6 +49,8 @@ struct _php_core_globals {
 };
 ```
 
+<!--more-->
+
 ## SG
 
 我们来看一下`SG`的定义

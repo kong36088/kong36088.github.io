@@ -33,6 +33,7 @@ console.log('xxx' + str.trim() + 'xxx');  // xxxRucheexxx
 str = ' Ruchee ';
 console.log('xxx' + str.trim(' ', 'left') + 'xxx');  // xxxRuchee xxx
 
+<!--more-->
 
 // 去除字符串右侧空白
 str = ' Ruchee ';

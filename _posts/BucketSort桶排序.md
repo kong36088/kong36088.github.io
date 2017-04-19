@@ -18,6 +18,8 @@ date: 2016/08/14 15:24:25
 
 ![BucketSort](/uploads/BucketSort.jpg)
 
+<!--more-->
+
 # 实现
 
 ``` c++

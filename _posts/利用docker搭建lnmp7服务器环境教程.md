@@ -22,6 +22,7 @@ apt-get update
 apt-get install nginx
 ```
 完成安装
+<!--more-->
 
 ## 配置
 ``` bash

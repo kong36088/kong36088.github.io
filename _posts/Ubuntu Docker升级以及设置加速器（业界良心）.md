@@ -42,6 +42,7 @@ sudo apt-get install lxc-docker
 在使用加速器后下载镜像时长由原来的几个小时到现在的几十分钟，大大的提升了下载速度！
 这里我们使用的是国内良心厂家`DaoCloud`免费提供的加速器
 
+<!--more-->
 ## 注册
 
 首先要到`DaoCloud`先注册一个帐号，[这个是官网传送门](https://www.daocloud.io/)

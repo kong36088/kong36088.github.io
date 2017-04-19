@@ -28,6 +28,8 @@ You may assume that the secret number and your friend's guess only contain digit
 题目大意
 在Secret串和Guess串中找出位置相同且数字相同的数量A，并且计算出位置不一样但是数字相同的数量B
 
+<!--more-->
+
 以下是代码
 ``` c++
 class Solution {

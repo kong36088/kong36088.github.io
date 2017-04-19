@@ -18,13 +18,14 @@ date: 2016/11/04 21:24:25
 4.获取用户的关注列表和粉丝列表，继续插入到redis
 5.从redis的`user_queue`队列中获取新用户继续重复步骤3
 
-
 # 效果图
 
 服务器带宽有限，并且知乎进行了ip封杀，所以这些数据也花了好几天的时间才爬下来
 **喜欢的朋友帮忙点个star呗♪(＾∀＾●)ﾉ** [ZhihuSpider](https://github.com/kong36088/ZhihuSpider)
 
 ![知乎爬虫1](/uploads/知乎用户爬虫1.png)
+
+<!--more-->
 ![知乎爬虫2](/uploads/知乎用户爬虫2.png)
 ![知乎爬虫3](/uploads/知乎用户爬虫3.png)
 ![知乎爬虫4](/uploads/知乎用户爬虫4.png)

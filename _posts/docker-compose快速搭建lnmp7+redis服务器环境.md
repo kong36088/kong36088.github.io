@@ -31,6 +31,8 @@ $ sudo yum install docker-engine
 $ sudo service docker start
 ```
 
+<!--more-->
+
 # 安装docker-compose
 
 先安装pip

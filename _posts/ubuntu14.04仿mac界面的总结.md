@@ -25,6 +25,8 @@ sudo apt-get install ubuntu-tweak
 
 ![效果图](http://cl.ly/image/2V2n0u1D2Y02/172851tw17thwawpooawnk.jpeg)
 
+<!--more-->
+
 然后敲入下面命令安装主题：
 ``` bash
 sudo add-apt-repository ppa:noobslab/themes

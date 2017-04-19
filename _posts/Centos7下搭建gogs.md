@@ -27,6 +27,9 @@ $ sudo chmod -R 760 /home/git/gogs/
 # 运行安装
 
 首先安装数据库，这里我们安装mariadb，在centos7中mariadb代替了mysql
+
+<!--more-->
+
 ``` bash
 sudo yum update
 yum -y install mariadb

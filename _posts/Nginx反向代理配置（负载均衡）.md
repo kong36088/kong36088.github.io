@@ -40,7 +40,7 @@ upstream hello{
 }
 ``` 
 
-
+<!--more-->
 
 > 完整文件的配置
 

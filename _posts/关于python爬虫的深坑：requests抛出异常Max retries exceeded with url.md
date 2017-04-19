@@ -26,6 +26,8 @@ except requests.exceptions.ConnectionError:
  ``` 
 
 解决二：
+<!--more-->
+
 产生的连接数过多而导致`Max retries exceeded`
 在header中不使用持久连接
 `'Connection': 'close'`

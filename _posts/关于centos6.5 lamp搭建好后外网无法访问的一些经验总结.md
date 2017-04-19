@@ -16,6 +16,9 @@ CentOS防火墙设置开启80端口访问
 [root@centos httpd]# /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT
 ``` 
 保存
+
+<!--more-->
+
 ``` bash
 [root@centos httpd]# /etc/rc.d/init.d/iptables save
 iptables：将防火墙规则保存到 /etc/sysconfig/iptables：     [确定]

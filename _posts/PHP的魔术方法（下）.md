@@ -29,6 +29,8 @@ __toString() 方法用于一个类被当成字符串时应怎样回应。例如 
 
 当尝试使用var_dump()打印出对象时，如果没有定义该魔术方法，PHP会打印出所有public，protected，private属性
 
+<!--more-->
+
 ``` php
 <?php
 class Train2 {

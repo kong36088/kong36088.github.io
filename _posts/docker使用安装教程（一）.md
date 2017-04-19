@@ -16,6 +16,9 @@ apt-get install docker.io
 ``` 
 
 安装完成后，输入`docker`查看docker信息
+
+<!--more-->
+
 ``` bash
 Usage: docker [OPTIONS] COMMAND [arg...]
 

@@ -60,6 +60,8 @@ inline unsigned time33(char const*str, int len)
 } 
 ```
 
+<!--more-->
+
 ![PHP的HashTalble](/uploads/PHP的HashTable.png)
 
 ## HashTable的初始化
