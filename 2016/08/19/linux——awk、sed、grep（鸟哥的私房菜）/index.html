@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://github.com/kong36088/kong36088.github.io">
+  <title>linux——awk、sed、grep（鸟哥的私房菜） | William的后花园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习记录">
+<meta name="keywords" content="Linux##文章关键词，多关键词格式为 keyword1,keywords2,...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux——awk、sed、grep（鸟哥的私房菜）">
+<meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/index.html">
+<meta property="og:site_name" content="William的后花园">
+<meta property="og:description" content="学习记录">
+<meta property="og:updated_time" content="2017-04-19T12:32:25.927Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux——awk、sed、grep（鸟哥的私房菜）">
+<meta name="twitter:description" content="学习记录">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.05aabf.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "https://hm.baidu.com/hm.js?dc0124f7329d852649d4ac1bf1874a26";
+	var s = document.getElementsByTagName("script")[0]; 
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #000033"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/uploads/site/headimg.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">William</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">不懂裁缝的厨师不是好司机</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">home</a></li>
+	        
+				<li><a href="/archives">archives</a></li>
+	        
+				<li><a href="/about">about</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/kong36088" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiangweilongg" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #000033"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/uploads/site/headimg.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">William</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>不懂裁缝的厨师不是好司机<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/kong36088" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/jiangweilongg" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 33.333333333333336%"><a href="/">home</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/archives">archives</a></li>
+		        
+					<li style="width: 33.333333333333336%"><a href="/about">about</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-linux——awk、sed、grep（鸟哥的私房菜）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux——awk、sed、grep（鸟哥的私房菜）
+    </h1>
+  
+
+        
+        <a href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/" class="archive-article-date">
+  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><pre><code class="bash">[dmtsai@study ~]$ grep [-A] [-B] [--color=auto] <span class="string">'搜尋字串'</span> filename
+選項與參數：
+-A ：後面可加數字，為 after 的意思，除了列出該行外，後續的 n 行也列出來；
+-B ：後面可加數字，為 befer 的意思，除了列出該行外，前面的 n 行也列出來；
+--color=auto 可將正確的那個擷取資料列出顏色
+</code></pre>
+<p>範例一：用 dmesg 列出核心訊息，再以 grep 找出內含 qxl 那行</p>
+<pre><code class="bash">[dmtsai@study ~]$ dmesg | grep <span class="string">'qxl'</span>
+[    0.522749] [drm] qxl: 16M of VRAM memory size
+[    0.522750] [drm] qxl: 63M of IO pages memory ready (VRAM domain)
+[    0.522750] [drm] qxl: 32M of Surface memory size
+[    0.650714] fbcon: qxldrmfb (fb0) is primary device
+[    0.668487] qxl 0000:00:02.0: fb0: qxldrmfb frame buffer device
+<span class="comment"># dmesg 可列出核心產生的訊息！包括硬體偵測的流程也會顯示出來。</span>
+<span class="comment"># 鳥哥使用的顯卡是 QXL 這個虛擬卡，透過 grep 來 qxl 的相關資訊，可發現如上資訊。</span>
+</code></pre>
+<a id="more"></a>
+<p>範例二：承上題，要將捉到的關鍵字顯色，且加上行號來表示：</p>
+<pre><code class="bash">[dmtsai@study ~]$ dmesg | grep -n --color=auto <span class="string">'qxl'</span>
+515:[    0.522749] [drm] qxl: 16M of VRAM memory size
+516:[    0.522750] [drm] qxl: 63M of IO pages memory ready (VRAM domain)
+517:[    0.522750] [drm] qxl: 32M of Surface memory size
+529:[    0.650714] fbcon: qxldrmfb (fb0) is primary device
+539:[    0.668487] qxl 0000:00:02.0: fb0: qxldrmfb frame buffer device
+<span class="comment"># 除了 qxl 會有特殊顏色來表示之外，最前面還有行號喔！其實顏色顯示已經是預設在 alias 當中了！</span>
+</code></pre>
+<p>範例三：承上題，在關鍵字所在行的前兩行與後三行也一起捉出來顯示</p>
+<pre><code class="bash">[dmtsai@study ~]$ dmesg | grep -n -A3 -B2 --color=auto <span class="string">'qxl'</span>
+<span class="comment"># 你會發現關鍵字之前與之後的數行也被顯示出來！這樣可以讓你將關鍵字前後資料捉出來進行分析啦！</span>
+grep 是一個很常見也很常用的指令，他最重要的功能就是進行字串資料的比對，然後將符合使用者需求的字串列印出來。 需要說明的是『grep 在資料中查尋一個字串時，是以 <span class="string">"整行"</span> 為單位來進行資料的擷取的！』也就是說，假如一個檔案內有 10 行，其中有兩行具有你所搜尋的字串，則將那兩行顯示在螢幕上，其他的就丟棄了！
+</code></pre>
+<p>在 CentOS 7 當中，預設已經將 –color=auto 加入在 alias 當中了！使用者就可以直接使用有關鍵字顯色的 grep 囉！非常方便！</p>
+<h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><p>在瞭解了一些正規表示法的基礎應用之後，再來呢？呵呵～兩個東西可以玩一玩的，那就是 sed 跟底下會介紹的 awk 了！ 這兩個傢伙可是相當的有用的啊！舉例來說，鳥哥寫的 logfile.sh 分析登錄檔的小程式 (第十八章會談到)，絕大部分分析關鍵字的取用、統計等等，就是用這兩個寶貝蛋來幫我完成的！那麼你說，要不要玩一玩啊？^_^</p>
+<p>我們先來談一談 sed 好了， sed 本身也是一個管線命令，可以分析 standard input 的啦！ 而且 sed 還可以將資料進行取代、刪除、新增、擷取特定行等等的功能呢！很不錯吧～ 我們先來瞭解一下 sed 的用法，再來聊他的用途好了！</p>
+<pre><code class="bash">[dmtsai@study ~]$ sed [-nefr] [動作]
+選項與參數：
+-n  ：使用安靜(silent)模式。在一般 sed 的用法中，所有來自 STDIN 的資料一般都會被列出到螢幕上。
+      但如果加上 -n 參數後，則只有經過 sed 特殊處理的那一行(或者動作)才會被列出來。
+-e  ：直接在指令列模式上進行 sed 的動作編輯；
+-f  ：直接將 sed 的動作寫在一個檔案內， -f filename 則可以執行 filename 內的 sed 動作；
+-r  ：sed 的動作支援的是延伸型正規表示法的語法。(預設是基礎正規表示法語法)
+-i  ：直接修改讀取的檔案內容，而不是由螢幕輸出。
+
+動作說明：  [n1[,n2]]<span class="keyword">function</span>
+n1, n2 ：不見得會存在，一般代表『選擇進行動作的行數』，舉例來說，如果我的動作
+         是需要在 10 到 20 行之間進行的，則『 10,20[動作行為] 』
+
+<span class="keyword">function</span> 有底下這些咚咚：
+a   ：新增， a 的後面可以接字串，而這些字串會在新的一行出現(目前的下一行)～
+c   ：取代， c 的後面可以接字串，這些字串可以取代 n1,n2 之間的行！
+d   ：刪除，因為是刪除啊，所以 d 後面通常不接任何咚咚；
+i   ：插入， i 的後面可以接字串，而這些字串會在新的一行出現(目前的上一行)；
+p   ：列印，亦即將某個選擇的資料印出。通常 p 會與參數 sed -n 一起運作～
+s   ：取代，可以直接進行取代的工作哩！通常這個 s 的動作可以搭配正規表示法！
+      例如 1,20s/old/new/g 就是啦！
+以行為單位的新增/刪除功能
+</code></pre>
+<p>sed 光是用看的是看不懂的啦！所以又要來練習了！先來玩玩刪除與新增的功能吧！</p>
+<p>範例一：將 /etc/passwd 的內容列出並且列印行號，同時，請將第 2~5 行刪除！</p>
+<pre><code class="bash">[dmtsai@study ~]$ nl /etc/passwd | sed <span class="string">'2,5d'</span>
+     1  root:x:0:0:root:/root:/bin/bash
+     6  sync:x:5:0:sync:/sbin:/bin/sync
+     7  shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+.....(後面省略).....
+</code></pre>
+<p>看到了吧？sed 的動作為 ‘2,5d’ ，那個 d 就是刪除！因為 2-5 行給他刪除了，所以顯示的資料就沒有 2-5 行囉～ 另外，注意一下，原本應該是要下達 sed -e 才對，沒有 -e 也行啦！同時也要注意的是， sed 後面接的動作，請務必以 ‘’ 兩個單引號括住喔！</p>
+<p>如果題型變化一下，舉例來說，如果只要刪除第 2 行，可以使用『 nl /etc/passwd | sed ‘2d’ 』來達成， 至於若是要刪除第 3 到最後一行，則是『 nl /etc/passwd | sed ‘3,$d’ 』的啦，那個錢字號『 $ 』代表最後一行！</p>
+<p>範例二：承上題，在第二行後(亦即是加在第三行)加上『drink tea?』字樣！</p>
+<pre><code class="bash">[dmtsai@study ~]$ nl /etc/passwd | sed <span class="string">'2a drink tea'</span>
+     1  root:x:0:0:root:/root:/bin/bash
+     2  bin:x:1:1:bin:/bin:/sbin/nologin
+drink tea
+     3  daemon:x:2:2:daemon:/sbin:/sbin/nologin
+.....(後面省略).....
+</code></pre>
+<p>嘿嘿！在 a 後面加上的字串就已將出現在第二行後面囉！那如果是要在第二行前呢？『 nl /etc/passwd | sed ‘2i drink tea’ 』就對啦！就是將『 a 』變成『 i 』即可。 增加一行很簡單，那如果是要增將兩行以上呢？</p>
+<p>範例三：在第二行後面加入兩行字，例如『Drink tea or …..』與『drink beer?』</p>
+<pre><code class="bash">[dmtsai@study ~]$ nl /etc/passwd | sed <span class="string">'2a Drink tea or ......\
+&gt; drink beer ?'</span>
+     1  root:x:0:0:root:/root:/bin/bash
+     2  bin:x:1:1:bin:/bin:/sbin/nologin
+Drink tea or ......
+drink beer ?
+     3  daemon:x:2:2:daemon:/sbin:/sbin/nologin
+.....(後面省略).....
+</code></pre>
+<p>這個範例的重點是『我們可以新增不只一行喔！可以新增好幾行』但是每一行之間都必須要以反斜線『 \ 』來進行新行的增加喔！所以，上面的例子中，我們可以發現在第一行的最後面就有 \ 存在啦！在多行新增的情況下， \ 是一定要的喔！</p>
+<p>以行為單位的取代與顯示功能<br>剛剛是介紹如何新增與刪除，那麼如果要整行取代呢？看看底下的範例吧：</p>
+<p>範例四：我想將第2-5行的內容取代成為『No 2-5 number』呢？</p>
+<pre><code class="bash">[dmtsai@study ~]$ nl /etc/passwd | sed <span class="string">'2,5c No 2-5 number'</span>
+     1  root:x:0:0:root:/root:/bin/bash
+No 2-5 number
+     6  sync:x:5:0:sync:/sbin:/bin/sync
+.....(後面省略).....
+</code></pre>
+<p>透過這個方法我們就能夠將資料整行取代了！非常容易吧！sed 還有更好用的東東！我們以前想要列出第 11~20 行， 得要透過『head -n 20 | tail -n 10』之類的方法來處理，很麻煩啦～ sed 則可以簡單的直接取出你想要的那幾行！是透過行號來捉的喔！看看底下的範例先：</p>
+<p>範例五：僅列出 /etc/passwd 檔案內的第 5-7 行</p>
+<pre><code class="bash">[dmtsai@study ~]$ nl /etc/passwd | sed -n <span class="string">'5,7p'</span>
+     5  lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+     6  sync:x:5:0:sync:/sbin:/bin/sync
+     7  shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+</code></pre>
+<p>上述的指令中有個重要的選項『 -n 』，按照說明文件，這個 -n 代表的是『安靜模式』！ 那麼為什麼要使用安靜模式呢？你可以自行下達 sed ‘5,7p’ 就知道了 (5-7 行會重複輸出)！ 有沒有加上 -n 的參數時，輸出的資料可是差很多的喔！你可以透過這個 sed 的以行為單位的顯示功能， 就能夠將某一個檔案內的某些行號捉出來查閱！很棒的功能！不是嗎？</p>
+<p>部分資料的搜尋並取代的功能<br>除了整行的處理模式之外， sed 還可以用行為單位進行部分資料的搜尋並取代的功能喔！ 基本上 sed 的搜尋與取代的與 vi 相當的類似！他有點像這樣：</p>
+<p>sed ‘s/要被取代的字串/新的字串/g’<br>上表中特殊字體的部分為關鍵字，請記下來！至於三個斜線分成兩欄就是新舊字串的替換啦！ 我們使用底下這個取得 IP 數據的範例，一段一段的來處理給您瞧瞧，讓你瞭解一下什麼是咱們所謂的搜尋並取代吧！</p>
+<p>步驟一：先觀察原始訊息，利用 /sbin/ifconfig  查詢 IP 為何？</p>
+<pre><code class="bash">[dmtsai@study ~]$ /sbin/ifconfig eth0
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::5054:ff:fedf:e174  prefixlen 64  scopeid 0x20&lt;link&gt;
+        ether 52:54:00:df:e1:74  txqueuelen 1000  (Ethernet)
+.....(以下省略).....
+</code></pre>
+<p><em>因為我們還沒有講到 IP ，這裡你先有個概念即可啊！我們的重點在第二行，</em><br><em>也就是 192.168.1.100 那一行而已！先利用關鍵字捉出那一行！</em></p>
+<p>步驟二：利用關鍵字配合 grep 擷取出關鍵的一行資料</p>
+<pre><code class="bash">[dmtsai@study ~]$ /sbin/ifconfig eth0 | grep <span class="string">'inet '</span>
+        inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+</code></pre>
+<p><em>當場僅剩下一行！要注意， CentOS 7 與 CentOS 6 以前的 ifconfig 指令輸出結果不太相同，</em><br><em>鳥哥這個範例主要是針對 CentOS 7 以後的喔！接下來，我們要將開始到 addr: 通通刪除，</em><br><em>就是像底下這樣：</em><br><em>inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255</em><br><em>上面的刪除關鍵在於『 ^.</em>inet  』啦！正規表示法出現！ ^_^*</p>
+<p>步驟三：將 IP 前面的部分予以刪除</p>
+<pre><code class="bash">[dmtsai@study ~]$ /sbin/ifconfig eth0 | grep <span class="string">'inet '</span> | sed <span class="string">'s/^.*inet //g'</span>
+192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+<span class="comment"># 仔細與上個步驟比較一下，前面的部分不見了！接下來則是刪除後續的部分，亦即：</span>
+192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
+<span class="comment"># 此時所需的正規表示法為：『 ' *netmask.*$ 』就是啦！</span>
+</code></pre>
+<p>步驟四：將 IP 後面的部分予以刪除</p>
+<pre><code class="bash">[dmtsai@study ~]$ /sbin/ifconfig eth0 | grep <span class="string">'inet '</span> | sed <span class="string">'s/^.*inet //g'</span> \
+&gt;   | sed <span class="string">'s/ *netmask.*$//g'</span>
+192.168.1.100
+</code></pre>
+<p>透過這個範例的練習也建議您依據此一步驟來研究你的指令！就是先觀察，然後再一層一層的試做， 如果有做不對的地方，就先予以修改，改完之後測試，成功後再往下繼續測試。以鳥哥上面的介紹中， 那一大串指令就做了四個步驟！對吧！ ^_^</p>
+<p>讓我們再來繼續研究 sed 與正規表示法的配合練習！假設我只要 MAN 存在的那幾行資料， 但是含有 # 在內的註解我不想要，而且空白行我也不要！此時該如何處理呢？可以透過這幾個步驟來實作看看：</p>
+<p>步驟一：先使用 grep 將關鍵字 MAN 所在行取出來</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat /etc/man_db.conf | grep <span class="string">'MAN'</span>
+<span class="comment"># MANDATORY_MANPATH                     manpath_element</span>
+<span class="comment"># MANPATH_MAP           path_element    manpath_element</span>
+<span class="comment"># MANDB_MAP             global_manpath  [relative_catpath]</span>
+<span class="comment"># every automatically generated MANPATH includes these fields</span>
+....(後面省略)....
+</code></pre>
+<p>步驟二：刪除掉註解之後的資料！</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat /etc/man_db.conf | grep <span class="string">'MAN'</span>| sed <span class="string">'s/#.*$//g'</span>
+
+
+MANDATORY_MANPATH                       /usr/man
+....(後面省略)....
+<span class="comment"># 從上面可以看出來，原本註解的資料都變成空白行啦！所以，接下來要刪除掉空白行</span>
+
+[dmtsai@study ~]$ cat /etc/man_db.conf | grep <span class="string">'MAN'</span>| sed <span class="string">'s/#.*$//g'</span> | sed <span class="string">'/^$/d'</span>
+MANDATORY_MANPATH                       /usr/man
+MANDATORY_MANPATH                       /usr/share/man
+MANDATORY_MANPATH                       /usr/<span class="built_in">local</span>/share/man
+....(後面省略)....
+</code></pre>
+<p>直接修改檔案內容(危險動作)<br>你以為 sed 只有這樣的能耐嗎？那可不！ sed 甚至可以直接修改檔案的內容呢！而不必使用管線命令或資料流重導向！ 不過，由於這個動作會直接修改到原始的檔案，所以請你千萬不要隨便拿系統設定檔來測試喔！ 我們還是使用你下載的 regular_express.txt 檔案來測試看看吧！</p>
+<p>範例六：利用 sed 將 regular_express.txt 內每一行結尾若為 . 則換成 !</p>
+<pre><code class="bash">[dmtsai@study ~]$ sed -i <span class="string">'s/\.$/\!/g'</span> regular_express.txt
+<span class="comment"># 上頭的 -i 選項可以讓你的 sed 直接去修改後面接的檔案內容而不是由螢幕輸出喔！</span>
+<span class="comment"># 這個範例是用在取代！請您自行 cat 該檔案去查閱結果囉！</span>
+</code></pre>
+<p>範例七：利用 sed 直接在 regular_express.txt 最後一行加入『# This is a test』</p>
+<pre><code class="bash">[dmtsai@study ~]$ sed -i <span class="string">'$a # This is a test'</span> regular_express.txt
+<span class="comment"># 由於 $ 代表的是最後一行，而 a 的動作是新增，因此該檔案最後新增囉！</span>
+</code></pre>
+<p>sed 的『 -i 』選項可以直接修改檔案內容，這功能非常有幫助！舉例來說，如果你有一個 100 萬行的檔案，你要在第 100 行加某些文字，此時使用 vim 可能會瘋掉！因為檔案太大了！那怎辦？就利用 sed 啊！透過 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修訂！很棒吧！</p>
+<p>總之，這個 sed 不錯用啦！而且很多的 shell script 都會使用到這個指令的功能～ sed 可以幫助系統管理員管理好日常的工作喔！要仔細的學習呢！</p>
+<h1 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h1><p>awk 也是一個非常棒的資料處理工具！相較於 sed 常常作用於一整個行的處理， awk 則比較傾向於一行當中分成數個『欄位』來處理。因此，awk<br>相當的適合處理小型的數據資料處理呢！awk 通常運作的模式是這樣的：</p>
+<p><code>[dmtsai@study ~]$ awk &#39;條件類型1{動作1} 條件類型2{動作2} ...&#39; filename</code><br>awk 後面接兩個單引號並加上大括號 {} 來設定想要對資料進行的處理動作。 awk 可以處理後續接的檔案，也可以讀取來自前個指令的 standard output 。 但如前面說的， awk 主要是處理『每一行的欄位內的資料』，而預設的『欄位的分隔符號為 “空白鍵” 或 “[tab]鍵” 』！舉例來說，我們用 last 可以將登入者的資料取出來，結果如下所示：</p>
+<pre><code class="bash">[dmtsai@study ~]$ last -n 5 &lt;==僅取出前五行
+dmtsai   pts/0     192.168.1.100   Tue Jul 14 17:32   still logged <span class="keyword">in</span>
+dmtsai   pts/0     192.168.1.100   Thu Jul  9 23:36 - 02:58  (03:22)
+dmtsai   pts/0     192.168.1.100   Thu Jul  9 17:23 - 23:36  (06:12)
+dmtsai   pts/0     192.168.1.100   Thu Jul  9 08:02 - 08:17  (00:14)
+dmtsai   tty1                      Fri May 29 11:55 - 12:11  (00:15)
+</code></pre>
+<p>若我想要取出帳號與登入者的 IP ，且帳號與 IP 之間以 [tab] 隔開，則會變成這樣：</p>
+<pre><code class="bash">[dmtsai@study ~]$ last -n 5 | awk <span class="string">'{print $1 "\t" $3}'</span>
+dmtsai  192.168.1.100
+dmtsai  192.168.1.100
+dmtsai  192.168.1.100
+dmtsai  192.168.1.100
+dmtsai  Fri
+</code></pre>
+<p>上表是 awk 最常使用的動作！透過 print 的功能將欄位資料列出來！欄位的分隔則以空白鍵或 [tab] 按鍵來隔開。 因為不論哪一行我都要處理，因此，就不需要有 “條件類型” 的限制！我所想要的是第一欄以及第三欄， 但是，第五行的內容怪怪的～這是因為資料格式的問題啊！所以囉～使用 awk 的時候，請先確認一下你的資料當中，如果是連續性的資料，請不要有空格或 [tab] 在內，否則，就會像這個例子這樣，會發生誤判喔！</p>
+<p>另外，由上面這個例子你也會知道，在 awk 的括號內，每一行的每個欄位都是有變數名稱的，那就是 $1, $2… 等變數名稱。以上面的例子來說， dmtsai 是 $1 ，因為他是第一欄嘛！至於 192.168.1.100 是第三欄， 所以他就是 $3 啦！後面以此類推～呵呵！還有個變數喔！那就是 $0 ，$0 代表『一整列資料』的意思～以上面的例子來說，第一行的 $0 代表的就是『dmtsai …. 』那一行啊！ 由此可知，剛剛上面五行當中，整個 awk 的處理流程是：</p>
+<p>讀入第一行，並將第一行的資料填入 $0, $1, $2…. 等變數當中；<br>依據 “條件類型” 的限制，判斷是否需要進行後面的 “動作”；<br>做完所有的動作與條件類型；<br>若還有後續的『行』的資料，則重複上面 1~3 的步驟，直到所有的資料都讀完為止。<br>經過這樣的步驟，你會曉得， awk 是『以行為一次處理的單位』， 而『以欄位為最小的處理單位』。好了，那麼 awk 怎麼知道我到底這個資料有幾行？有幾欄呢？這就需要 awk 的內建變數的幫忙啦～</p>
+<p>變數名稱    代表意義</p>
+<blockquote>
+<p>NF    每一行 ($0) 擁有的欄位總數<br>NR    目前 awk 所處理的是『第幾行』資料<br>FS    目前的分隔字元，預設是空白鍵</p>
+</blockquote>
+<p>我們繼續以上面 <code>last -n 5</code> 的例子來做說明，如果我想要：</p>
+<p>列出每一行的帳號(就是 $1)；<br>列出目前處理的行數(就是 awk 內的 NR 變數)<br>並且說明，該行有多少欄位(就是 awk 內的 NF 變數)<br>則可以這樣：</p>
+<p>Tips<br>鳥哥的圖示 要注意喔，awk 後續的所有動作是以單引號『 ‘ 』括住的，由於單引號與雙引號都必須是成對的， 所以， awk 的格式內容如果想要以 print 列印時，記得非變數的文字部分，包含上一小節 printf 提到的格式中，都需要使用雙引號來定義出來喔！因為單引號已經是 awk 的指令固定用法了！</p>
+<pre><code class="bash">[dmtsai@study ~]$ last -n 5| awk <span class="string">'{print $1 "\t lines: " NR "\t columns: " NF}'</span>
+dmtsai   lines: 1        columns: 10
+dmtsai   lines: 2        columns: 10
+dmtsai   lines: 3        columns: 10
+dmtsai   lines: 4        columns: 10
+dmtsai   lines: 5        columns: 9
+</code></pre>
+<p><em>注意喔，在 awk 內的 NR, NF 等變數要用大寫，且不需要有錢字號 $ 啦！</em><br>這樣可以瞭解 NR 與 NF 的差別了吧？好了，底下來談一談所謂的 “條件類型” 了吧！</p>
+<p>awk 的邏輯運算字元<br>既然有需要用到 “條件” 的類別，自然就需要一些邏輯運算囉～例如底下這些：</p>
+<p>運算單元    代表意義</p>
+<blockquote>
+<blockquote>
+<p>   大於<br>&lt;    小於<br>=    大於或等於<br>&lt;=    小於或等於<br>==    等於<br>!=    不等於</p>
+</blockquote>
+</blockquote>
+<p>值得注意的是那個『 == 』的符號，因為：</p>
+<p>邏輯運算上面亦即所謂的大於、小於、等於等判斷式上面，習慣上是以『 == 』來表示；<br>如果是直接給予一個值，例如變數設定時，就直接使用 = 而已。<br>好了，我們實際來運用一下邏輯判斷吧！舉例來說，在 /etc/passwd 當中是以冒號 “:” 來作為欄位的分隔， 該檔案中第一欄位為帳號，第三欄位則是 UID。那假設我要查閱，第三欄小於 10 以下的數據，並且僅列出帳號與第三欄， 那麼可以這樣做：</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat /etc/passwd | awk <span class="string">'{FS=":"} $3 &lt; 10 {print $1 "\t " $3}'</span>
+root:x:0:0:root:/root:/bin/bash
+bin      1
+daemon   2
+....(以下省略)....
+</code></pre>
+<p>有趣吧！不過，怎麼第一行沒有正確的顯示出來呢？這是因為我們讀入第一行的時候，那些變數 $1, $2… 預設還是以空白鍵為分隔的，所以雖然我們定義了 FS=”:” 了， 但是卻僅能在第二行後才開始生效。那麼怎麼辦呢？我們可以預先設定 awk 的變數啊！ 利用 BEGIN 這個關鍵字喔！這樣做：</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat /etc/passwd | awk <span class="string">'BEGIN {FS=":"} $3 &lt; 10 {print $1 "\t " $3}'</span>
+root     0
+bin      1
+daemon   2
+......(以下省略)......
+</code></pre>
+<p>很有趣吧！而除了 BEGIN 之外，我們還有 END 呢！另外，如果要用 awk 來進行『計算功能』呢？以底下的例子來看， 假設我有一個薪資資料表檔名為 pay.txt ，內容是這樣的：</p>
+<pre><code class="bash">Name    1st     2nd     3th
+VBird   23000   24000   25000
+DMTsai  21000   20000   23000
+Bird2   43000   42000   41000
+</code></pre>
+<p>如何幫我計算每個人的總額呢？而且我還想要格式化輸出喔！我們可以這樣考慮：</p>
+<p>第一行只是說明，所以第一行不要進行加總 (NR==1 時處理)；<br>第二行以後就會有加總的情況出現 (NR&gt;=2 以後處理)</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat pay.txt | \
+&gt; awk <span class="string">'NR==1{printf "%10s %10s %10s %10s %10s\n",$1,$2,$3,$4,"Total" }
+&gt; NR&gt;=2{total = $2 + $3 + $4
+&gt; printf "%10s %10d %10d %10d %10.2f\n", $1, $2, $3, $4, total}'</span>
+      Name        1st        2nd        3th      Total
+     VBird      23000      24000      25000   72000.00
+    DMTsai      21000      20000      23000   64000.00
+     Bird2      43000      42000      41000  126000.00
+</code></pre>
+<p>上面的例子有幾個重要事項應該要先說明的：</p>
+<p>awk 的指令間隔：所有 awk 的動作，亦即在 {} 內的動作，如果有需要多個指令輔助時，可利用分號『;』間隔， 或者直接以 [Enter] 按鍵來隔開每個指令，例如上面的範例中，鳥哥共按了三次 [enter] 喔！<br>邏輯運算當中，如果是『等於』的情況，則務必使用兩個等號『==』！<br>格式化輸出時，在 printf 的格式設定當中，務必加上 \n ，才能進行分行！<br>與 bash shell 的變數不同，在 awk 當中，變數可以直接使用，不需加上 $ 符號。<br>利用 awk 這個玩意兒，就可以幫我們處理很多日常工作了呢！真是好用的很～ 此外， awk 的輸出格式當中，常常會以 printf 來輔助，所以， 最好你對 printf 也稍微熟悉一下比較好啦！另外， awk 的動作內 {} 也是支援 if (條件) 的喔！ 舉例來說，上面的指令可以修訂成為這樣：</p>
+<pre><code class="bash">[dmtsai@study ~]$ cat pay.txt | \
+&gt; awk <span class="string">'{if(NR==1) printf "%10s %10s %10s %10s %10s\n",$1,$2,$3,$4,"Total"}
+&gt; NR&gt;=2{total = $2 + $3 + $4
+&gt; printf "%10s %10d %10d %10d %10.2f\n", $1, $2, $3, $4, total}'</span>
+</code></pre>
+<p>你可以仔細的比對一下上面兩個輸入有啥不同～從中去瞭解兩種語法吧！我個人是比較傾向於使用第一種語法， 因為會比較有統一性啊！ ^_^</p>
+<p>除此之外， awk 還可以幫我們進行迴圈計算喔！真是相當的好用！不過，那屬於比較進階的單獨課程了， 我們這裡就不再多加介紹。如果你有興趣的話，請務必參考延伸閱讀中的相關連結喔</p>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>鸟哥的私房菜：<a href="http://linux.vbird.org/linux_basic/0330regularex.php#top" target="_blank" rel="external">第十一章、正規表示法與文件格式化處理</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/site/zhifubao-yilia.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/site/wechat-pay-yilia.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/kong36088/kong36088.github.io/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/08/28/Swoole中的几个进程：Reactor、Worker、Task/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Swoole中的几个进程：Reactor、Worker、Task
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Shell脚本错误提示——binsh^Mbad interpreter</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="linux——awk、sed、grep（鸟哥的私房菜）" data-title="linux——awk、sed、grep（鸟哥的私房菜）" data-url="https://github.com/kong36088/kong36088.github.io/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 William
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true,
+		showTags: true
+	}
+</script>
+
+<script>!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="./",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),g=e(75),m=r(g),w=e(70);l(),(0,w.addLoadEvent)(function(){m.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),g=x[f],m=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&m&&void 0!==m[a],s&&a in x||(l=s?m[a]:e[a],x[a]=d&&"function"!=typeof m[a]?e[a]:h&&s?i(l,r):b&&m[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&g&&!g[a]&&u(g,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,g,m,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=g==h,M=!1,A=t.prototype,T=A[p]||A[v]||g&&A[g],L=T||j(g),N=g?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,g)if(O={values:E?L:j(h),keys:m?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),g=e(10),m=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),g(t),n=w(n,!0),g(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){g(t);for(var e,r=b(n=m(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=m(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(m(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:m(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){var n=t.setAttribute("target");n&&""!==n||t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}])</script><script src="/./main.05aabf.js"></script><script>!function(){var e=function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)};e("/slider.885efe.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 50%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">BucketSort</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">gogs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">CodeIgniter</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">时间</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">微信</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Laravel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LeetCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">内核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">socket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">迭代器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">curl</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PSR</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Sphnix</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Swoole</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ThinkPHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">验证码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">PHP7</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">练习题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">file-upload</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Unbuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Ubuntu</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">分页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">trim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开源</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">范式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机网络</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">努力写出诗一样的代码。&lt;br&gt;记录我的代码生涯~</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
