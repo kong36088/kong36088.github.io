@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="努力写出诗一样的代码。记录我的代码生涯~">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/uploads/site/logo.jpg">
   
   <link rel="stylesheet" type="text/css" href="/./main.05aabf.css">
   <style type="text/css">
@@ -415,88 +415,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-JS获取URL中的query string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/JS获取URL中的query string/">JS获取URL中的query string</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/30/JS获取URL中的query string/" class="archive-article-date">
-  	<time datetime="2016-03-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
-    <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
-    <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;
-}
-<span class="comment">//用法：</span>
-<span class="comment">//getQueryString('arg')</span>
-<span class="comment">//getQueryString('test')</span>
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/30/JS获取URL中的query string/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-JS刷新页面的几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -562,6 +480,88 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/03/30/JS刷新页面的几种方式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-JS获取URL中的query string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/30/JS获取URL中的query string/">JS获取URL中的query string</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/30/JS获取URL中的query string/" class="archive-article-date">
+  	<time datetime="2016-03-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
+    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
+    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
+    <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
+    <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;
+}
+<span class="comment">//用法：</span>
+<span class="comment">//getQueryString('arg')</span>
+<span class="comment">//getQueryString('test')</span>
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/30/JS获取URL中的query string/">展开全文 >></a>
         </p>
       
 
@@ -1098,6 +1098,10 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">BucketSort</a>
               </li>
              
@@ -1110,15 +1114,15 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">gogs</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1131,10 +1135,6 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">源码</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1158,15 +1158,15 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内核</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1178,11 +1178,11 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">curl</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">curl</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1230,10 +1230,6 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Unbuntu</a>
               </li>
              
@@ -1243,6 +1239,10 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分页</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
