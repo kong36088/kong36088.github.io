@@ -160,91 +160,6 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-关于centos6.5 lamp搭建好后外网无法访问的一些经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">关于centos6.5 lamp搭建好后外网无法访问的一些经验总结</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>外网不能访问aoache，查看了apache的access_log，发现根本没有访问到服务器，直接就被拒绝了，所以在想可能是防火墙把80端口关了，百度了之后发现了原因所在。</p>
-<p>因为防火墙把80端口给禁了，所以把80端口开放出来就可以让外网访问到apache服务器</p>
-<p>CentOS防火墙设置开启80端口访问</p>
-<p>我们以添加80端口为例操作如下：</p>
-<pre><code class="bash">[root@centos httpd]<span class="comment"># /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span>
-</code></pre>
-<p>保存</p>
-        
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Centos</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-Linux的文件目录安全修改" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -311,6 +226,84 @@ change files and directories recursively-t, --<span class="built_in">type</span>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/Linux的文件目录安全修改/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-PHP开发小技巧——显示错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/PHP开发小技巧——显示错误/">PHP开发小技巧——显示错误</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/PHP开发小技巧——显示错误/" class="archive-article-date">
+  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在开发调试阶段，可以在代码的开头添加</p>
+<pre><code class="php">error_reporting(E_ALL);
+
+ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</span>);
+</code></pre>
+<p>来显示出php运行时的错误，不用去修改php.ini</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/PHP开发小技巧——显示错误/">展开全文 >></a>
         </p>
       
 
@@ -432,86 +425,6 @@ change files and directories recursively-t, --<span class="built_in">type</span>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/关于ping++对接的一点看法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-PHP中迭代器模式的使用和体会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP中迭代器模式的使用和体会/">一个使用的分页方法</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP中迭代器模式的使用和体会/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>迭代器模式提供一种访问一个容器对象中的各个元素，而又不暴露其内部细节的方法。在应用中，我们时常会遇到各种变量代码，foreach在很多代码处都可以见到，使用迭代器可以对不同数据结构的集合封装，外部只需调用迭代器提供的接口即可，提高了应用的可扩展性。</p>
-<p>迭代器的使用可以遍历容器内的数据，是一种十分之实用的方法。</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">迭代器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/">展开全文 >></a>
         </p>
       
 
@@ -734,6 +647,86 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
+    <article id="post-PHP爬虫（信软官网）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/PHP爬虫（信软官网）/">PHP爬虫（信软官网）</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/PHP爬虫（信软官网）/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>信软官网：<a href="http://info.scau.edu.cn" target="_blank" rel="external">点我</a></p>
+<p>源码：</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-JS破解微信防盗链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -804,170 +797,6 @@ $(<span class="string">'#content'</span>).append(<span class="string">'&lt;ifram
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/JS破解微信防盗链/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-dirname(__FILE__) 的使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/dirname(__FILE__) 的使用总结/">dirname(__FILE__) 的使用总结</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/dirname(__FILE__) 的使用总结/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>dirname(<strong>FILE</strong>)<br>php中定义了一个很有用的常数，即<br><strong>file</strong></p>
-<p>这个内定常数是当前php程序的就是完整路径（路径+文件名）。</p>
-<p>即使这个文件被其他文件引用(include或require)，<strong>file</strong>始终是它所在文件的完整路径，而不是引用它的那个文件完整路径。</p>
-<p>请看下面例子：<br>/home/data/demo/test/a.php</p>
-<pre><code class="php">$the_full_name=<span class="keyword">__FILE__</span>;
-$the_dir=dirname(<span class="keyword">__FILE__</span>);
-<span class="keyword">echo</span> $the_full_name; <span class="comment">//返回/home/data/demo/test/a.php</span>
-<span class="keyword">echo</span> $the_dir;            <span class="comment">//返回/home/data/demo/test</span>
-</code></pre>
-<blockquote>
-<p><strong>FILE</strong>     返回当前 路径+文件名<br>dirname(<strong>FILE</strong>) 返回当前文件路径的 路径部分<br>dirname(dirname(<strong>FILE</strong>));得到的是文件上一层目录名（不含最后一个“/”号）</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/dirname(__FILE__) 的使用总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-PHP爬虫（信软官网）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP爬虫（信软官网）/">PHP爬虫（信软官网）</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP爬虫（信软官网）/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>信软官网：<a href="http://info.scau.edu.cn" target="_blank" rel="external">点我</a></p>
-<p>源码：</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/">展开全文 >></a>
         </p>
       
 
@@ -1089,6 +918,170 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
 
 
   
+    <article id="post-dirname(__FILE__) 的使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/dirname(__FILE__) 的使用总结/">dirname(__FILE__) 的使用总结</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/dirname(__FILE__) 的使用总结/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>dirname(<strong>FILE</strong>)<br>php中定义了一个很有用的常数，即<br><strong>file</strong></p>
+<p>这个内定常数是当前php程序的就是完整路径（路径+文件名）。</p>
+<p>即使这个文件被其他文件引用(include或require)，<strong>file</strong>始终是它所在文件的完整路径，而不是引用它的那个文件完整路径。</p>
+<p>请看下面例子：<br>/home/data/demo/test/a.php</p>
+<pre><code class="php">$the_full_name=<span class="keyword">__FILE__</span>;
+$the_dir=dirname(<span class="keyword">__FILE__</span>);
+<span class="keyword">echo</span> $the_full_name; <span class="comment">//返回/home/data/demo/test/a.php</span>
+<span class="keyword">echo</span> $the_dir;            <span class="comment">//返回/home/data/demo/test</span>
+</code></pre>
+<blockquote>
+<p><strong>FILE</strong>     返回当前 路径+文件名<br>dirname(<strong>FILE</strong>) 返回当前文件路径的 路径部分<br>dirname(dirname(<strong>FILE</strong>));得到的是文件上一层目录名（不含最后一个“/”号）</p>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/dirname(__FILE__) 的使用总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-PHP中迭代器模式的使用和体会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/PHP中迭代器模式的使用和体会/">一个使用的分页方法</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/PHP中迭代器模式的使用和体会/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>迭代器模式提供一种访问一个容器对象中的各个元素，而又不暴露其内部细节的方法。在应用中，我们时常会遇到各种变量代码，foreach在很多代码处都可以见到，使用迭代器可以对不同数据结构的集合封装，外部只需调用迭代器提供的接口即可，提高了应用的可扩展性。</p>
+<p>迭代器的使用可以遍历容器内的数据，是一种十分之实用的方法。</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">迭代器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/7/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/9/">Next &raquo;</a>
@@ -1174,10 +1167,6 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">BucketSort</a>
               </li>
              
@@ -1198,7 +1187,7 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1211,6 +1200,10 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1234,15 +1227,15 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1254,11 +1247,11 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">curl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">curl</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1306,6 +1299,10 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Unbuntu</a>
               </li>
              
@@ -1315,10 +1312,6 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分页</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">

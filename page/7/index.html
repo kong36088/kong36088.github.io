@@ -380,86 +380,6 @@ socket_close ( $socket );
 
 
   
-    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
-  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
-<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
     <article id="post-ubuntu14.04仿mac界面的总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -635,54 +555,31 @@ sudo apt-get install ubuntu-tweak
 
 
   
-    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
+      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
+  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
-<p>原因一：采用int数据量小，便于提高数据库效率</p>
-<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
-<p>date(format,timestamp)进行转换</p>
-<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
-<p>PHP中要获取一个月前的时间戳可以这样用：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1429287142</p>
-</blockquote>
-<p>一年前的时间戳：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1400343128</p>
-</blockquote>
-<p>转换成可读时间：</p>
-<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>2015-04-18</p>
-</blockquote>
-<p>由此可见，strtotime这个函数十分之强大</p>
-
+        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
+<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
+        
       
 
       
@@ -695,11 +592,11 @@ sudo apt-get install ubuntu-tweak
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -720,90 +617,7 @@ sudo apt-get install ubuntu-tweak
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-ThinkPHP生成二维码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/ThinkPHP生成二维码/">ThinkPHP生成二维码</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/ThinkPHP生成二维码/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在php中，大致生成二维码的方法有两种：一种是引用别家提供的api然后进行自动生成，</p>
-<p>google有提供api专门生成二维码，而国内的新浪也有api专门提供，</p>
-<p>新浪的api地址是：<a href="http://qrcoder.sinaapp.com?t=http://www.gbtags.com" target="_blank" rel="external">http://qrcoder.sinaapp.com?t=http://www.gbtags.com</a></p>
-<p>t=后面加上想要生成的url即可</p>
-<p>生成二维码的另一种方法：通过开源的phpqrcode进行自动生成。</p>
-        
-          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
         </p>
       
 
@@ -990,19 +804,19 @@ sudo apt-get install ubuntu-tweak
 
 
   
-    <article id="post-PHP开发小技巧——显示错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ThinkPHP生成二维码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP开发小技巧——显示错误/">PHP开发小技巧——显示错误</a>
+      <a class="article-title" href="/2015/11/16/ThinkPHP生成二维码/">ThinkPHP生成二维码</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/PHP开发小技巧——显示错误/" class="archive-article-date">
+        <a href="/2015/11/16/ThinkPHP生成二维码/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -1010,13 +824,14 @@ sudo apt-get install ubuntu-tweak
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在开发调试阶段，可以在代码的开头添加</p>
-<pre><code class="php">error_reporting(E_ALL);
-
-ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</span>);
-</code></pre>
-<p>来显示出php运行时的错误，不用去修改php.ini</p>
-
+        <p>在php中，大致生成二维码的方法有两种：一种是引用别家提供的api然后进行自动生成，</p>
+<p>google有提供api专门生成二维码，而国内的新浪也有api专门提供，</p>
+<p>新浪的api地址是：<a href="http://qrcoder.sinaapp.com?t=http://www.gbtags.com" target="_blank" rel="external">http://qrcoder.sinaapp.com?t=http://www.gbtags.com</a></p>
+<p>t=后面加上想要生成的url即可</p>
+<p>生成二维码的另一种方法：通过开源的phpqrcode进行自动生成。</p>
+        
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/#more">more >></a>
+        
       
 
       
@@ -1029,7 +844,11 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
         		</li>
       		
 		</ul>
@@ -1050,7 +869,195 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP开发小技巧——显示错误/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
+  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
+<p>原因一：采用int数据量小，便于提高数据库效率</p>
+<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
+<p>date(format,timestamp)进行转换</p>
+<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
+<p>PHP中要获取一个月前的时间戳可以这样用：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>1429287142</p>
+</blockquote>
+<p>一年前的时间戳：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>1400343128</p>
+</blockquote>
+<p>转换成可读时间：</p>
+<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>2015-04-18</p>
+</blockquote>
+<p>由此可见，strtotime这个函数十分之强大</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-关于centos6.5 lamp搭建好后外网无法访问的一些经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">关于centos6.5 lamp搭建好后外网无法访问的一些经验总结</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/" class="archive-article-date">
+  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>外网不能访问aoache，查看了apache的access_log，发现根本没有访问到服务器，直接就被拒绝了，所以在想可能是防火墙把80端口关了，百度了之后发现了原因所在。</p>
+<p>因为防火墙把80端口给禁了，所以把80端口开放出来就可以让外网访问到apache服务器</p>
+<p>CentOS防火墙设置开启80端口访问</p>
+<p>我们以添加80端口为例操作如下：</p>
+<pre><code class="bash">[root@centos httpd]<span class="comment"># /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span>
+</code></pre>
+<p>保存</p>
+        
+          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Centos</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">展开全文 >></a>
         </p>
       
 
@@ -1153,10 +1160,6 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">BucketSort</a>
               </li>
              
@@ -1177,7 +1180,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1190,6 +1193,10 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">源码</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1213,15 +1220,15 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">内核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MYSQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1233,11 +1240,11 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color5">curl</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">curl</a>
+                <a href="javascript:void(0)" class="js-tag color3">爬虫</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1285,6 +1292,10 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Unbuntu</a>
               </li>
              
@@ -1294,10 +1305,6 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">分页</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
