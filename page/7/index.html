@@ -160,6 +160,103 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ubuntu彻底卸载软件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/22/ubuntu彻底卸载软件/">ubuntu彻底卸载软件</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/22/ubuntu彻底卸载软件/" class="archive-article-date">
+  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在ubuntu中安装软件后通常想卸载都会卸载得不干净，以下献上把软件完全卸载干净的方法<br>首先找到你想卸载的软件：software（这个是你想要卸载的软件的名称）<br>然后打开teminal执行以下命令</p>
+<pre><code class="bash">sudo apt-get purge software
+</code></pre>
+<p>purge参数为彻底删除文件,然后执行</p>
+<pre><code class="bash">sudo apt-get autoremove software
+sudo apt-get clean software
+dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg -P software
+</code></pre>
+<p>这些命令之后就可以彻底卸载干净软件了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/22/ubuntu彻底卸载软件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-全面的防sql注入方法（转）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -785,19 +882,19 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
 
   
-    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
+      <a class="article-title" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
+        <a href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -805,33 +902,16 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
-<p>原因一：采用int数据量小，便于提高数据库效率</p>
-<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
-<p>date(format,timestamp)进行转换</p>
-<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
-<p>PHP中要获取一个月前的时间戳可以这样用：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
-</code></pre>
-<p>结果为：</p>
+        <p>今天在用PHP的时候发现PHP没有安装CURL拓展，于是打算用</p>
+<p>apt-get php5-curl去自动安装，却发现了这样的提示：</p>
+<p>php5-curl : 依赖: php5-common (= 5.5.9+dfsg-1ubuntu4) 但是 5.5.9+dfsg-1ubuntu4.14 正要被安装</p>
+<p>于是百度了很久，终于找到了答案，原来是DNS的问题，直接到系统文件中修改一下DNS：</p>
 <blockquote>
-<p>1429287142</p>
+<p>1.修改/etc/resolv.conf文件：为nameserver=8.8.8.8</p>
+<p>2.sudo rm /var/lib/apt/lists/* -vf</p>
+<p>3.sudo apt-get update</p>
 </blockquote>
-<p>一年前的时间戳：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1400343128</p>
-</blockquote>
-<p>转换成可读时间：</p>
-<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>2015-04-18</p>
-</blockquote>
-<p>由此可见，strtotime这个函数十分之强大</p>
+<p>搞定</p>
 
       
 
@@ -845,11 +925,11 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
         		</li>
       		
 		</ul>
@@ -861,7 +941,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
         		</li>
       		
 		</ul>
@@ -870,102 +950,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ThinkPHP经常用到的系统变量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/ThinkPHP经常用到的系统变量/">ThinkPHP经常用到的系统变量</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/ThinkPHP经常用到的系统变量/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文地址：<a href="http://www.jb51.net/article/47642.htm" target="_blank" rel="external">http://www.jb51.net/article/47642.htm</a></p>
-<hr>
-<p>（1）系统变量：在模板中输出系统变量：包括server、env、session、post、get、request、cookie<br>{$Think.server.script_name} // 输出$_SERVER变量<br>{$Think.session.session_id|md5} // 输出$_SESSION变量<br>{$Think.get.pageNumber} // 输出$_GET变量<br>{$Think.cookie.name}  // 输出$_COOKIE变量</p>
-<p>以上方式还可以写成：<br>{$_SERVER.script_name} // 输出$_SERVER变量<br>{$_SESSION.session_id|md5} // 输出$_SESSION变量<br>{$_GET.pageNumber} // 输出$_GET变量<br>{$_COOKIE.name}  // 输出$_COOKIE变量</p>
-<p>系统常量 ：使用$Think.const 输出<br>注意：server、cookie、config不区分大小写，但是变量区分大小写。例如：<br>{$Think.server.script_name}和{$Think.SERVER.script_name}等效<br>SESSION 、COOKIE还支持二维数组的输出</p>
-        
-          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">展开全文 >></a>
         </p>
       
 
@@ -1090,19 +1075,19 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
 
   
-    <article id="post-关于centos6.5 lamp搭建好后外网无法访问的一些经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ThinkPHP经常用到的系统变量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">关于centos6.5 lamp搭建好后外网无法访问的一些经验总结</a>
+      <a class="article-title" href="/2015/11/16/ThinkPHP经常用到的系统变量/">ThinkPHP经常用到的系统变量</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/" class="archive-article-date">
+        <a href="/2015/11/16/ThinkPHP经常用到的系统变量/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -1110,15 +1095,13 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>外网不能访问aoache，查看了apache的access_log，发现根本没有访问到服务器，直接就被拒绝了，所以在想可能是防火墙把80端口关了，百度了之后发现了原因所在。</p>
-<p>因为防火墙把80端口给禁了，所以把80端口开放出来就可以让外网访问到apache服务器</p>
-<p>CentOS防火墙设置开启80端口访问</p>
-<p>我们以添加80端口为例操作如下：</p>
-<pre><code class="bash">[root@centos httpd]<span class="comment"># /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span>
-</code></pre>
-<p>保存</p>
+        <p>原文地址：<a href="http://www.jb51.net/article/47642.htm" target="_blank" rel="external">http://www.jb51.net/article/47642.htm</a></p>
+<hr>
+<p>（1）系统变量：在模板中输出系统变量：包括server、env、session、post、get、request、cookie<br>{$Think.server.script_name} // 输出$_SERVER变量<br>{$Think.session.session_id|md5} // 输出$_SESSION变量<br>{$Think.get.pageNumber} // 输出$_GET变量<br>{$Think.cookie.name}  // 输出$_COOKIE变量</p>
+<p>以上方式还可以写成：<br>{$_SERVER.script_name} // 输出$_SERVER变量<br>{$_SESSION.session_id|md5} // 输出$_SESSION变量<br>{$_GET.pageNumber} // 输出$_GET变量<br>{$_COOKIE.name}  // 输出$_COOKIE变量</p>
+<p>系统常量 ：使用$Think.const 输出<br>注意：server、cookie、config不区分大小写，但是变量区分大小写。例如：<br>{$Think.server.script_name}和{$Think.SERVER.script_name}等效<br>SESSION 、COOKIE还支持二维数组的输出</p>
         
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/#more">more >></a>
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/#more">more >></a>
         
       
 
@@ -1132,11 +1115,11 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Centos</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
         		</li>
       		
 		</ul>
@@ -1148,7 +1131,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
         		</li>
       		
 		</ul>
@@ -1157,7 +1140,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/">展开全文 >></a>
         </p>
       
 

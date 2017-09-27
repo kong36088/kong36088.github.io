@@ -160,6 +160,99 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP内核中的HashTable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/01/PHP内核中的HashTable/">PHP内核中的HashTable</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/01/PHP内核中的HashTable/" class="archive-article-date">
+  	<time datetime="2016-11-01T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PHP内核中的HashTable原理"><a href="#PHP内核中的HashTable原理" class="headerlink" title="PHP内核中的HashTable原理"></a>PHP内核中的HashTable原理</h1><h2 id="简易的结构"><a href="#简易的结构" class="headerlink" title="简易的结构"></a>简易的结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">Bucket</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *key;</div><div class="line">    <span class="keyword">void</span> *value;</div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">Bucket</span> *<span class="title">next</span>;</span></div><div class="line">&#125; Bucket;</div><div class="line"> </div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">HashTable</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> size;</div><div class="line">    <span class="keyword">int</span> elem_num;</div><div class="line">    Bucket** buckets;</div><div class="line">&#125; HashTable;</div></pre></td></tr></table></figure>
+<p>这个是一个简化过的哈希表结构<br>Bucket是一个链表，而_HashTable用于存储hash值并指向真正的数据储存单位</p>
+<h2 id="解决冲突算法DJBX33A"><a href="#解决冲突算法DJBX33A" class="headerlink" title="解决冲突算法DJBX33A"></a>解决冲突算法DJBX33A</h2><p>而链表是为了解决冲突用的，冲突解决采用DJBX33A算法，算法的内容如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">unsigned</span> <span class="title">time33</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span>*str, <span class="keyword">int</span> len)</span> </span></div><div class="line">&#123; </div><div class="line">     <span class="keyword">unsigned</span> <span class="keyword">long</span> hash = <span class="number">5381</span>; </div><div class="line">     <span class="comment">/* variant with the hash unrolled eight times */</span> </div><div class="line">     <span class="keyword">for</span> (; len &gt;= <span class="number">8</span>; len -= <span class="number">8</span>) &#123; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">switch</span> (len) &#123; </div><div class="line">        <span class="keyword">case</span> <span class="number">7</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">6</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">5</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">4</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">3</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">2</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">1</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="keyword">break</span>; </div><div class="line">        <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">break</span>; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">return</span> hash; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2016/11/01/PHP内核中的HashTable/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内核</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP内核##分类/" class="article-tag-list-link color5">PHP内核##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/01/PHP内核中的HashTable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP内核哈希表实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -651,97 +744,6 @@ php Delete.php
 
 
   
-    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
-  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
-<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
-<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
-<pre><code class="bash">vi a.sh
-</code></pre>
-<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
-<p>再次执行就不会有这样的问题了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-linux——awk、sed、grep（鸟哥的私房菜）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -815,6 +817,97 @@ php Delete.php
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
+  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
+<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
+<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
+<pre><code class="bash">vi a.sh
+</code></pre>
+<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
+<p>再次执行就不会有这样的问题了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
         </p>
       
 
@@ -1009,102 +1102,6 @@ php Delete.php
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/08/14/Leetcode题解——347Top K Frequent Elements/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode题解——299Bulls_and_Cows" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/28/LeetCode题解——299Bulls_and_Cows/">LeetCode题解——299Bulls_and_Cows</a>
-    </h1>
-  
-
-        
-        <a href="/2016/07/28/LeetCode题解——299Bulls_and_Cows/" class="archive-article-date">
-  	<time datetime="2016-07-28T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我的4ms解法<br>题目地址：<a href="https://leetcode.com/problems/bulls-and-cows/" target="_blank" rel="external">Bulls and Cows</a><br>题目：<br>You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly in both digit and position (called “bulls”) and how many digits match the secret number but locate in the wrong position (called “cows”). Your friend will use successive guesses and hints to eventually derive the secret number.</p>
-<p>For example:</p>
-<p>Secret number:  “1807”<br>Friend’s guess: “7810”<br>Hint: 1 bull and 3 cows. (The bull is 8, the cows are 0, 1 and 7.)<br>Write a function to return a hint according to the secret number and friend’s guess, use A to indicate the bulls and B to indicate the cows. In the above example, your function should return “1A3B”.</p>
-<p>Please note that both secret number and friend’s guess may contain duplicate digits, for example:</p>
-<p>Secret number:  “1123”<br>Friend’s guess: “0111”<br>In this case, the 1st 1 in friend’s guess is a bull, the 2nd or 3rd 1 is a cow, and your function should return “1A1B”.<br>You may assume that the secret number and your friend’s guess only contain digits, and their lengths are always equal.</p>
-<p>题目大意<br>在Secret串和Guess串中找出位置相同且数字相同的数量A，并且计算出位置不一样但是数字相同的数量B</p>
-        
-          <a class="article-more-a" href="/2016/07/28/LeetCode题解——299Bulls_and_Cows/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/LeetCode##分类/" class="article-tag-list-link color3">LeetCode##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/07/28/LeetCode题解——299Bulls_and_Cows/">展开全文 >></a>
         </p>
       
 

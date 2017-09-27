@@ -160,6 +160,76 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nginx配置location以及rewrite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-location正则写法"><a href="#1-location正则写法" class="headerlink" title="1. location正则写法"></a>1. location正则写法</h1><p>一个示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">location  = / &#123;</div><div class="line">  <span class="comment"># 精确匹配 / ，主机名后面不能带任何字符串</span></div><div class="line">  [ configuration A ]</div><div class="line">&#125;</div><div class="line">location  / &#123;</div><div class="line">  <span class="comment"># 因为所有的地址都以 / 开头，所以这条规则将匹配到所有请求</span></div><div class="line">  <span class="comment"># 但是正则和最长字符串会优先匹配</span></div><div class="line">  [ configuration B ]</div><div class="line">&#125;</div><div class="line">location /documents/ &#123;</div><div class="line">  <span class="comment"># 匹配任何以 /documents/ 开头的地址，匹配符合以后，还要继续往下搜索</span></div><div class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></div><div class="line">  [ configuration C ]</div><div class="line">&#125;</div><div class="line">location ~ /documents/Abc &#123;</div><div class="line">  <span class="comment"># 匹配任何以 /documents/Abc 开头的地址，匹配符合以后，还要继续往下搜索</span></div><div class="line">  <span class="comment"># 只有后面的正则表达式没有匹配到时，这一条才会采用这一条</span></div><div class="line">  [ configuration CC ]</div><div class="line">&#125;</div><div class="line">location ^~ /images/ &#123;</div><div class="line">  <span class="comment"># 匹配任何以 /images/ 开头的地址，匹配符合以后，停止往下搜索正则，采用这一条。</span></div><div class="line">  [ configuration D ]</div><div class="line">&#125;</div><div class="line">location ~* \.(gif|jpg|jpeg)$ &#123;</div><div class="line">  <span class="comment"># 匹配所有以 gif,jpg或jpeg 结尾的请求</span></div><div class="line">  <span class="comment"># 然而，所有请求 /images/ 下的图片会被 config D 处理，因为 ^~ 到达不了这一条正则</span></div><div class="line">  [ configuration E ]</div><div class="line">&#125;</div><div class="line">location /images/ &#123;</div><div class="line">  <span class="comment"># 字符匹配到 /images/，继续往下，会发现 ^~ 存在</span></div><div class="line">  [ configuration F ]</div><div class="line">&#125;</div><div class="line">location /images/abc &#123;</div><div class="line">  <span class="comment"># 最长字符匹配到 /images/abc，继续往下，会发现 ^~ 存在</span></div><div class="line">  <span class="comment"># F与G的放置顺序是没有关系的</span></div><div class="line">  [ configuration G ]</div><div class="line">&#125;</div><div class="line">location ~ /images/abc/ &#123;</div><div class="line">  <span class="comment"># 只有去掉 config D 才有效：先最长匹配 config G 开头的地址，继续往下搜索，匹配到这一条正则，采用</span></div><div class="line">    [ configuration H ]</div><div class="line">&#125;</div><div class="line">location ~* /js/.*/\.js</div></pre></td></tr></table></figure>
+<p>以=开头表示精确匹配<br>如 A 中只匹配根目录结尾的请求，后面不能带任何字符串。<br>^~ 开头表示uri以某个常规字符串开头，不是正则匹配<br>~ 开头表示区分大小写的正则匹配;<br>~<em> 开头表示不区分大小写的正则匹配<br>/ 通用匹配, 如果没有其它匹配,任何请求都会匹配到<br>顺序 no优先级：<br>(location =) &gt; (location 完整路径) &gt; (location ^~ 路径) &gt; (location ~,~</em> 正则顺序) &gt; (location 部分起始路径) &gt; (/)</p>
+<p>上面的匹配结果<br>按照上面的location写法，以下的匹配示例成立：</p>
+<p>/ -&gt; config A<br>精确完全匹配，即使/index.html也匹配不了<br>/downloads/download.html -&gt; config B<br>匹配B以后，往下没有任何匹配，采用B<br>/images/1.gif -&gt; configuration D<br>匹配到F，往下匹配到D，停止往下<br>/images/abc/def -&gt; config D<br>最长匹配到G，往下匹配D，停止往下<br>你可以看到 任何以/images/开头的都会匹配到D并停止，FG写在这里是没有任何意义的，H是永远轮不到的，这里只是为了说明匹配顺序<br>/documents/document.html -&gt; config C<br>匹配到C，往下没有任何匹配，采用C<br>/documents/1.jpg -&gt; configuration E<br>匹配到C，往下正则匹配到E<br>/documents/Abc.jpg -&gt; config CC<br>最长匹配到C，往下正则顺序匹配到CC，不会往下到E</p>
+<h3 id="实际使用建议"><a href="#实际使用建议" class="headerlink" title="实际使用建议"></a>实际使用建议</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">所以实际使用中，个人觉得至少有三个匹配规则定义，如下：</div><div class="line"><span class="comment">#直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理，官网如是说。</span></div><div class="line"><span class="comment">#这里是直接转发给后端应用服务器了，也可以是一个静态首页</span></div><div class="line"><span class="comment"># 第一个必选规则</span></div><div class="line">location = / &#123;</div><div class="line">    proxy_pass http://tomcat:8080/index</div><div class="line">&#125;</div><div class="line"><span class="comment"># 第二个必选规则是处理静态文件请求，这是nginx作为http服务器的强项</span></div><div class="line"><span class="comment"># 有两种配置模式，目录匹配或后缀匹配,任选其一或搭配使用</span></div><div class="line">location ^~ /static/ &#123;</div><div class="line">    root /webroot/static/;</div><div class="line">&#125;</div><div class="line">location ~* \.(gif|jpg|jpeg|png|css|js|ico)$ &#123;</div><div class="line">    root /webroot/res/;</div><div class="line">&#125;</div><div class="line"><span class="comment">#第三个规则就是通用规则，用来转发动态请求到后端应用服务器</span></div><div class="line"><span class="comment">#非静态文件请求就默认是动态请求，自己根据实际把握</span></div><div class="line"><span class="comment">#毕竟目前的一些框架的流行，带.php,.jsp后缀的情况很少了</span></div><div class="line">location / &#123;</div><div class="line">    proxy_pass http://tomcat:8080/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="http://tengine.taobao.org/book/chapter_02.html" target="_blank" rel="external">http://tengine.taobao.org/book/chapter_02.html</a><br><a href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html" target="_blank" rel="external">http://nginx.org/en/docs/http/ngx_http_rewrite_module.html</a></p>
+<h1 id="2-Rewrite规则"><a href="#2-Rewrite规则" class="headerlink" title="2. Rewrite规则"></a>2. Rewrite规则</h1><p>rewrite功能就是，使用nginx提供的全局变量或自己设置的变量，结合正则表达式和标志位实现url重写以及重定向。rewrite只能放在server{},location{},if{}中，并且只能对域名后边的除去传递的参数外的字符串起作用，例如 <code>http://seanlook.com/a/we/index.php?id=1&amp;u=str</code> 只对<code>/a/we/index.php</code>重写。语法rewrite regex replacement [flag];</p>
+<p>如果相对域名或参数字符串起作用，可以使用全局变量匹配，也可以使用proxy_pass反向代理。</p>
+<p>表明看rewrite和location功能有点像，都能实现跳转，主要区别在于rewrite是在同一域名内更改获取资源的路径，而location是对一类路径做控制访问或反向代理，可以proxy_pass到其他机器。很多情况下rewrite也会写在location里，它们的执行顺序是：</p>
+<p>执行server块的rewrite指令<br>执行location匹配<br>执行选定的location中的rewrite指令<br>如果其中某步URI被重写，则重新循环执行1-3，直到找到真实存在的文件；循环超过10次，则返回500 Internal Server Error错误。</p>
+<p>2.1 flag标志位<br><code>last</code> : 相当于Apache的[L]标记，表示完成rewrite<br><code>break</code> : 停止执行当前虚拟主机的后续rewrite指令集<br><code>redirect</code> : 返回302临时重定向，地址栏会显示跳转后的地址<br><code>permanent</code> : 返回301永久重定向，地址栏会显示跳转后的地址<br>因为301和302不能简单的只返回状态码，还必须有重定向的URL，这就是return指令无法返回301,302的原因了。这里 last 和 break 区别有点难以理解：<br>``<br>last一般写在server和if中，而break一般使用在location中<br>last不终止重写后的url匹配，即新的url会再从server走一遍匹配流程，而break终止重写后的匹配<br>break和last都能组织继续执行后面的rewrite指令<br>2.2 if指令与全局变量<br>if判断指令<br>语法为if(condition){…}，对给定的条件condition进行判断。如果为真，大括号内的rewrite指令将被执行，if条件(conditon)可以是如下任何内容：</p>
+<p>当表达式只是一个变量时，如果值为空或任何以0开头的字符串都会当做false<br>直接比较变量和内容时，使用=或!=<br>~正则表达式匹配，~*不区分大小写的匹配，!~区分大小写的不匹配<br>-f和!-f用来判断是否存在文件<br>-d和!-d用来判断是否存在目录<br>-e和!-e用来判断是否存在文件或目录<br>-x和!-x用来判断文件是否可执行</p>
+<p>例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="variable">$http_user_agent</span> ~ MSIE) &#123;</div><div class="line">    rewrite ^(.*)$ /msie/<span class="variable">$1</span> <span class="built_in">break</span>;</div><div class="line">&#125; //如果UA包含<span class="string">"MSIE"</span>，rewrite请求到/msid/目录下</div><div class="line"><span class="keyword">if</span> (<span class="variable">$http_cookie</span> ~* <span class="string">"id=([^;]+)(?:;|$)"</span>) &#123;</div><div class="line">    <span class="built_in">set</span> <span class="variable">$id</span> <span class="variable">$1</span>;</div><div class="line"> &#125; //如果cookie匹配正则，设置变量<span class="variable">$id</span>等于正则引用部分</div><div class="line"><span class="keyword">if</span> (<span class="variable">$request_method</span> = POST) &#123;</div><div class="line">    <span class="built_in">return</span> 405;</div><div class="line">&#125; //如果提交方法为POST，则返回状态405（Method not allowed）。<span class="built_in">return</span>不能返回301,302</div><div class="line"><span class="keyword">if</span> (<span class="variable">$slow</span>) &#123;</div><div class="line">    limit_rate 10k;</div><div class="line">&#125; //限速，<span class="variable">$slow</span>可以通过 <span class="built_in">set</span> 指令设置</div><div class="line"><span class="keyword">if</span> (!-f <span class="variable">$request_filename</span>)&#123;</div><div class="line">    <span class="built_in">break</span>;</div><div class="line">    proxy_pass  http://127.0.0.1;</div><div class="line">&#125; //如果请求的文件名不存在，则反向代理到localhost 。这里的<span class="built_in">break</span>也是停止rewrite检查</div><div class="line"><span class="keyword">if</span> (<span class="variable">$args</span> ~ post=140)&#123;</div><div class="line">    rewrite ^ http://example.com/ permanent;</div><div class="line">&#125; //如果query string中包含<span class="string">"post=140"</span>，永久重定向到example.com</div><div class="line">location ~* \.(gif|jpg|png|swf|flv)$ &#123;</div><div class="line">    valid_referers none blocked www.jefflei.com www.leizhenfang.com;</div><div class="line">    <span class="keyword">if</span> (<span class="variable">$invalid_referer</span>) &#123;</div><div class="line">        <span class="built_in">return</span> 404;</div><div class="line">    &#125; //防盗链</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>全局变量<br>下面是可以用作if判断的全局变量</p>
+<p><code>$args</code> ： #这个变量等于请求行中的参数，同$query_string<br><code>$content_length</code> ： 请求头中的Content-length字段。<br><code>$content_type</code> ： 请求头中的Content-Type字段。<br><code>$document_root</code> ： 当前请求在root指令中指定的值。<br><code>$host</code> ： 请求主机头字段，否则为服务器名称。<br><code>$http_user_agent</code> ： 客户端agent信息<br><code>$http_cookie</code> ： 客户端cookie信息<br><code>$limit_rate</code> ： 这个变量可以限制连接速率。<br><code>$request_method</code> ： 客户端请求的动作，通常为GET或POST。<br><code>$remote_addr</code> ： 客户端的IP地址。<br><code>$remote_port</code> ： 客户端的端口。<br><code>$remote_user</code> ： 已经经过Auth Basic Module验证的用户名。<br><code>$request_filename</code> ： 当前请求的文件路径，由root或alias指令与URI请求生成。<br><code>$scheme</code> ： HTTP方法（如http，https）。<br><code>$server_protocol</code> ： 请求使用的协议，通常是HTTP/1.0或HTTP/1.1。<br><code>$server_addr</code> ： 服务器地址，在完成一次系统调用后可以确定这个值。<br><code>$server_name</code> ： 服务器名称。<br><code>$server_port</code> ： 请求到达服务器的端口号。<br><code>$request_uri</code> ： 包含请求参数的原始URI，不包含主机名，如：”/foo/bar.php?arg=baz”。<br><code>$uri</code> ： 不带请求参数的当前URI，$uri不包含主机名，如”/foo/bar.html”。<br><code>$document_uri</code> ： 与$uri相同。<br>例：<code>http://localhost:88/test1/test2/test.php</code><br><code>$host</code>：localhost<br><code>$server_port</code>：88<br><code>$request_uri</code>：<a href="http://localhost:88/test1/test2/test.php" target="_blank" rel="external">http://localhost:88/test1/test2/test.php</a><br><code>$document_uri</code>：/test1/test2/test.php<br><code>$document_root</code>：/var/www/html<br><code>$request_filename</code>：/var/www/html/test1/test2/test.php</p>
+<p>2.3 常用正则<br><code>.</code> ： 匹配除换行符以外的任意字符<br><code>?</code> ： 重复0次或1次<br><code>+</code> ： 重复1次或更多次<br><code>*</code> ： 重复0次或更多次<br><code>\d</code> ：匹配数字<br><code>^</code> ： 匹配字符串的开始<br><code>$</code> ： 匹配字符串的介绍<br><code>{n}</code> ： 重复n次<br><code>{n,}</code> ： 重复n次或更多次<br><code>[c]</code> ： 匹配单个字符c<br><code>[a-z]</code> ： 匹配a-z小写字母的任意一个<br>小括号()之间匹配的内容，可以在后面通过$1来引用，$2表示的是前面第二个()里的内容。正则里面容易让人困惑的是\转义特殊字符。</p>
+<p>2.4 rewrite实例<br>例1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">    <span class="comment"># 定义image日志格式</span></div><div class="line">    log_format imagelog <span class="string">'[$time_local] '</span> <span class="variable">$image_file</span> <span class="string">' '</span> <span class="variable">$image_type</span> <span class="string">' '</span> <span class="variable">$body_bytes_sent</span> <span class="string">' '</span> <span class="variable">$status</span>;</div><div class="line">    <span class="comment"># 开启重写日志</span></div><div class="line">    rewrite_log on;</div><div class="line">    server &#123;</div><div class="line">        root /home/www;</div><div class="line">        location / &#123;</div><div class="line">                <span class="comment"># 重写规则信息</span></div><div class="line">                error_log logs/rewrite.log notice;</div><div class="line">                <span class="comment"># 注意这里要用‘’单引号引起来，避免&#123;&#125;</span></div><div class="line">                rewrite <span class="string">'^/images/([a-z]&#123;2&#125;)/([a-z0-9]&#123;5&#125;)/(.*)\.(png|jpg|gif)$'</span> /data?file=<span class="variable">$3</span>.<span class="variable">$4</span>;</div><div class="line">                <span class="comment"># 注意不能在上面这条规则后面加上“last”参数，否则下面的set指令不会执行</span></div><div class="line">                <span class="built_in">set</span> <span class="variable">$image_file</span> <span class="variable">$3</span>;</div><div class="line">                <span class="built_in">set</span> <span class="variable">$image_type</span> <span class="variable">$4</span>;</div><div class="line">        &#125;</div><div class="line">        location /data &#123;</div><div class="line">                <span class="comment"># 指定针对图片的日志格式，来分析图片类型和大小</span></div><div class="line">                access_log logs/images.log mian;</div><div class="line">                root /data/images;</div><div class="line">                <span class="comment"># 应用前面定义的变量。判断首先文件在不在，不在再判断目录在不在，如果还不在就跳转到最后一个url里</span></div><div class="line">                try_files /<span class="variable">$arg_file</span> /image404.html;</div><div class="line">        &#125;</div><div class="line">        location = /image404.html &#123;</div><div class="line">                <span class="comment"># 图片不存在返回特定的信息</span></div><div class="line">                <span class="built_in">return</span> 404 <span class="string">"image not found\n"</span>;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对形如<code>/images/ef/uh7b3/test.png</code>的请求，重写到<code>/data?file=test.png</code>，于是匹配到<code>location /data</code>，先看<code>/data/images/test.png</code>文件存不存在，如果存在则正常响应，如果不存在则重写tryfiles到新的image404 location，直接返回404状态码。</p>
+<p>例2：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rewrite ^/images/(.*)_(\d+)x(\d+)\.(png|jpg|gif)$ /resizer/<span class="variable">$1</span>.<span class="variable">$4</span>?width=<span class="variable">$2</span>&amp;height=<span class="variable">$3</span>? last;</div></pre></td></tr></table></figure></p>
+<p>对形如/images/bla_500x400.jpg的文件请求，重写到/resizer/bla.jpg?width=500&amp;height=400地址，并会继续尝试匹配location。</p>
+<h1 id="转载出处"><a href="#转载出处" class="headerlink" title="转载出处"></a>转载出处</h1><p><a href="http://seanlook.com/2015/05/17/nginx-location-rewrite/" target="_blank" rel="external">http://seanlook.com/2015/05/17/nginx-location-rewrite/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/27/nginx配置location以及rewrite/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP standard函数getcwd源码阅读小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1018,99 +1088,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/11/04/我用python爬了知乎一百万用户的数据/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PHP内核中的HashTable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/PHP内核中的HashTable/">PHP内核中的HashTable</a>
-    </h1>
-  
-
-        
-        <a href="/2016/11/01/PHP内核中的HashTable/" class="archive-article-date">
-  	<time datetime="2016-11-01T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PHP内核中的HashTable原理"><a href="#PHP内核中的HashTable原理" class="headerlink" title="PHP内核中的HashTable原理"></a>PHP内核中的HashTable原理</h1><h2 id="简易的结构"><a href="#简易的结构" class="headerlink" title="简易的结构"></a>简易的结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">Bucket</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *key;</div><div class="line">    <span class="keyword">void</span> *value;</div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">Bucket</span> *<span class="title">next</span>;</span></div><div class="line">&#125; Bucket;</div><div class="line"> </div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">HashTable</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> size;</div><div class="line">    <span class="keyword">int</span> elem_num;</div><div class="line">    Bucket** buckets;</div><div class="line">&#125; HashTable;</div></pre></td></tr></table></figure>
-<p>这个是一个简化过的哈希表结构<br>Bucket是一个链表，而_HashTable用于存储hash值并指向真正的数据储存单位</p>
-<h2 id="解决冲突算法DJBX33A"><a href="#解决冲突算法DJBX33A" class="headerlink" title="解决冲突算法DJBX33A"></a>解决冲突算法DJBX33A</h2><p>而链表是为了解决冲突用的，冲突解决采用DJBX33A算法，算法的内容如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">unsigned</span> <span class="title">time33</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span>*str, <span class="keyword">int</span> len)</span> </span></div><div class="line">&#123; </div><div class="line">     <span class="keyword">unsigned</span> <span class="keyword">long</span> hash = <span class="number">5381</span>; </div><div class="line">     <span class="comment">/* variant with the hash unrolled eight times */</span> </div><div class="line">     <span class="keyword">for</span> (; len &gt;= <span class="number">8</span>; len -= <span class="number">8</span>) &#123; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">         hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">switch</span> (len) &#123; </div><div class="line">        <span class="keyword">case</span> <span class="number">7</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">6</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">5</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">4</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">3</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">2</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="comment">/* fallthrough... */</span> </div><div class="line">        <span class="keyword">case</span> <span class="number">1</span>: hash = ((hash &lt;&lt; <span class="number">5</span>) + hash) + *str++; <span class="keyword">break</span>; </div><div class="line">        <span class="keyword">case</span> <span class="number">0</span>: <span class="keyword">break</span>; </div><div class="line">    &#125; </div><div class="line">    <span class="keyword">return</span> hash; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2016/11/01/PHP内核中的HashTable/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内核</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP内核##分类/" class="article-tag-list-link color5">PHP内核##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/01/PHP内核中的HashTable/">展开全文 >></a>
         </p>
       
 
