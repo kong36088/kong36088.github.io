@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/kong36088/kong36088.github.io">
-  <title>nginx配置location以及rewrite | William的后花园</title>
+  <title>nginx初探 | William的后花园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="[toc] worker模型 Nginx架构每个请求会占用一个线程，一个worker进程可以处理成千上万的请求。 nginx采用多worker的方式来处理请求，每个worker里面只有一个主线程，那能够处理的并发数很有限啊，多少个worker就能处理多少个并发，何来高并发呢？非也，这就是nginx的高明之处，nginx采用了异步非阻塞的方式来处理请求，也就是说，nginx是可以同时处理成千上万个请">
 <meta name="keywords" content="Nginx,源码,C##文章关键词，多关键词格式为 keyword1,keywords2,...">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx配置location以及rewrite">
+<meta property="og:title" content="nginx初探">
 <meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2017/10/18/nginx初探/index.html">
 <meta property="og:site_name" content="William的后花园">
 <meta property="og:description" content="[toc] worker模型 Nginx架构每个请求会占用一个线程，一个worker进程可以处理成千上万的请求。 nginx采用多worker的方式来处理请求，每个worker里面只有一个主线程，那能够处理的并发数很有限啊，多少个worker就能处理多少个并发，何来高并发呢？非也，这就是nginx的高明之处，nginx采用了异步非阻塞的方式来处理请求，也就是说，nginx是可以同时处理成千上万个请">
 <meta property="og:image" content="http://tengine.taobao.org/book/_images/chapter-2-1.PNG">
 <meta property="og:image" content="http://tengine.taobao.org/book/_images/chapter-2-2.PNG">
-<meta property="og:updated_time" content="2017-10-18T09:40:00.908Z">
+<meta property="og:updated_time" content="2017-10-18T09:45:08.731Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx配置location以及rewrite">
+<meta name="twitter:title" content="nginx初探">
 <meta name="twitter:description" content="[toc] worker模型 Nginx架构每个请求会占用一个线程，一个worker进程可以处理成千上万的请求。 nginx采用多worker的方式来处理请求，每个worker里面只有一个主线程，那能够处理的并发数很有限啊，多少个worker就能处理多少个并发，何来高并发呢？非也，这就是nginx的高明之处，nginx采用了异步非阻塞的方式来处理请求，也就是说，nginx是可以同时处理成千上万个请">
 <meta name="twitter:image" content="http://tengine.taobao.org/book/_images/chapter-2-1.PNG">
   
@@ -170,7 +170,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      nginx配置location以及rewrite
+      nginx初探
     </h1>
   
 
@@ -190,6 +190,7 @@ var _hmt = _hmt || [];
 <p>异步非阻塞的事件处理机制，具体到系统调用就是像<code>select/poll/epoll/kqueue</code>这样的系统调用。它们提供了一种机制，让你可以同时监控多个事件，调用他们是阻塞的，但可以设置超时时间，在超时时间之内，如果有事件准备好了，就返回。这种机制正好解决了我们上面的两个问题，拿<code>epoll</code>为例，当事件没准备好时，放到<code>epoll</code>里面，事件准备好了，我们就去读写，当读写返回<code>EAGAIN</code>时，我们将它再次加入到<code>epoll</code>里面。</p>
 <p>nginx事件处理模型：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">for</span> t in run_tasks:</div><div class="line">        t.handler();</div><div class="line">    update_time(&amp;now);</div><div class="line">    timeout = ETERNITY;</div><div class="line">    <span class="keyword">for</span> t in wait_tasks: <span class="comment">/* sorted already */</span></div><div class="line">        <span class="keyword">if</span> (t.time &lt;= now) &#123;</div><div class="line">            t.timeout_handler();</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            timeout = t.time - now;</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">    nevents = poll_function(events, timeout);</div><div class="line">    <span class="keyword">for</span> i in nevents:</div><div class="line">        task t;</div><div class="line">        <span class="keyword">if</span> (events[i].type == READ) &#123;</div><div class="line">            t.handler = read_handler;</div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">/* events[i].type == WRITE */</span></div><div class="line">            t.handler = write_handler;</div><div class="line">        &#125;</div><div class="line">        run_tasks_add(t);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="connection"><a href="#connection" class="headerlink" title="connection"></a>connection</h2><p>在这里，很多人会误解worker_connections这个参数的意思，认为这个值就是nginx所能建立连接的最大值。其实不然，这个值是表示每个worker进程所能建立连接的最大值，所以，一个nginx能建立的最大连接数，应该是<code>worker_connections * worker_processes</code>。当然，这里说的是最大连接数，对于HTTP请求本地资源来说，能够支持的最大并发数量是<code>worker_connections * worker_processes</code>，而如果是HTTP作为反向代理来说，最大并发数量应该是<code>worker_connections * worker_processes/2</code>。因为作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接。</p>
+<a id="more"></a>
 <p>每个worker分配到的请求数需要通过一定的机制进行调控，请求越多的worker被分配到请求的可能性越小。可以参考以下伪代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ngx_accept_disabled = ngx_cycle-&gt;connection_n / <span class="number">8</span></div><div class="line">    - ngx_cycle-&gt;free_connection_n;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (ngx_accept_disabled &gt; <span class="number">0</span>) &#123;</div><div class="line">    ngx_accept_disabled--;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (ngx_trylock_accept_mutex(cycle) == NGX_ERROR) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (ngx_accept_mutex_held) &#123;</div><div class="line">        flags |= NGX_POST_EVENTS;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (timer == NGX_TIMER_INFINITE</div><div class="line">                || timer &gt; ngx_accept_mutex_delay)</div><div class="line">        &#123;</div><div class="line">            timer = ngx_accept_mutex_delay;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>首先，nginx的处理得先打开accept_mutex选项，此时，只有获得了accept_mutex的进程才会去添加accept事件，也就是说，nginx会控制进程是否添加accept事件。nginx使用一个叫ngx_accept_disabled的变量来控制是否去竞争accept_mutex锁。在第一段代码中，计算ngx_accept_disabled的值，这个值是nginx单进程的所有连接总数的八分之一，减去剩下的空闲连接数量，得到的这个ngx_accept_disabled有一个规律，当剩余连接数小于总连接数的八分之一时，其值才大于0，而且剩余的连接数越小，这个值越大。再看第二段代码，当ngx_accept_disabled大于0时，不会去尝试获取accept_mutex锁，并且将ngx_accept_disabled减1，于是，每次执行到此处时，都会去减1，直到小于0。不去获取accept_mutex锁，就是等于让出获取连接的机会，很显然可以看出，当空余连接越少时，ngx_accept_disable越大，于是让出的机会就越多，这样其它进程获取锁的机会也就越大。不去accept，自己的连接就控制下来了，其它进程的连接池就会得到利用，这样，nginx就控制了多进程间连接的平衡了。</p>
 <h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><p>nginx对于解析http协议也是通过一行一行地读取进行处理。</p>
