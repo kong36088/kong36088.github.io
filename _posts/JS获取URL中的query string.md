@@ -6,23 +6,13 @@ description: JQ获取query string
 date: 2016/03/30 14:24:25 
 ---
 ``` javascript
-function GetRequest() {
-	var url = location.search; //获取url中"?"符后的字串
-	var theRequest = new Object();
-	if (url.indexOf("?") != -1) {
-		var str = url.substr(1);
-		strs = str.split("&");
-		for(var i = 0; i < strs.length; i ++) {
-			theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-		}
-	}
-	return theRequest;
+function getQueryString(key){
+    var reg = new     function getQueryString(key){
+    var reg = new RegExp("(^|&)"+key+"=([^&]*)(&|$)");
+    var result = window.location.search.substr(1).match(reg);
+    return result?decodeURIComponent(result[2]):null;
 }
-var Request = new Object();
-Request = GetRequest();
-// var 参数1,参数2,参数3,参数N;
-// 参数1 = Request['参数1'];
-// 参数2 = Request['参数2'];
-// 参数3 = Request['参数3'];
-// 参数N = Request['参数N'];
+//用法：
+//getQueryString('arg')
+//getQueryString('test')
 ``` 
