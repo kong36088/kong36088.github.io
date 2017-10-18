@@ -160,6 +160,100 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-我用python爬了知乎一百万用户的数据" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/04/我用python爬了知乎一百万用户的数据/">我用python爬了知乎一百万用户的数据</a>
+    </h1>
+  
+
+        
+        <a href="/2016/11/04/我用python爬了知乎一百万用户的数据/" class="archive-article-date">
+  	<time datetime="2016-11-04T13:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目源码放在我的github上：<a href="https://github.com/kong36088/ZhihuSpider">ZhihuSpider</a><br><strong>喜欢的话帮忙点个star呗:-D</strong></p>
+<h1 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h1><p>1.首先是模拟登陆知乎，利用保存登陆的cookie信息<br>2.抓取知乎页面的html代码，留待下一步继续进行分析提取信息<br>3.分析提取页面中用户的个性化url，放入<code>redis</code>（这里特别说明一下redis的思路用法，将提取到的用户的个性化url放入redis的一个名为<code>already_get_user</code>的<code>hash table</code>，表示已抓取的用户，对于已抓取过的用户判断是否存在于<code>already_get_user</code>以去除重复抓取，同时将个性化url放入<code>user_queue</code>的队列中，需要抓取新用户时pop队列获取新的用户）<br>4.获取用户的关注列表和粉丝列表，继续插入到redis<br>5.从redis的<code>user_queue</code>队列中获取新用户继续重复步骤3</p>
+<h1 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h1><p>服务器带宽有限，并且知乎进行了ip封杀，所以这些数据也花了好几天的时间才爬下来<br><strong>喜欢的朋友帮忙点个star呗♪(＾∀＾●)ﾉ</strong> <a href="https://github.com/kong36088/ZhihuSpider">ZhihuSpider</a></p>
+<p><img src="/uploads/知乎用户爬虫1.png" alt="知乎爬虫1"></p>
+        
+          <a class="article-more-a" href="/2016/11/04/我用python爬了知乎一百万用户的数据/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python##分类/" class="article-tag-list-link color1">python##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/11/04/我用python爬了知乎一百万用户的数据/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP内核中的HashTable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -744,6 +838,97 @@ php Delete.php
 
 
   
+    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
+  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
+<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
+<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
+<pre><code class="bash">vi a.sh
+</code></pre>
+<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
+<p>再次执行就不会有这样的问题了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux——awk、sed、grep（鸟哥的私房菜）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -846,97 +1031,6 @@ php Delete.php
 
 
   
-    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
-  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
-<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
-<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
-<pre><code class="bash">vi a.sh
-</code></pre>
-<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
-<p>再次执行就不会有这样的问题了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-BucketSort桶排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1007,101 +1101,6 @@ php Delete.php
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/08/14/BucketSort桶排序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Leetcode题解——347Top K Frequent Elements" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/14/Leetcode题解——347Top K Frequent Elements/">Leetcode题解——347Top K Frequent Elements</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/14/Leetcode题解——347Top K Frequent Elements/" class="archive-article-date">
-  	<time datetime="2016-08-14T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>题目地址：<a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" rel="external">347. Top K Frequent Elements</a></p>
-<p>Given a non-empty array of integers, return the k most frequent elements.</p>
-<p>For example,<br>Given <code>[1,1,1,2,2,3]</code> and <code>k = 2</code>, return <code>[1,2]</code>.</p>
-<p>Note:<br>You may assume k is always valid, 1 ≤ k ≤ number of unique elements.<br>Your algorithm’s time complexity must be better than O(n log n), where n is the array’s size.</p>
-<p>根据题目大意就是，给出一个数组，找出其中出现次数前K多的数字并以数组形式返回</p>
-        
-          <a class="article-more-a" href="/2016/08/14/Leetcode题解——347Top K Frequent Elements/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/LeetCode##分类/" class="article-tag-list-link color3">LeetCode##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/14/Leetcode题解——347Top K Frequent Elements/">展开全文 >></a>
         </p>
       
 
@@ -1413,6 +1412,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
             
             <div class="clearfix"></div>

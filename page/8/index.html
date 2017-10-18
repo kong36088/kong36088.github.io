@@ -352,6 +352,104 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
+    <article id="post-ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/" class="archive-article-date">
+  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在用PHP的时候发现PHP没有安装CURL拓展，于是打算用</p>
+<p>apt-get php5-curl去自动安装，却发现了这样的提示：</p>
+<p>php5-curl : 依赖: php5-common (= 5.5.9+dfsg-1ubuntu4) 但是 5.5.9+dfsg-1ubuntu4.14 正要被安装</p>
+<p>于是百度了很久，终于找到了答案，原来是DNS的问题，直接到系统文件中修改一下DNS：</p>
+<blockquote>
+<p>1.修改/etc/resolv.conf文件：为nameserver=8.8.8.8</p>
+<p>2.sudo rm /var/lib/apt/lists/* -vf</p>
+<p>3.sudo apt-get update</p>
+</blockquote>
+<p>搞定</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -600,98 +698,6 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
-    <article id="post-PHP中迭代器模式的使用和体会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP中迭代器模式的使用和体会/">一个使用的分页方法</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP中迭代器模式的使用和体会/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>迭代器模式提供一种访问一个容器对象中的各个元素，而又不暴露其内部细节的方法。在应用中，我们时常会遇到各种变量代码，foreach在很多代码处都可以见到，使用迭代器可以对不同数据结构的集合封装，外部只需调用迭代器提供的接口即可，提高了应用的可扩展性。</p>
-<p>迭代器的使用可以遍历容器内的数据，是一种十分之实用的方法。</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">迭代器</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP中迭代器模式的使用和体会/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-thinkPHP验证码的几个要点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -826,122 +832,6 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
-    <article id="post-一个使用分页的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/一个使用分页的方法/">一个使用的分页方法</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/一个使用分页的方法/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code class="php"><span class="comment">/**
- * $count 总页数
- * $page 当前页号
- * $num 显示的页码数
- **/</span>
-<span class="function"><span class="keyword">function</span> <span class="title">pagebar</span><span class="params">($count, $page, $num)</span> </span>{
-    $num = min ( $count, $num ); <span class="comment">// 处理显示的页码数大于总页数的情况</span>
-    <span class="keyword">if</span> ($page &gt; $count || $page &lt; <span class="number">1</span>)
-        <span class="keyword">return</span>; <span class="comment">// 处理非法页号的情况</span>
-    $end = $page + floor ( $num / <span class="number">2</span> ) &lt;= $count ? $page + floor ( $num / <span class="number">2</span> ) : $count; <span class="comment">// 计算结束页号</span>
-    $start = $end - $num + <span class="number">1</span>; <span class="comment">// 计算开始页号</span>
-    <span class="keyword">if</span> ($start &lt; <span class="number">1</span>) { <span class="comment">// 处理开始页号小于1的情况</span>
-        $end -= $start - <span class="number">1</span>;
-        $start = <span class="number">1</span>;
-    }
-    <span class="keyword">for</span>($i = $start; $i &lt;= $end; $i ++) { <span class="comment">// 输出分页条，请自行添加链接样式</span>
-        <span class="keyword">if</span> ($i == $page)
-            <span class="keyword">echo</span> <span class="string">"[$i]"</span>;
-        <span class="keyword">else</span>
-            <span class="keyword">echo</span> <span class="string">" $i "</span>;
-    }
-    <span class="keyword">echo</span> <span class="string">"($page)&lt;br /&gt;"</span>;
-}
-</code></pre>
-<p>输出的结果：</p>
-<blockquote>
-<p>14 15 16 17 [18] 19 20 21 22 (18)</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分页</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/一个使用分页的方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-PHP爬虫（信软官网）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1005,6 +895,105 @@ change files and directories recursively-t, --<span class="built_in">type</span>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JS破解微信防盗链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/JS破解微信防盗链/">JS破解微信防盗链</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/JS破解微信防盗链/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2015年微信公众号的图片加入了防盗链功能，使得不能直接用<img src="">这种方式引用图片，但是针对如此问题，研究了一个下午，尝试过php的curl进行访问，但是却是失败告终，最终找到了解决方案：</p>
+<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">showImg</span>(<span class="params"> url ,frameid</span>) </span>{ <span class="comment">//url是要访问的连接，frameid是一个独立的frameid</span>
+<span class="comment">//frameid可以自行传入</span>
+<span class="comment">// var frameid = 'frameimg' + Math.random();</span>
+<span class="built_in">window</span>.img = <span class="string">'&lt;img id="img" src=\''</span>+url+<span class="string">'?'</span>+<span class="built_in">Math</span>.random()+<span class="string">'\' height="500px" width="500px" /&gt;&lt;script&gt;window.onload = function() { parent.document.getElementById(\''</span>+frameid+<span class="string">'\').height = document.getElementById(\'img\').height+\'px\'; }&lt;'</span>+<span class="string">'/script&gt;'</span>;
+<span class="comment">// document.write('&lt;iframe id="'+frameid+'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%"&gt;&lt;/iframe&gt;');</span>
+}
+<span class="comment">//通过以下方法调用</span>
+showImg(result.img,result.id);
+$(<span class="string">'#content'</span>).append(<span class="string">'&lt;iframe id="'</span>+result.id+<span class="string">'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%" height="100%"&gt;&lt;/iframe&gt;'</span>);
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">微信</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/JS破解微信防盗链/">展开全文 >></a>
         </p>
       
 
@@ -1130,19 +1119,19 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
 
 
   
-    <article id="post-JS破解微信防盗链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-一个使用分页的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/JS破解微信防盗链/">JS破解微信防盗链</a>
+      <a class="article-title" href="/2015/11/16/一个使用分页的方法/">一个使用的分页方法</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/JS破解微信防盗链/" class="archive-article-date">
+        <a href="/2015/11/16/一个使用分页的方法/" class="archive-article-date">
   	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -1150,17 +1139,34 @@ $the_dir=dirname(<span class="keyword">__FILE__</span>);
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>2015年微信公众号的图片加入了防盗链功能，使得不能直接用<img src="">这种方式引用图片，但是针对如此问题，研究了一个下午，尝试过php的curl进行访问，但是却是失败告终，最终找到了解决方案：</p>
-<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">showImg</span>(<span class="params"> url ,frameid</span>) </span>{ <span class="comment">//url是要访问的连接，frameid是一个独立的frameid</span>
-<span class="comment">//frameid可以自行传入</span>
-<span class="comment">// var frameid = 'frameimg' + Math.random();</span>
-<span class="built_in">window</span>.img = <span class="string">'&lt;img id="img" src=\''</span>+url+<span class="string">'?'</span>+<span class="built_in">Math</span>.random()+<span class="string">'\' height="500px" width="500px" /&gt;&lt;script&gt;window.onload = function() { parent.document.getElementById(\''</span>+frameid+<span class="string">'\').height = document.getElementById(\'img\').height+\'px\'; }&lt;'</span>+<span class="string">'/script&gt;'</span>;
-<span class="comment">// document.write('&lt;iframe id="'+frameid+'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%"&gt;&lt;/iframe&gt;');</span>
+        <pre><code class="php"><span class="comment">/**
+ * $count 总页数
+ * $page 当前页号
+ * $num 显示的页码数
+ **/</span>
+<span class="function"><span class="keyword">function</span> <span class="title">pagebar</span><span class="params">($count, $page, $num)</span> </span>{
+    $num = min ( $count, $num ); <span class="comment">// 处理显示的页码数大于总页数的情况</span>
+    <span class="keyword">if</span> ($page &gt; $count || $page &lt; <span class="number">1</span>)
+        <span class="keyword">return</span>; <span class="comment">// 处理非法页号的情况</span>
+    $end = $page + floor ( $num / <span class="number">2</span> ) &lt;= $count ? $page + floor ( $num / <span class="number">2</span> ) : $count; <span class="comment">// 计算结束页号</span>
+    $start = $end - $num + <span class="number">1</span>; <span class="comment">// 计算开始页号</span>
+    <span class="keyword">if</span> ($start &lt; <span class="number">1</span>) { <span class="comment">// 处理开始页号小于1的情况</span>
+        $end -= $start - <span class="number">1</span>;
+        $start = <span class="number">1</span>;
+    }
+    <span class="keyword">for</span>($i = $start; $i &lt;= $end; $i ++) { <span class="comment">// 输出分页条，请自行添加链接样式</span>
+        <span class="keyword">if</span> ($i == $page)
+            <span class="keyword">echo</span> <span class="string">"[$i]"</span>;
+        <span class="keyword">else</span>
+            <span class="keyword">echo</span> <span class="string">" $i "</span>;
+    }
+    <span class="keyword">echo</span> <span class="string">"($page)&lt;br /&gt;"</span>;
 }
-<span class="comment">//通过以下方法调用</span>
-showImg(result.img,result.id);
-$(<span class="string">'#content'</span>).append(<span class="string">'&lt;iframe id="'</span>+result.id+<span class="string">'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%" height="100%"&gt;&lt;/iframe&gt;'</span>);
 </code></pre>
+<p>输出的结果：</p>
+<blockquote>
+<p>14 15 16 17 [18] 19 20 21 22 (18)</p>
+</blockquote>
 
       
 
@@ -1174,11 +1180,11 @@ $(<span class="string">'#content'</span>).append(<span class="string">'&lt;ifram
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">微信</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">分页</a>
         		</li>
       		
 		</ul>
@@ -1190,7 +1196,7 @@ $(<span class="string">'#content'</span>).append(<span class="string">'&lt;ifram
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
         		</li>
       		
 		</ul>
@@ -1199,7 +1205,7 @@ $(<span class="string">'#content'</span>).append(<span class="string">'&lt;ifram
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/JS破解微信防盗链/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/一个使用分页的方法/">展开全文 >></a>
         </p>
       
 
@@ -1511,6 +1517,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C</a>
               </li>
             
             <div class="clearfix"></div>
