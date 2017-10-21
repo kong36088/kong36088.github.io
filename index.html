@@ -180,8 +180,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[toc]</p>
-<h1 id="worker模型"><a href="#worker模型" class="headerlink" title="worker模型"></a>worker模型</h1><p><img src="http://tengine.taobao.org/book/_images/chapter-2-1.PNG" alt="worker模型"></p>
+        <h1 id="worker模型"><a href="#worker模型" class="headerlink" title="worker模型"></a>worker模型</h1><p><img src="http://tengine.taobao.org/book/_images/chapter-2-1.PNG" alt="worker模型"></p>
 <h2 id="nginx架构"><a href="#nginx架构" class="headerlink" title="nginx架构"></a>nginx架构</h2><p>每个请求会占用一个线程，一个worker进程可以处理成千上万的请求。</p>
 <p>nginx采用多worker的方式来处理请求，每个worker里面只有一个主线程，那能够处理的并发数很有限啊，多少个worker就能处理多少个并发，何来高并发呢？非也，这就是nginx的高明之处，nginx采用了异步非阻塞的方式来处理请求，也就是说，nginx是可以同时处理成千上万个请求的。</p>
 <p>异步非阻塞的事件处理机制，具体到系统调用就是像<code>select/poll/epoll/kqueue</code>这样的系统调用。它们提供了一种机制，让你可以同时监控多个事件，调用他们是阻塞的，但可以设置超时时间，在超时时间之内，如果有事件准备好了，就返回。这种机制正好解决了我们上面的两个问题，拿<code>epoll</code>为例，当事件没准备好时，放到<code>epoll</code>里面，事件准备好了，我们就去读写，当读写返回<code>EAGAIN</code>时，我们将它再次加入到<code>epoll</code>里面。</p>
