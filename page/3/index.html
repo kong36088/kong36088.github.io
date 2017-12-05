@@ -160,6 +160,105 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-BucketSort桶排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/14/BucketSort桶排序/">BucketSort桶排序</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/14/BucketSort桶排序/" class="archive-article-date">
+  	<time datetime="2016-08-14T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Bucket-Sort介绍"><a href="#Bucket-Sort介绍" class="headerlink" title="Bucket Sort介绍"></a>Bucket Sort介绍</h1><p>桶排序 (Bucket sort)或所谓的箱排序，是一个排序算法，工作的原理是将数组分到有限数量的桶子里。每个桶子再个别排序（有可能再使用别的排序算法或是以递归方式继续使用桶排序进行排序）。桶排序是鸽巢排序的一种归纳结果。当要被排序的数组内的数值是均匀分配的时候，桶排序使用线性时间（Θ（n））。但桶排序并不是 比较排序，他不受到 O(n log n) 下限的影响。</p>
+<p>假定：输入是由一个随机过程产生的[0, 1)区间上均匀分布的实数。将区间[0, 1)划分为n个大小相等的子区间（桶），每桶大小1/n：[0, 1/n)， [1/n, 2/n)， [2/n, 3/n)，…，[k/n, (k+1)/n )，…将n个输入元素分配到这些桶中，对桶中元素进行排序，然后依次连接桶输入0 ≤A[1..n] &lt;1辅助数组B[0..n-1]是一指针数组，指向桶（链表）。</p>
+<p>介绍一个非常易于理解Bucket Sort的网站：<a href="http://www.cs.usfca.edu/~galles/visualization/BucketSort.html" target="_blank" rel="external">Bucket Sort</a></p>
+<p>桶排序有一个比较明显的缺点：<br>数据最好都处于一个比较小的区间内，如果数据处于1-2亿的区间当中，用桶排序显然不合适</p>
+<p><img src="/uploads/BucketSort.jpg" alt="BucketSort"></p>
+        
+          <a class="article-more-a" href="/2016/08/14/BucketSort桶排序/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BucketSort</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">排序</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/算法##分类/" class="article-tag-list-link color2">算法##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/14/BucketSort桶排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Leetcode题解——347Top K Frequent Elements" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1002,112 +1101,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-docker使用安装教程（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/10/docker使用安装教程（二）/">docker使用安装教程（二）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/10/docker使用安装教程（二）/" class="archive-article-date">
-  	<time datetime="2016-05-10T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>根据上一节配置的容器，继续进行操作</p>
-<pre><code class="bash">apt-get update
-apt-get install -y nginx
-</code></pre>
-<p>安装好之后，退出容器</p>
-<pre><code class="bash">root@ubuntu:/<span class="comment"># exit </span>
-<span class="built_in">exit</span>
-root@ubuntu:/home/jwl<span class="comment">#</span>
-</code></pre>
-<p>保存修改</p>
-<pre><code class="bash">root@ubuntu:/home/jwl<span class="comment"># docker commit -m "add nginx" 596e william/ubuntu-nginx:v1</span>
-dab208031d1dc8f6a10f91363959a943f86f6233d790bbba10f44fe278b4c195
-root@ubuntu:/home/jwl<span class="comment"># docker images</span>
-REPOSITORY             TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-william/ubuntu-nginx   v1                  dab208031d1d        8 seconds ago       299.9 MB
-ubuntu                 14.04               d4751aa1c40a        6 days ago          188 MB
-</code></pre>
-<p>此时已经加入到镜像了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Docker##分类/" class="article-tag-list-link color1">Docker##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/10/docker使用安装教程（二）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1394,6 +1387,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
               </li>
             
             <div class="clearfix"></div>

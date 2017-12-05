@@ -160,6 +160,112 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-docker使用安装教程（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/10/docker使用安装教程（二）/">docker使用安装教程（二）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/10/docker使用安装教程（二）/" class="archive-article-date">
+  	<time datetime="2016-05-10T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>根据上一节配置的容器，继续进行操作</p>
+<pre><code class="bash">apt-get update
+apt-get install -y nginx
+</code></pre>
+<p>安装好之后，退出容器</p>
+<pre><code class="bash">root@ubuntu:/<span class="comment"># exit </span>
+<span class="built_in">exit</span>
+root@ubuntu:/home/jwl<span class="comment">#</span>
+</code></pre>
+<p>保存修改</p>
+<pre><code class="bash">root@ubuntu:/home/jwl<span class="comment"># docker commit -m "add nginx" 596e william/ubuntu-nginx:v1</span>
+dab208031d1dc8f6a10f91363959a943f86f6233d790bbba10f44fe278b4c195
+root@ubuntu:/home/jwl<span class="comment"># docker images</span>
+REPOSITORY             TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+william/ubuntu-nginx   v1                  dab208031d1d        8 seconds ago       299.9 MB
+ubuntu                 14.04               d4751aa1c40a        6 days ago          188 MB
+</code></pre>
+<p>此时已经加入到镜像了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Docker##分类/" class="article-tag-list-link color1">Docker##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/10/docker使用安装教程（二）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-docker使用安装教程（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -638,100 +744,6 @@ apt-get install docker.io
 
 
   
-    <article id="post-JS获取URL中的query string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/JS获取URL中的query string/">JS获取URL中的query string</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/30/JS获取URL中的query string/" class="archive-article-date">
-  	<time datetime="2016-03-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
-    <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
-    <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;
-}
-<span class="comment">//用法：</span>
-<span class="comment">//getQueryString('arg')</span>
-<span class="comment">//getQueryString('test')</span>
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/30/JS获取URL中的query string/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-JS刷新页面的几种方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -797,6 +809,100 @@ apt-get install docker.io
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/03/30/JS刷新页面的几种方式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JS获取URL中的query string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/30/JS获取URL中的query string/">JS获取URL中的query string</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/30/JS获取URL中的query string/" class="archive-article-date">
+  	<time datetime="2016-03-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
+    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
+    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
+    <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
+    <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;
+}
+<span class="comment">//用法：</span>
+<span class="comment">//getQueryString('arg')</span>
+<span class="comment">//getQueryString('test')</span>
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/30/JS获取URL中的query string/">展开全文 >></a>
         </p>
       
 
@@ -983,125 +1089,6 @@ setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/03/21/centos6、centos7通过yum方式安装php7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Nginx反向代理配置（负载均衡）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/10/Nginx反向代理配置（负载均衡）/">Nginx反向代理配置（负载均衡）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/10/Nginx反向代理配置（负载均衡）/" class="archive-article-date">
-  	<time datetime="2016-03-10T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>负载均衡分配</p>
-</blockquote>
-<p>根据ip轮询：</p>
-<pre><code class="bash">upstream backend {
-    server 192.168.102.143;
-    server 192.168.102.144;
-}
-</code></pre>
-<p>根据ip的hash值分配（轮询）：</p>
-<pre><code class="bash">upstream backend {
-    ip_hash;
-    server 192.168.102.143;
-    server 192.168.102.144;
-}
-</code></pre>
-<p>根据权值分配：</p>
-<pre><code class="bash">upstream hello{
-    server 192.168.102.143 weight=1;
-    server 192.168.102.144 weight=1;            
-}
-</code></pre>
-<p>最少连接数：</p>
-<pre><code class="bash">upstream hello{
-    least_conn;
-    server 192.168.102.143;
-    server 192.168.102.144;            
-}
-</code></pre>
-        
-          <a class="article-more-a" href="/2016/03/10/Nginx反向代理配置（负载均衡）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Nginx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/10/Nginx反向代理配置（负载均衡）/">展开全文 >></a>
         </p>
       
 
@@ -1417,6 +1404,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
               </li>
             
             <div class="clearfix"></div>

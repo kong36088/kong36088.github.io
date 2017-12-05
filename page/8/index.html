@@ -160,19 +160,19 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-关于centos6.5 lamp搭建好后外网无法访问的一些经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">关于centos6.5 lamp搭建好后外网无法访问的一些经验总结</a>
+      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/" class="archive-article-date">
+        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -180,16 +180,34 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>外网不能访问aoache，查看了apache的access_log，发现根本没有访问到服务器，直接就被拒绝了，所以在想可能是防火墙把80端口关了，百度了之后发现了原因所在。</p>
-<p>因为防火墙把80端口给禁了，所以把80端口开放出来就可以让外网访问到apache服务器</p>
-<p>CentOS防火墙设置开启80端口访问</p>
-<p>我们以添加80端口为例操作如下：</p>
-<pre><code class="bash">[root@centos httpd]<span class="comment"># /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span>
+        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
+<p>原因一：采用int数据量小，便于提高数据库效率</p>
+<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
+<p>date(format,timestamp)进行转换</p>
+<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
+<p>PHP中要获取一个月前的时间戳可以这样用：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
 </code></pre>
-<p>保存</p>
-        
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/#more">more >></a>
-        
+<p>结果为：</p>
+<blockquote>
+<p>1429287142</p>
+</blockquote>
+<p>一年前的时间戳：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>1400343128</p>
+</blockquote>
+<p>转换成可读时间：</p>
+<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>2015-04-18</p>
+</blockquote>
+<p>由此可见，strtotime这个函数十分之强大</p>
+
       
 
       
@@ -202,11 +220,11 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Centos</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
         		</li>
       		
 		</ul>
@@ -218,7 +236,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
         		</li>
       		
 		</ul>
@@ -227,7 +245,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
         </p>
       
 
@@ -352,19 +370,19 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
-    <article id="post-ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ThinkPHP经常用到的系统变量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误</a>
+      <a class="article-title" href="/2015/11/16/ThinkPHP经常用到的系统变量/">ThinkPHP经常用到的系统变量</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/" class="archive-article-date">
+        <a href="/2015/11/16/ThinkPHP经常用到的系统变量/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -372,17 +390,14 @@ change files and directories recursively-t, --<span class="built_in">type</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在用PHP的时候发现PHP没有安装CURL拓展，于是打算用</p>
-<p>apt-get php5-curl去自动安装，却发现了这样的提示：</p>
-<p>php5-curl : 依赖: php5-common (= 5.5.9+dfsg-1ubuntu4) 但是 5.5.9+dfsg-1ubuntu4.14 正要被安装</p>
-<p>于是百度了很久，终于找到了答案，原来是DNS的问题，直接到系统文件中修改一下DNS：</p>
-<blockquote>
-<p>1.修改/etc/resolv.conf文件：为nameserver=8.8.8.8</p>
-<p>2.sudo rm /var/lib/apt/lists/* -vf</p>
-<p>3.sudo apt-get update</p>
-</blockquote>
-<p>搞定</p>
-
+        <p>原文地址：<a href="http://www.jb51.net/article/47642.htm" target="_blank" rel="external">http://www.jb51.net/article/47642.htm</a></p>
+<hr>
+<p>（1）系统变量：在模板中输出系统变量：包括server、env、session、post、get、request、cookie<br>{$Think.server.script_name} // 输出$_SERVER变量<br>{$Think.session.session_id|md5} // 输出$_SESSION变量<br>{$Think.get.pageNumber} // 输出$_GET变量<br>{$Think.cookie.name}  // 输出$_COOKIE变量</p>
+<p>以上方式还可以写成：<br>{$_SERVER.script_name} // 输出$_SERVER变量<br>{$_SESSION.session_id|md5} // 输出$_SESSION变量<br>{$_GET.pageNumber} // 输出$_GET变量<br>{$_COOKIE.name}  // 输出$_COOKIE变量</p>
+<p>系统常量 ：使用$Think.const 输出<br>注意：server、cookie、config不区分大小写，但是变量区分大小写。例如：<br>{$Think.server.script_name}和{$Think.SERVER.script_name}等效<br>SESSION 、COOKIE还支持二维数组的输出</p>
+        
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/#more">more >></a>
+        
       
 
       
@@ -395,11 +410,11 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
         		</li>
       		
 		</ul>
@@ -411,7 +426,7 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
         		</li>
       		
 		</ul>
@@ -420,7 +435,7 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP经常用到的系统变量/">展开全文 >></a>
         </p>
       
 
@@ -450,19 +465,19 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
-    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ThinkPHP生成二维码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
+      <a class="article-title" href="/2015/11/16/ThinkPHP生成二维码/">ThinkPHP生成二维码</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
+        <a href="/2015/11/16/ThinkPHP生成二维码/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -470,34 +485,14 @@ change files and directories recursively-t, --<span class="built_in">type</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
-<p>原因一：采用int数据量小，便于提高数据库效率</p>
-<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
-<p>date(format,timestamp)进行转换</p>
-<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
-<p>PHP中要获取一个月前的时间戳可以这样用：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1429287142</p>
-</blockquote>
-<p>一年前的时间戳：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1400343128</p>
-</blockquote>
-<p>转换成可读时间：</p>
-<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>2015-04-18</p>
-</blockquote>
-<p>由此可见，strtotime这个函数十分之强大</p>
-
+        <p>在php中，大致生成二维码的方法有两种：一种是引用别家提供的api然后进行自动生成，</p>
+<p>google有提供api专门生成二维码，而国内的新浪也有api专门提供，</p>
+<p>新浪的api地址是：<a href="http://qrcoder.sinaapp.com?t=http://www.gbtags.com" target="_blank" rel="external">http://qrcoder.sinaapp.com?t=http://www.gbtags.com</a></p>
+<p>t=后面加上想要生成的url即可</p>
+<p>生成二维码的另一种方法：通过开源的phpqrcode进行自动生成。</p>
+        
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/#more">more >></a>
+        
       
 
       
@@ -535,7 +530,104 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/ThinkPHP生成二维码/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-关于centos6.5 lamp搭建好后外网无法访问的一些经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">关于centos6.5 lamp搭建好后外网无法访问的一些经验总结</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/" class="archive-article-date">
+  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>外网不能访问aoache，查看了apache的access_log，发现根本没有访问到服务器，直接就被拒绝了，所以在想可能是防火墙把80端口关了，百度了之后发现了原因所在。</p>
+<p>因为防火墙把80端口给禁了，所以把80端口开放出来就可以让外网访问到apache服务器</p>
+<p>CentOS防火墙设置开启80端口访问</p>
+<p>我们以添加80端口为例操作如下：</p>
+<pre><code class="bash">[root@centos httpd]<span class="comment"># /sbin/iptables -I INPUT -p tcp --dport 80 -j ACCEPT</span>
+</code></pre>
+<p>保存</p>
+        
+          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Centos</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/关于centos6.5 lamp搭建好后外网无法访问的一些经验总结/">展开全文 >></a>
         </p>
       
 
@@ -832,6 +924,101 @@ change files and directories recursively-t, --<span class="built_in">type</span>
 
 
   
+    <article id="post-Sphinx的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/Sphinx的安装/">Sphinx的安装</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/Sphinx的安装/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Sphinx不推荐在windows下使用</p>
+<p>在ubuntu和debian关于Sphinx的安装有两种途径，一种是通过deb包安装，另一种则是通过PPA的途径</p>
+<p>Deb包:</p>
+<p>利用apt-get安装libpq5拓展</p>
+<pre><code class="bash">$ sudo apt-get install mysql-client unixodbc libpq5
+</code></pre>
+<p>安装deb包</p>
+<pre><code class="bash">$ sudo dpkg -i sphinxsearch_2.3.1-beta-0ubuntu11~trusty_amd64.deb
+</code></pre>
+        
+          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Sphnix</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Sphnix##分类/" class="article-tag-list-link color1">Sphnix##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP爬虫（信软官网）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -895,201 +1082,6 @@ change files and directories recursively-t, --<span class="built_in">type</span>
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JS破解微信防盗链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/JS破解微信防盗链/">JS破解微信防盗链</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/JS破解微信防盗链/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>2015年微信公众号的图片加入了防盗链功能，使得不能直接用<img src="">这种方式引用图片，但是针对如此问题，研究了一个下午，尝试过php的curl进行访问，但是却是失败告终，最终找到了解决方案：</p>
-<pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">showImg</span>(<span class="params"> url ,frameid</span>) </span>{ <span class="comment">//url是要访问的连接，frameid是一个独立的frameid</span>
-<span class="comment">//frameid可以自行传入</span>
-<span class="comment">// var frameid = 'frameimg' + Math.random();</span>
-<span class="built_in">window</span>.img = <span class="string">'&lt;img id="img" src=\''</span>+url+<span class="string">'?'</span>+<span class="built_in">Math</span>.random()+<span class="string">'\' height="500px" width="500px" /&gt;&lt;script&gt;window.onload = function() { parent.document.getElementById(\''</span>+frameid+<span class="string">'\').height = document.getElementById(\'img\').height+\'px\'; }&lt;'</span>+<span class="string">'/script&gt;'</span>;
-<span class="comment">// document.write('&lt;iframe id="'+frameid+'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%"&gt;&lt;/iframe&gt;');</span>
-}
-<span class="comment">//通过以下方法调用</span>
-showImg(result.img,result.id);
-$(<span class="string">'#content'</span>).append(<span class="string">'&lt;iframe id="'</span>+result.id+<span class="string">'" src="javascript:parent.img;" frameBorder="0" scrolling="no" width="100%" height="100%"&gt;&lt;/iframe&gt;'</span>);
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">微信</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/JS破解微信防盗链/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-dirname(__FILE__) 的使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/dirname(__FILE__) 的使用总结/">dirname(__FILE__) 的使用总结</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/dirname(__FILE__) 的使用总结/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>dirname(<strong>FILE</strong>)<br>php中定义了一个很有用的常数，即<br><strong>file</strong></p>
-<p>这个内定常数是当前php程序的就是完整路径（路径+文件名）。</p>
-<p>即使这个文件被其他文件引用(include或require)，<strong>file</strong>始终是它所在文件的完整路径，而不是引用它的那个文件完整路径。</p>
-<p>请看下面例子：<br>/home/data/demo/test/a.php</p>
-<pre><code class="php">$the_full_name=<span class="keyword">__FILE__</span>;
-$the_dir=dirname(<span class="keyword">__FILE__</span>);
-<span class="keyword">echo</span> $the_full_name; <span class="comment">//返回/home/data/demo/test/a.php</span>
-<span class="keyword">echo</span> $the_dir;            <span class="comment">//返回/home/data/demo/test</span>
-</code></pre>
-<blockquote>
-<p><strong>FILE</strong>     返回当前 路径+文件名<br>dirname(<strong>FILE</strong>) 返回当前文件路径的 路径部分<br>dirname(dirname(<strong>FILE</strong>));得到的是文件上一层目录名（不含最后一个“/”号）</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/dirname(__FILE__) 的使用总结/">展开全文 >></a>
         </p>
       
 
@@ -1521,6 +1513,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
               </li>
             
             <div class="clearfix"></div>
