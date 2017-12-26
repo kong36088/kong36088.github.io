@@ -15,13 +15,13 @@
 <meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2017/12/26/WebSocket协议小记/index.html">
 <meta property="og:site_name" content="William的后花园">
 <meta property="og:description" content="杂谈在一两年前就已经使用过websocket协议，但是当时也仅仅是停留在使用上，对于很多原理以及协议的实现没有过多的理解。在很长一段时间里，我对websocket都还只是停留在“会用”的阶段。 最近总算有时间来捣鼓捣鼓一些底层原理性的东西，算是查缺补漏吧。 让我们进入我们的主题——websocket。 WebSocket 初探首先，WebSocket是一个持久连接协议，WebSocket是HTML">
-<meta property="og:image" content="https://github.com/Uploads/websocket/websocket.jpg">
-<meta property="og:image" content="https://github.com/Uploads/websocket/pingpong.png">
-<meta property="og:updated_time" content="2017-12-26T13:52:31.299Z">
+<meta property="og:image" content="https://github.com/uploads/websocket/websocket.jpg">
+<meta property="og:image" content="https://github.com/uploads/websocket/pingpong.png">
+<meta property="og:updated_time" content="2017-12-26T14:41:32.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebSocket协议小记">
 <meta name="twitter:description" content="杂谈在一两年前就已经使用过websocket协议，但是当时也仅仅是停留在使用上，对于很多原理以及协议的实现没有过多的理解。在很长一段时间里，我对websocket都还只是停留在“会用”的阶段。 最近总算有时间来捣鼓捣鼓一些底层原理性的东西，算是查缺补漏吧。 让我们进入我们的主题——websocket。 WebSocket 初探首先，WebSocket是一个持久连接协议，WebSocket是HTML">
-<meta name="twitter:image" content="https://github.com/Uploads/websocket/websocket.jpg">
+<meta name="twitter:image" content="https://github.com/uploads/websocket/websocket.jpg">
   
   
     <link rel="icon" href="/uploads/site/logo.jpg">
@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
 <h1 id="WebSocket-初探"><a href="#WebSocket-初探" class="headerlink" title="WebSocket 初探"></a>WebSocket 初探</h1><p>首先，WebSocket是一个持久连接协议，WebSocket是HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）</p>
 <p>WebSocket和HTTP之前会有一些小小的共同点，比如：<br>1、他们都是基于TCP。因为WebSocket是基于TCP的，所以连接可靠性得到了保障。<br>2、他们都有“Header”，像 <code>Cookie=xxxx;Content-Type=xxxx;</code> 这样的键值对</p>
 <p>他们之间的关系就像是这样的：</p>
-<p><img src="/Uploads/websocket/websocket.jpg" alt="WebSocket和HTTP"></p>
+<p><img src="/uploads/websocket/websocket.jpg" alt="WebSocket和HTTP"></p>
 <h1 id="WebSocket-之深入"><a href="#WebSocket-之深入" class="headerlink" title="WebSocket 之深入"></a>WebSocket 之深入</h1><h2 id="握手阶段"><a href="#握手阶段" class="headerlink" title="握手阶段"></a>握手阶段</h2><p>一起来看看WebSocket建立连接的过程。</p>
 <p>这里是浏览器发起的请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET /chat HTTP/1.1</div><div class="line">Host: server.example.com</div><div class="line">Upgrade: websocket</div><div class="line">Connection: Upgrade</div><div class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</div><div class="line">Sec-WebSocket-Protocol: chat, superchat</div><div class="line">Sec-WebSocket-Version: 13</div><div class="line">Origin: http://example.com</div></pre></td></tr></table></figure></p>
 <p>可以看到，比起传统的HTTP协议，多了几个头：<code>Upgrade</code> <code>Sec-WebSocket-Key</code> <code>Sec-WebSocket-Protocol</code> <code>Sec-WebSocket-Version</code><br>这些头部是用于给WebSocket握手建立连接用的，指定的是websocket协议<br><code>Sec-WebSocket-Key</code> 是浏览器随机生成的base64 encode的值，用来询问服务器是否是支持WebSocket。</p>
@@ -207,7 +207,7 @@ var _hmt = _hmt || [];
 <h1 id="WebSocket-心跳"><a href="#WebSocket-心跳" class="headerlink" title="WebSocket 心跳"></a>WebSocket 心跳</h1><p>心跳主要是用于检测对端是否在线，以减小资源压力。</p>
 <p>WebSocket的心跳主要是通过 <code>Ping</code>、<code>Pong</code> 控制帧进行控制。Ping的协议头是0x9，Pong的协议头是0xA</p>
 <p>在一端发出 <code>Ping</code> 帧后，若对端收到该帧，则必须回应 <code>Pong</code> 帧以表示在线</p>
-<p><img src="/Uploads/websocket/pingpong.png" alt="pingpong"></p>
+<p><img src="/uploads/websocket/pingpong.png" alt="pingpong"></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://datatracker.ietf.org/doc/rfc6455/" target="_blank" rel="external">https://datatracker.ietf.org/doc/rfc6455/</a></p>
 <p><a href="https://www.zhihu.com/question/20215561/answer/40316953" target="_blank" rel="external">https://www.zhihu.com/question/20215561/answer/40316953</a></p>
 <p><a href="https://baike.baidu.com/item/WebSocket/1953845?fr=aladdin" target="_blank" rel="external">https://baike.baidu.com/item/WebSocket/1953845?fr=aladdin</a></p>
