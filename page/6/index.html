@@ -160,6 +160,113 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ubuntu下apache开启SSL提示443端口被占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/">ubuntu下apache开启SSL提示443端口被占用</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/" class="archive-article-date">
+  	<time datetime="2016-01-30T15:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>You guys are going to laugh at this. I had an extra Listen 443 in ports.conf that shouldn’t have been there. Removing that solved this.</p>
+</blockquote>
+<p>因为在ports.conf中重复出现443端口的配置，所以做以下修改<br>把多余的Listen 443注释掉，所以ports.conf的内容应该是这样的</p>
+<pre><code class="bash">NameVirtualHost *:80
+Listen 80
+
+NameVirtualHost *:443
+<span class="comment">#Listen 443</span>
+
+&lt;IfModule mod_ssl.c&gt;
+    Listen 443
+&lt;/IfModule&gt;
+
+&lt;IfModule mod_gnutls.c&gt;
+    Listen 443
+&lt;/IfModule&gt;
+</code></pre>
+<p>另外在虚拟服务器中不要加 NameVirtualHost *:443 </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-微信支付的经验总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1065,114 +1172,6 @@ sudo cp php.ini-development /etc/php/
 
 
   
-    <article id="post-PHP分离curl header和body" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/28/PHP分离curl header和body/">PHP分离curl header和body</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/28/PHP分离curl header和body/" class="archive-article-date">
-  	<time datetime="2015-11-28T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code class="php">$header = <span class="keyword">array</span> (
-    <span class="string">"Content-Type:application/json;encoding=utf-8"</span> 
-);
-$ch = curl_init ();
-curl_setopt ( $ch, CURLOPT_URL, $uri );
-curl_setopt ( $ch, CURLOPT_POST, <span class="number">1</span> );
-curl_setopt ( $ch, CURLOPT_HEADER, $header );
-curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span> );
-curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
-$response = curl_exec ( $ch );
-$http_status = curl_getinfo ( $ch, CURLINFO_HTTP_CODE );
-curl_close ( $ch );
-print_r($response);
-</code></pre>
-<p>返回结果如下</p>
-<blockquote>
-<p>HTTP/1.1 200 OK Content-Type: application/json;encoding=utf-8 Access-Control-Allow-Origin: * Set-Cookie: key1=value1 Set-Cookie: key2=value2 {“header”:{“handler_id”:3001,”command_id”:3004,”terminal”:1001,”version”:0,”reserved”:0},”data”:{“service_types”:[{“name”:”A号：收款、退费、科研经费入账”,”id”:1,”count”:0},{“name”:”B号：请款、内部转账、出国业务咨询及报销”,”id”:2,”count”:0},{“name”:”C号：报销（含劳务收入酬金报销）”,”id”:3,”count”:0},{“name”:”D号：零余额优先报账”,”id”:4,”count”:0}],”code”:1,”msgCode”:23000,”msg”:”获得排队业务清单请求成功”}}</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2015/11/28/PHP分离curl header和body/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">curl</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/28/PHP分离curl header和body/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
@@ -1463,6 +1462,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>

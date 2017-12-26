@@ -160,6 +160,105 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CodeIgniter源码阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/12/CodeIgniter源码阅读笔记/">CodeIgniter源码阅读笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/12/CodeIgniter源码阅读笔记/" class="archive-article-date">
+  	<time datetime="2016-12-12T13:00:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="入口文件"><a href="#入口文件" class="headerlink" title="入口文件"></a>入口文件</h1><h2 id="index-php"><a href="#index-php" class="headerlink" title="index.php"></a>index.php</h2><p>入口文件<code>index.php</code>中主要定义了一些全局路径变量如<code>BASEPATH</code>和<code>APPPATH</code>这种常用的变量<br>并且可以配置代码的部署环境，最后<code>require</code>真正的核心文件<code>CodeIgniter.php</code></p>
+<h2 id="CodeIgniter-php"><a href="#CodeIgniter-php" class="headerlink" title="CodeIgniter.php"></a>CodeIgniter.php</h2><p>位于<code>system/core/</code>目录下，该文件是最主要的核心文件，他负责引入全局需要用到的一些关键的类，比如<code>Common.php</code>和<code>Controller.php</code>，这些类处于<code>system/core</code>目录下<br><code>CodeIgniter.php</code>有点策略模式和工厂模式的意味了，很好的解决了代码耦合的问题，代码可拓展性很高，这也是我喜欢CI的一个地方<br>CI的异常处理机制是利用PHP的error_handler和exception_handler进行处理，实现代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//全局的异常处理都在这里进行</span></div><div class="line">set_error_handler(<span class="string">'_error_handler'</span>);</div><div class="line">set_exception_handler(<span class="string">'_exception_handler'</span>);</div><div class="line">register_shutdown_function(<span class="string">'_shutdown_handler'</span>);</div></pre></td></tr></table></figure>
+<p>这里的error_handler和exception_handler都是利用CI的Loader进行Exception类的实例化并且进行异常处理，同时Loader加载Log类进行日志记录</p>
+<h1 id="核心类库"><a href="#核心类库" class="headerlink" title="核心类库"></a>核心类库</h1><h2 id="Common-php"><a href="#Common-php" class="headerlink" title="Common.php"></a>Common.php</h2><p>该文件定义了一些全局当中需要用到的函数，辅助框架运行，如<code>is_cli()</code>判断来判断是否cli运行环境</p>
+        
+          <a class="article-more-a" href="/2016/12/12/CodeIgniter源码阅读笔记/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CodeIgniter</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/12/CodeIgniter源码阅读笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的百万知乎用户数据分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -934,97 +1033,6 @@ php Delete.php
 
 
   
-    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
-  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
-<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
-<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
-<pre><code class="bash">vi a.sh
-</code></pre>
-<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
-<p>再次执行就不会有这样的问题了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-linux——awk、sed、grep（鸟哥的私房菜）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1417,6 +1425,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>

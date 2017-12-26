@@ -160,6 +160,99 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-centos6、centos7通过yum方式安装php7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/21/centos6、centos7通过yum方式安装php7/">centos6、centos7通过yum方式安装php7</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/21/centos6、centos7通过yum方式安装php7/" class="archive-article-date">
+  	<time datetime="2016-03-21T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="安装PHP7"><a href="#安装PHP7" class="headerlink" title="安装PHP7"></a>安装PHP7</h1><p>如果想要通过yum安装php7的话，根据你的centos的版本进行安装源的类型，从下面的地址进行选择<br><a href="https://mirror.webtatic.com/" target="_blank" rel="external">https://mirror.webtatic.com/</a><br>如果和我一样，是centos6选择<a href="https://mirror.webtatic.com/yum/el6/latest.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el6/latest.rpm</a><br>如果是centos7的版本的话，选择<a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a><br>至于安装方式，也非常简单，centos6下面安装如下</p>
+<p>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el6/latest.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el6/latest.rpm</a><br>centos7下面的安装方式</p>
+<p>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="external">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a><br>然后就可以安装php7了，安装方式如下</p>
+        
+          <a class="article-more-a" href="/2016/03/21/centos6、centos7通过yum方式安装php7/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">PHP7</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/21/centos6、centos7通过yum方式安装php7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Nginx反向代理配置（负载均衡）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1083,113 +1176,6 @@ http_post_data($url,$data);
 
 
   
-    <article id="post-ubuntu下apache开启SSL提示443端口被占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/">ubuntu下apache开启SSL提示443端口被占用</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/" class="archive-article-date">
-  	<time datetime="2016-01-30T15:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>You guys are going to laugh at this. I had an extra Listen 443 in ports.conf that shouldn’t have been there. Removing that solved this.</p>
-</blockquote>
-<p>因为在ports.conf中重复出现443端口的配置，所以做以下修改<br>把多余的Listen 443注释掉，所以ports.conf的内容应该是这样的</p>
-<pre><code class="bash">NameVirtualHost *:80
-Listen 80
-
-NameVirtualHost *:443
-<span class="comment">#Listen 443</span>
-
-&lt;IfModule mod_ssl.c&gt;
-    Listen 443
-&lt;/IfModule&gt;
-
-&lt;IfModule mod_gnutls.c&gt;
-    Listen 443
-&lt;/IfModule&gt;
-</code></pre>
-<p>另外在虚拟服务器中不要加 NameVirtualHost *:443 </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/30/ubuntu下apache开启SSL提示443端口被占用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -1480,6 +1466,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>

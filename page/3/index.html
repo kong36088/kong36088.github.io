@@ -160,6 +160,97 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Shell脚本错误提示——binsh^Mbad interpreter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">Shell脚本错误提示——binsh^Mbad interpreter</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/" class="archive-article-date">
+  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>执行脚本的时候一直发现执行失败，命令没有达到预期效果</p>
+<p><code>/bin/sh^M:bad interpreter: No such file or directory</code></p>
+<p>这个错误发生在你在windows下编写文件上传到linux服务器去运行的时候。<br>错误原因：windows和linux的文件不一样。<br>解决办法:vi该文件 在命令模式下输入 :set ff=unix 回车<br>例如 <code>a.sh</code></p>
+<pre><code class="bash">vi a.sh
+</code></pre>
+<p>进入输入 <code>:set ff=unix</code> 回车<br>输入<code>:wq</code> 回车</p>
+<p>再次执行就不会有这样的问题了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/19/Shell脚本错误提示——binsh^Mbad interpreter/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BucketSort桶排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1012,95 +1103,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-在JS中对异步数据请求进行封装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/23/在JS中对异步数据请求进行封装/">在JS中对异步数据请求进行封装</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/23/在JS中对异步数据请求进行封装/" class="archive-article-date">
-  	<time datetime="2016-05-23T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前戏介绍"><a href="#前戏介绍" class="headerlink" title="前戏介绍"></a>前戏介绍</h1><p>jQuery.ajax返回的是jqXHR对象，它是浏览器原生XMLHttpRequest对象的一个超集，并实现了Promise接口。使它拥有了Promise的所有属性，方法和行为。<br>为了让回调函数名字统一，便于<code>$.ajax</code>中使用，jqXHR也提供了<code>.error()</code>，<code>.success()</code>，<code>.complete()</code><br>但是由于版本的升级相应的<code>.fail()</code>，<code>.done()</code>，<code>.always()</code>代替了前三个方法，使用方式和解释并没有什么区别。</p>
-<p><code>jqXHR.fail(function(jqXHR, textStatus, errorThrown) {});</code><br>一种可供选择的请求失败时调用的回调选项构造函数，<code>.fail()</code>方法取代了的过时的<code>.error()</code>方法。<br><code>jqXHR.done(function(data, textStatus, jqXHR) {});</code><br>一种可供选择的请求成功时调用的回调选项构造函数，<code>.done()</code>方法取代了过时的<code>.success()</code>方法。<br><code>jqXHR.always(function(data|jqXHR, textStatus, jqXHR|errorThrown) {});</code><br>一种可供选择的请求结束时调用的回调选项构造函数，<code>.always()</code>方法代替了过时的<code>.complete()</code>方法,<br>当请求成功时，该函数的参数与<code>.done()</code>的参数一致；当请求失败时，该函数的参数与<code>.fail()</code>的参数一致。</p>
-<h1 id="过程介绍"><a href="#过程介绍" class="headerlink" title="过程介绍"></a>过程介绍</h1><p>封装成两个文件，分别为逻辑层和视图层</p>
-        
-          <a class="article-more-a" href="/2016/05/23/在JS中对异步数据请求进行封装/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/javascript##分类/" class="article-tag-list-link color5">javascript##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/23/在JS中对异步数据请求进行封装/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1391,6 +1393,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>

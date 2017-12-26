@@ -160,6 +160,114 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP分离curl header和body" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/28/PHP分离curl header和body/">PHP分离curl header和body</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/28/PHP分离curl header和body/" class="archive-article-date">
+  	<time datetime="2015-11-28T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code class="php">$header = <span class="keyword">array</span> (
+    <span class="string">"Content-Type:application/json;encoding=utf-8"</span> 
+);
+$ch = curl_init ();
+curl_setopt ( $ch, CURLOPT_URL, $uri );
+curl_setopt ( $ch, CURLOPT_POST, <span class="number">1</span> );
+curl_setopt ( $ch, CURLOPT_HEADER, $header );
+curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span> );
+curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data );
+$response = curl_exec ( $ch );
+$http_status = curl_getinfo ( $ch, CURLINFO_HTTP_CODE );
+curl_close ( $ch );
+print_r($response);
+</code></pre>
+<p>返回结果如下</p>
+<blockquote>
+<p>HTTP/1.1 200 OK Content-Type: application/json;encoding=utf-8 Access-Control-Allow-Origin: * Set-Cookie: key1=value1 Set-Cookie: key2=value2 {“header”:{“handler_id”:3001,”command_id”:3004,”terminal”:1001,”version”:0,”reserved”:0},”data”:{“service_types”:[{“name”:”A号：收款、退费、科研经费入账”,”id”:1,”count”:0},{“name”:”B号：请款、内部转账、出国业务咨询及报销”,”id”:2,”count”:0},{“name”:”C号：报销（含劳务收入酬金报销）”,”id”:3,”count”:0},{“name”:”D号：零余额优先报账”,”id”:4,”count”:0}],”code”:1,”msgCode”:23000,”msg”:”获得排队业务清单请求成功”}}</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2015/11/28/PHP分离curl header和body/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">curl</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/28/PHP分离curl header和body/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-计算机网络——应用层的协议总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -223,6 +331,100 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/25/计算机网络——应用层的协议总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-java的一百多个练手小项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/22/java的一百多个练手小项目/">java的一百多个练手小项目</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/22/java的一百多个练手小项目/" class="archive-article-date">
+  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文本操作</p>
+<blockquote>
+<p>逆转字符串——输入一个字符串，将其逆转并输出。<br>拉丁猪文字游戏——这是一个英语语言游戏。基本规则是将一个英语单词的第一个辅音音素的字母移动到词尾并且加上后缀-ay（譬如“banana”会变成“anana-bay”）。可以在维基百科上了解更多内容。<br>统计元音字母——输入一个字符串，统计处其中元音字母的数量。更复杂点的话统计出每个元音字母的数量。<br>判断是否为回文——判断用户输入的字符串是否为回文。回文是指正反拼写形式都是一样的词，譬如“racecar”。<br>统计字符串中的单词数目——统计字符串中单词的数目，更复杂的话从一个文本中读出字符串并生成单词数目统计结果。<br>文本编辑器——记事本类型的应用，可以打开、编辑、保存文本文档。可以增加单词高亮和其它的一些特性。<br>RSS源创建器——可以从其它来源读取文本并将其以RSS或者Atom的格式发布出去。<br>实时股价——可以查询股票当前价格。用户可以设定数据刷新频率，程序会用绿色和红色的箭头表示股价走势。<br>访客留言簿/日志——允许人们添加评论或者日记，可以设置开启/关闭评论，并且可以记录下每一条目的时间。也可以做成喊话器。<br>新闻和比分播报器——一个桌面应用，可以从网上收集新闻和比赛分数，将结果在屏幕上滚动播出。<br>占星罗盘——用占星术来预测每天的运程。<br>密码短信——可以将数据加密解密，并能将其发送给朋友。<br>帮你挑礼物——输入一堆你可能会送的礼物，当有人过生日时，该程序会随机选择一样礼物。也可以加上一个额外功能，可以告知哪里可以弄到这个礼物。<br>HTML生成器——将 TEXT 文档转换成HTML文件，对制作网页HTML文档很有用。<br>CD-Key生成器——利用某种算法生成一个唯一的key。软件开发者可以用它来作为软件的激活器。<br>正则表达式查询工具——用户可以输入一段文本，在另外的控件里输入一个正则表达式。运行以后会返回匹配的内容或者正则表达式中的错误。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">练习题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java##分类/" class="article-tag-list-link color4">Java##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/">展开全文 >></a>
         </p>
       
 
@@ -320,100 +522,6 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/22/ubuntu彻底卸载软件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java的一百多个练手小项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/22/java的一百多个练手小项目/">java的一百多个练手小项目</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/22/java的一百多个练手小项目/" class="archive-article-date">
-  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文本操作</p>
-<blockquote>
-<p>逆转字符串——输入一个字符串，将其逆转并输出。<br>拉丁猪文字游戏——这是一个英语语言游戏。基本规则是将一个英语单词的第一个辅音音素的字母移动到词尾并且加上后缀-ay（譬如“banana”会变成“anana-bay”）。可以在维基百科上了解更多内容。<br>统计元音字母——输入一个字符串，统计处其中元音字母的数量。更复杂点的话统计出每个元音字母的数量。<br>判断是否为回文——判断用户输入的字符串是否为回文。回文是指正反拼写形式都是一样的词，譬如“racecar”。<br>统计字符串中的单词数目——统计字符串中单词的数目，更复杂的话从一个文本中读出字符串并生成单词数目统计结果。<br>文本编辑器——记事本类型的应用，可以打开、编辑、保存文本文档。可以增加单词高亮和其它的一些特性。<br>RSS源创建器——可以从其它来源读取文本并将其以RSS或者Atom的格式发布出去。<br>实时股价——可以查询股票当前价格。用户可以设定数据刷新频率，程序会用绿色和红色的箭头表示股价走势。<br>访客留言簿/日志——允许人们添加评论或者日记，可以设置开启/关闭评论，并且可以记录下每一条目的时间。也可以做成喊话器。<br>新闻和比分播报器——一个桌面应用，可以从网上收集新闻和比赛分数，将结果在屏幕上滚动播出。<br>占星罗盘——用占星术来预测每天的运程。<br>密码短信——可以将数据加密解密，并能将其发送给朋友。<br>帮你挑礼物——输入一堆你可能会送的礼物，当有人过生日时，该程序会随机选择一样礼物。也可以加上一个额外功能，可以告知哪里可以弄到这个礼物。<br>HTML生成器——将 TEXT 文档转换成HTML文件，对制作网页HTML文档很有用。<br>CD-Key生成器——利用某种算法生成一个唯一的key。软件开发者可以用它来作为软件的激活器。<br>正则表达式查询工具——用户可以输入一段文本，在另外的控件里输入一个正则表达式。运行以后会返回匹配的内容或者正则表达式中的错误。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">练习题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java##分类/" class="article-tag-list-link color4">Java##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/">展开全文 >></a>
         </p>
       
 
@@ -687,6 +795,98 @@ socket_close ( $socket );
 
 
   
+    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
+  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
+<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MYSQL按时间范围查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -886,111 +1086,19 @@ sudo apt-get install ubuntu-tweak
 
 
   
-    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
+      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
-  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
-<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-PHP开发小技巧——显示错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP开发小技巧——显示错误/">PHP开发小技巧——显示错误</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP开发小技巧——显示错误/" class="archive-article-date">
+        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
   	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -998,12 +1106,33 @@ sudo apt-get install ubuntu-tweak
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在开发调试阶段，可以在代码的开头添加</p>
-<pre><code class="php">error_reporting(E_ALL);
-
-ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</span>);
+        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
+<p>原因一：采用int数据量小，便于提高数据库效率</p>
+<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
+<p>date(format,timestamp)进行转换</p>
+<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
+<p>PHP中要获取一个月前的时间戳可以这样用：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
 </code></pre>
-<p>来显示出php运行时的错误，不用去修改php.ini</p>
+<p>结果为：</p>
+<blockquote>
+<p>1429287142</p>
+</blockquote>
+<p>一年前的时间戳：</p>
+<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>1400343128</p>
+</blockquote>
+<p>转换成可读时间：</p>
+<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
+</code></pre>
+<p>结果为：</p>
+<blockquote>
+<p>2015-04-18</p>
+</blockquote>
+<p>由此可见，strtotime这个函数十分之强大</p>
 
       
 
@@ -1017,7 +1146,11 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
         		</li>
       		
 		</ul>
@@ -1038,105 +1171,7 @@ ini_set(<span class="string">'display_errors'</span>, <span class="string">'1'</
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP开发小技巧——显示错误/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在用PHP的时候发现PHP没有安装CURL拓展，于是打算用</p>
-<p>apt-get php5-curl去自动安装，却发现了这样的提示：</p>
-<p>php5-curl : 依赖: php5-common (= 5.5.9+dfsg-1ubuntu4) 但是 5.5.9+dfsg-1ubuntu4.14 正要被安装</p>
-<p>于是百度了很久，终于找到了答案，原来是DNS的问题，直接到系统文件中修改一下DNS：</p>
-<blockquote>
-<p>1.修改/etc/resolv.conf文件：为nameserver=8.8.8.8</p>
-<p>2.sudo rm /var/lib/apt/lists/* -vf</p>
-<p>3.sudo apt-get update</p>
-</blockquote>
-<p>搞定</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/ubuntu14.04关于Some index files failed to download. They have been ignored, or old ones used instead.的错误/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
         </p>
       
 
@@ -1456,6 +1491,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">PHP-X</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络协议</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
               </li>
             
             <div class="clearfix"></div>
