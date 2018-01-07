@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2016/03/30/JS获取URL中的query string/index.html">
 <meta property="og:site_name" content="江炜隆的后花园">
 <meta property="og:description" content="JQ获取query string">
-<meta property="og:updated_time" content="2017-06-17T05:09:08.891Z">
+<meta property="og:updated_time" content="2018-01-07T11:34:28.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS获取URL中的query string">
 <meta name="twitter:description" content="JQ获取query string">
@@ -181,7 +181,6 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
     <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
     <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
     <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;

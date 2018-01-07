@@ -854,7 +854,6 @@ apt-get install docker.io
     <div class="article-entry" itemprop="articleBody">
       
         <pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
-    <span class="keyword">var</span> reg = <span class="keyword">new</span>     <span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">key</span>)</span>{
     <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span>+key+<span class="string">"=([^&amp;]*)(&amp;|$)"</span>);
     <span class="keyword">var</span> result = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);
     <span class="keyword">return</span> result?<span class="built_in">decodeURIComponent</span>(result[<span class="number">2</span>]):<span class="literal">null</span>;
