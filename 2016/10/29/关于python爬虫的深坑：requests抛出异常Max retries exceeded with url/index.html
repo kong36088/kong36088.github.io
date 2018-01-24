@@ -15,7 +15,7 @@
 <meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2016/10/29/关于python爬虫的深坑：requests抛出异常Max retries exceeded with url/index.html">
 <meta property="og:site_name" content="江炜隆的后花园">
 <meta property="og:description" content="在写知乎爬虫中遇到的一些坑">
-<meta property="og:updated_time" content="2017-04-19T12:25:42.175Z">
+<meta property="og:updated_time" content="2018-01-24T08:58:00.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于python爬虫的深坑：requests抛出异常Max retries exceeded with url">
 <meta name="twitter:description" content="在写知乎爬虫中遇到的一些坑">
@@ -180,19 +180,15 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code class="bash">requests.packages.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=<span class="string">'www.zhihu.com'</span>, port=443): Max retries exceeded with url: /people/claire-98-77/about (Caused by NewConnectionError(<span class="string">'&lt;requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f2ee28c6588&gt;: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'</span>,))
-</code></pre>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">requests.packages.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=<span class="string">'www.zhihu.com'</span>, port=443): Max retries exceeded with url: /people/claire-98-77/about (Caused by NewConnectionError(<span class="string">'&lt;requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f2ee28c6588&gt;: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'</span>,))</div></pre></td></tr></table></figure>
 <p>在调试的过程中，不断抛出该错误，在google查了很久，总结如下：<br>http的连接数超过最大限制，默认的情况下连接是Keep-alive的，所以这就导致了服务器保持了太多连接而不能再新建连接<br>解决方案：</p>
 <p>解决一：<br>error trace is misleading it should be something like “No connection could be made because the target machine actively refused it”.</p>
-<p>因为目标地址拒绝连接而产生的异常</p>
-<pre><code class="python"><span class="keyword">try</span>:
-    page1 = requests.get(ap)
-<span class="keyword">except</span> requests.exceptions.ConnectionError:
-    r.status_code = <span class="string">"Connection refused"</span>
-</code></pre>
+<p>因为目标地址拒绝连接而产生的异常<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    page1 = requests.get(ap)</div><div class="line"><span class="keyword">except</span> requests.exceptions.ConnectionError:</div><div class="line">    r.status_code = <span class="string">"Connection refused"</span></div></pre></td></tr></table></figure></p>
 <p>解决二：<br><a id="more"></a></p>
 <p>产生的连接数过多而导致<code>Max retries exceeded</code><br>在header中不使用持久连接<br><code>&#39;Connection&#39;: &#39;close&#39;</code><br>或<br><code>requests.adapters.DEFAULT_RETRIES = 5</code></p>
-<p>解决三：<br>其实这个异常也有另一种可能性：<br>在使用<code>requests</code>库的时候，当连接失败时会自动发生重连，导致重连次数过多而引发异常<br>通常对于这种情况选择无视或跳过即可</p>
+<p>解决三：<br>其实这个异常也有另一种可能性：<br>在使用<code>requests</code>库的时候，由于请求失败而由程序本身发送重连连接的速度过快导致产生该错误。<br>减缓出错时重连的速度可能可以有效地解决这一个问题。</p>
+<p>具体可以参照一下这个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">page = <span class="string">''</span></div><div class="line"><span class="keyword">while</span> page == <span class="string">''</span>:</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        page = requests.get(url)</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        print(<span class="string">"Connection refused by the server.."</span>)</div><div class="line">        print(<span class="string">"Let me sleep for 5 seconds"</span>)</div><div class="line">        print(<span class="string">"ZZzzzz..."</span>)</div><div class="line">        time.sleep(<span class="number">5</span>)</div><div class="line">        print(<span class="string">"Was a nice sleep, now let me continue..."</span>)</div><div class="line">        <span class="keyword">continue</span></div></pre></td></tr></table></figure>
 <p>闲话~</p>
 <p>在python3中redis取出的值是以b’…….’的形式<br>可以像<code>redis_con.rpop(&quot;user_queue&quot;).decode(&#39;utf-8&#39;)</code>这样转换一下</p>
 

@@ -654,16 +654,10 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code class="bash">requests.packages.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=<span class="string">'www.zhihu.com'</span>, port=443): Max retries exceeded with url: /people/claire-98-77/about (Caused by NewConnectionError(<span class="string">'&lt;requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f2ee28c6588&gt;: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'</span>,))
-</code></pre>
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">requests.packages.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host=<span class="string">'www.zhihu.com'</span>, port=443): Max retries exceeded with url: /people/claire-98-77/about (Caused by NewConnectionError(<span class="string">'&lt;requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x7f2ee28c6588&gt;: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'</span>,))</div></pre></td></tr></table></figure>
 <p>在调试的过程中，不断抛出该错误，在google查了很久，总结如下：<br>http的连接数超过最大限制，默认的情况下连接是Keep-alive的，所以这就导致了服务器保持了太多连接而不能再新建连接<br>解决方案：</p>
 <p>解决一：<br>error trace is misleading it should be something like “No connection could be made because the target machine actively refused it”.</p>
-<p>因为目标地址拒绝连接而产生的异常</p>
-<pre><code class="python"><span class="keyword">try</span>:
-    page1 = requests.get(ap)
-<span class="keyword">except</span> requests.exceptions.ConnectionError:
-    r.status_code = <span class="string">"Connection refused"</span>
-</code></pre>
+<p>因为目标地址拒绝连接而产生的异常<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    page1 = requests.get(ap)</div><div class="line"><span class="keyword">except</span> requests.exceptions.ConnectionError:</div><div class="line">    r.status_code = <span class="string">"Connection refused"</span></div></pre></td></tr></table></figure></p>
 <p>解决二：<br>
         
           <a class="article-more-a" href="/2016/10/29/关于python爬虫的深坑：requests抛出异常Max retries exceeded with url/#more">more >></a>
