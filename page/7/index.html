@@ -160,6 +160,114 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Linux下PHP源码编译安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/30/Linux下PHP源码编译安装/">Linux下PHP源码编译安装</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/30/Linux下PHP源码编译安装/" class="archive-article-date">
+  	<time datetime="2015-11-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>要用swoole，首先需要有PHP环境。由于swoole的某些特性，最好是能够从源码编译安装PHP，这样在使用过程中可以避免很多不必要的错误。PHP下载地址：<a href="http://php.net/" target="_blank" rel="external">PHP官网</a>在这里挑选你想用的版本即可。下载源码包后，解压至本地任意目录（保证读写权限），留待使用。安装PHP前，需要安装编译环境和PHP的相关依赖。下面是相关命令：Ubuntu环境下：<br>sudo apt-get install build-essential gcc g++ autoconf libiconv-hook-dev libmcrypt-dev libxml2-dev libmysqlclient-dev libcurl4-openssl-dev libjpeg8-dev libpng12-dev libfreetype6-dev<br>CentOS环境下：<br>yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers gd gd2 gd-devel gd2-devel perl-CPAN pcre-devel<br>（注：以上命令是我在实际使用中验证过的可以使用的，可能会和其他教程提供的命令不同）当上述命令执行后，即可开始安装PHP。命令如下：</p>
+<pre><code class="bash"><span class="built_in">cd</span> php-5.5.10/
+./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc/php --<span class="built_in">enable</span>-fpm --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-mysqlnd --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-sockets --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem  --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-zip --<span class="built_in">enable</span>-ftp --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-xml --<span class="built_in">enable</span>-mbstring --<span class="built_in">disable</span>-rpath --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-fileinfo --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-pcre-regex --with-iconv --with-zlib --with-mcrypt --with-gd --with-openssl --with-mhash --with-xmlrpc --with-curl --with-imap-ssl
+sudo make
+sudo make install
+sudo cp php.ini-development /etc/php/
+</code></pre>
+<p>至此，PHP已经成功安装，但是此时在终端里是无法直接通过php –version查看php版本的还需要将PHP的可执行目录添加到环境变量中。使用Vim/Sublime打开~/.bashrc，在末尾添加如下内容：</p>
+<pre><code class="bash"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/php/bin:<span class="variable">$PATH</span>
+<span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/php/sbin:<span class="variable">$PATH</span>
+</code></pre>
+<p>保存后，终端输入命令：</p>
+<pre><code class="bash"><span class="built_in">source</span> ~/.bashrc
+</code></pre>
+<p>此时即可通过php –version查看php版本，看到如下内容：</p>
+<blockquote>
+<p>PHP 5.5.10 (cli) (built: Apr 26 2014 09:46:14)<br>Copyright (c) 1997-2014 The PHP Group<br>Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies<br>即说明安装成功。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2015/11/30/Linux下PHP源码编译安装/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/30/Linux下PHP源码编译安装/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP分离curl header和body" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -360,100 +468,6 @@ print_r($response);
 
 
   
-    <article id="post-java的一百多个练手小项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/22/java的一百多个练手小项目/">java的一百多个练手小项目</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/22/java的一百多个练手小项目/" class="archive-article-date">
-  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文本操作</p>
-<blockquote>
-<p>逆转字符串——输入一个字符串，将其逆转并输出。<br>拉丁猪文字游戏——这是一个英语语言游戏。基本规则是将一个英语单词的第一个辅音音素的字母移动到词尾并且加上后缀-ay（譬如“banana”会变成“anana-bay”）。可以在维基百科上了解更多内容。<br>统计元音字母——输入一个字符串，统计处其中元音字母的数量。更复杂点的话统计出每个元音字母的数量。<br>判断是否为回文——判断用户输入的字符串是否为回文。回文是指正反拼写形式都是一样的词，譬如“racecar”。<br>统计字符串中的单词数目——统计字符串中单词的数目，更复杂的话从一个文本中读出字符串并生成单词数目统计结果。<br>文本编辑器——记事本类型的应用，可以打开、编辑、保存文本文档。可以增加单词高亮和其它的一些特性。<br>RSS源创建器——可以从其它来源读取文本并将其以RSS或者Atom的格式发布出去。<br>实时股价——可以查询股票当前价格。用户可以设定数据刷新频率，程序会用绿色和红色的箭头表示股价走势。<br>访客留言簿/日志——允许人们添加评论或者日记，可以设置开启/关闭评论，并且可以记录下每一条目的时间。也可以做成喊话器。<br>新闻和比分播报器——一个桌面应用，可以从网上收集新闻和比赛分数，将结果在屏幕上滚动播出。<br>占星罗盘——用占星术来预测每天的运程。<br>密码短信——可以将数据加密解密，并能将其发送给朋友。<br>帮你挑礼物——输入一堆你可能会送的礼物，当有人过生日时，该程序会随机选择一样礼物。也可以加上一个额外功能，可以告知哪里可以弄到这个礼物。<br>HTML生成器——将 TEXT 文档转换成HTML文件，对制作网页HTML文档很有用。<br>CD-Key生成器——利用某种算法生成一个唯一的key。软件开发者可以用它来作为软件的激活器。<br>正则表达式查询工具——用户可以输入一段文本，在另外的控件里输入一个正则表达式。运行以后会返回匹配的内容或者正则表达式中的错误。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">练习题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Java##分类/" class="article-tag-list-link color4">Java##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-ubuntu彻底卸载软件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -522,6 +536,100 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/22/ubuntu彻底卸载软件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-java的一百多个练手小项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/22/java的一百多个练手小项目/">java的一百多个练手小项目</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/22/java的一百多个练手小项目/" class="archive-article-date">
+  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文本操作</p>
+<blockquote>
+<p>逆转字符串——输入一个字符串，将其逆转并输出。<br>拉丁猪文字游戏——这是一个英语语言游戏。基本规则是将一个英语单词的第一个辅音音素的字母移动到词尾并且加上后缀-ay（譬如“banana”会变成“anana-bay”）。可以在维基百科上了解更多内容。<br>统计元音字母——输入一个字符串，统计处其中元音字母的数量。更复杂点的话统计出每个元音字母的数量。<br>判断是否为回文——判断用户输入的字符串是否为回文。回文是指正反拼写形式都是一样的词，譬如“racecar”。<br>统计字符串中的单词数目——统计字符串中单词的数目，更复杂的话从一个文本中读出字符串并生成单词数目统计结果。<br>文本编辑器——记事本类型的应用，可以打开、编辑、保存文本文档。可以增加单词高亮和其它的一些特性。<br>RSS源创建器——可以从其它来源读取文本并将其以RSS或者Atom的格式发布出去。<br>实时股价——可以查询股票当前价格。用户可以设定数据刷新频率，程序会用绿色和红色的箭头表示股价走势。<br>访客留言簿/日志——允许人们添加评论或者日记，可以设置开启/关闭评论，并且可以记录下每一条目的时间。也可以做成喊话器。<br>新闻和比分播报器——一个桌面应用，可以从网上收集新闻和比赛分数，将结果在屏幕上滚动播出。<br>占星罗盘——用占星术来预测每天的运程。<br>密码短信——可以将数据加密解密，并能将其发送给朋友。<br>帮你挑礼物——输入一堆你可能会送的礼物，当有人过生日时，该程序会随机选择一样礼物。也可以加上一个额外功能，可以告知哪里可以弄到这个礼物。<br>HTML生成器——将 TEXT 文档转换成HTML文件，对制作网页HTML文档很有用。<br>CD-Key生成器——利用某种算法生成一个唯一的key。软件开发者可以用它来作为软件的激活器。<br>正则表达式查询工具——用户可以输入一段文本，在另外的控件里输入一个正则表达式。运行以后会返回匹配的内容或者正则表达式中的错误。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">练习题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Java##分类/" class="article-tag-list-link color4">Java##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/22/java的一百多个练手小项目/">展开全文 >></a>
         </p>
       
 
@@ -795,98 +903,6 @@ socket_close ( $socket );
 
 
   
-    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
-  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
-<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
-        
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-MYSQL按时间范围查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1086,54 +1102,31 @@ sudo apt-get install ubuntu-tweak
 
 
   
-    <article id="post-关于PHP对于时间存取的理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-PHP爬虫（红满堂）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/关于PHP对于时间存取的理解/">关于PHP对于时间存取的理解</a>
+      <a class="article-title" href="/2015/11/16/PHP爬虫（红满堂）/">PHP爬虫（红满堂）</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/关于PHP对于时间存取的理解/" class="archive-article-date">
-  	<time datetime="2015-11-16T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+        <a href="/2015/11/16/PHP爬虫（红满堂）/" class="archive-article-date">
+  	<time datetime="2015-11-16T12:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在使用PHP存取时间时，数据库表尽量使用int(10)这种类型，而不要使用datetime。</p>
-<p>原因一：采用int数据量小，便于提高数据库效率</p>
-<p>原因二：在进行提取时间操作的时候时间可以进行任意转换，可以通过php自带的函数</p>
-<p>date(format,timestamp)进行转换</p>
-<p>在储存数据的时候同样，可以利用函数strtotime转换成UNIX时间戳，然后作为int存入数据库，灵活变换</p>
-<p>PHP中要获取一个月前的时间戳可以这样用：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 month"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1429287142</p>
-</blockquote>
-<p>一年前的时间戳：</p>
-<pre><code class="php">strtotime(<span class="string">"-1 year"</span>)
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>1400343128</p>
-</blockquote>
-<p>转换成可读时间：</p>
-<pre><code class="php">date(<span class="string">"Y-m-d"</span>,strtotime(<span class="string">"-1 month"</span>))
-</code></pre>
-<p>结果为：</p>
-<blockquote>
-<p>2015-04-18</p>
-</blockquote>
-<p>由此可见，strtotime这个函数十分之强大</p>
-
+        <p>红满堂链接：<a href="http://hometown.scau.edu.cn/bbs/forum.php" target="_blank" rel="external">http://hometown.scau.edu.cn/bbs/forum.php</a></p>
+<p>献上源码（爬虫的关键是正则表达式的编写），按板块分类出文章标题和URL地址：</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/#more">more >></a>
+        
       
 
       
@@ -1146,11 +1139,11 @@ sudo apt-get install ubuntu-tweak
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ThinkPHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">验证码</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
         		</li>
       		
 		</ul>
@@ -1171,7 +1164,7 @@ sudo apt-get install ubuntu-tweak
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/关于PHP对于时间存取的理解/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（红满堂）/">展开全文 >></a>
         </p>
       
 

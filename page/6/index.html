@@ -160,6 +160,132 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-微信客服接口（主动向用户推送消息）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/30/微信客服接口（主动向用户推送消息）/">微信客服接口（主动向用户推送消息）</a>
+    </h1>
+  
+
+        
+        <a href="/2016/01/30/微信客服接口（主动向用户推送消息）/" class="archive-article-date">
+  	<time datetime="2016-01-30T15:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<pre><code class="php"><span class="function"><span class="keyword">function</span> <span class="title">http_post_data</span><span class="params">($url, $data)</span> </span>{
+    $curl = curl_init ();
+    curl_setopt ( $curl, CURLOPT_URL, $url );
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, <span class="keyword">FALSE</span> );
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, <span class="keyword">FALSE</span> );
+    curl_setopt ( $curl, CURLOPT_POST, <span class="number">1</span> );
+    curl_setopt ( $curl, CURLOPT_POSTFIELDS, $data );
+    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span> );
+    $result = curl_exec ( $curl );
+    <span class="keyword">if</span> (curl_errno ( $curl )) {
+        <span class="keyword">return</span> <span class="string">'Errno'</span> . curl_error ( $curl );
+    }
+    curl_close ( $curl );
+    <span class="keyword">return</span> $result;
+}
+
+$url = <span class="string">'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='</span> . ACCESS_TOKEN;
+$data = json_encode ( <span class="keyword">array</span> (
+        <span class="string">"touser"</span> =&gt; <span class="string">"oUc9GvzIY4ZZkb5yxIY8zGTUS0kI"</span>,
+        <span class="string">"msgtype"</span> =&gt; <span class="string">"text"</span>,
+        <span class="string">"text"</span> =&gt; <span class="keyword">array</span> (
+                <span class="string">"content"</span> =&gt; <span class="string">"abc"</span> 
+        ) 
+) );
+http_post_data($url,$data);
+</code></pre>
+<p>这里是利用curl来post数据到微信的服务器，其中需要access_token的支持，以下是access_token获取的方法</p>
+<pre><code class="php"><span class="function"><span class="keyword">function</span> <span class="title">get_access_token</span><span class="params">()</span> </span>{
+    $values = json_decode ( file_get_contents ( <span class="string">'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid='</span> . APPID . <span class="string">'&amp;secret='</span> . APPSECRET ) );
+    <span class="keyword">if</span> ($values) {
+        $access_token = $values-&gt;access_token;
+        <span class="keyword">return</span> $access_token;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+}
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">微信</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/01/30/微信客服接口（主动向用户推送消息）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ubuntu下apache开启SSL提示443端口被占用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1035,114 +1161,6 @@ NameVirtualHost *:443
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/12/04/无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系 解决办法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux下PHP源码编译安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/30/Linux下PHP源码编译安装/">Linux下PHP源码编译安装</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/30/Linux下PHP源码编译安装/" class="archive-article-date">
-  	<time datetime="2015-11-30T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>要用swoole，首先需要有PHP环境。由于swoole的某些特性，最好是能够从源码编译安装PHP，这样在使用过程中可以避免很多不必要的错误。PHP下载地址：<a href="http://php.net/" target="_blank" rel="external">PHP官网</a>在这里挑选你想用的版本即可。下载源码包后，解压至本地任意目录（保证读写权限），留待使用。安装PHP前，需要安装编译环境和PHP的相关依赖。下面是相关命令：Ubuntu环境下：<br>sudo apt-get install build-essential gcc g++ autoconf libiconv-hook-dev libmcrypt-dev libxml2-dev libmysqlclient-dev libcurl4-openssl-dev libjpeg8-dev libpng12-dev libfreetype6-dev<br>CentOS环境下：<br>yum -y install gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers gd gd2 gd-devel gd2-devel perl-CPAN pcre-devel<br>（注：以上命令是我在实际使用中验证过的可以使用的，可能会和其他教程提供的命令不同）当上述命令执行后，即可开始安装PHP。命令如下：</p>
-<pre><code class="bash"><span class="built_in">cd</span> php-5.5.10/
-./configure --prefix=/usr/<span class="built_in">local</span>/php --with-config-file-path=/etc/php --<span class="built_in">enable</span>-fpm --<span class="built_in">enable</span>-pcntl --<span class="built_in">enable</span>-mysqlnd --<span class="built_in">enable</span>-opcache --<span class="built_in">enable</span>-sockets --<span class="built_in">enable</span>-sysvmsg --<span class="built_in">enable</span>-sysvsem  --<span class="built_in">enable</span>-sysvshm --<span class="built_in">enable</span>-shmop --<span class="built_in">enable</span>-zip --<span class="built_in">enable</span>-ftp --<span class="built_in">enable</span>-soap --<span class="built_in">enable</span>-xml --<span class="built_in">enable</span>-mbstring --<span class="built_in">disable</span>-rpath --<span class="built_in">disable</span>-debug --<span class="built_in">disable</span>-fileinfo --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-pcre-regex --with-iconv --with-zlib --with-mcrypt --with-gd --with-openssl --with-mhash --with-xmlrpc --with-curl --with-imap-ssl
-sudo make
-sudo make install
-sudo cp php.ini-development /etc/php/
-</code></pre>
-<p>至此，PHP已经成功安装，但是此时在终端里是无法直接通过php –version查看php版本的还需要将PHP的可执行目录添加到环境变量中。使用Vim/Sublime打开~/.bashrc，在末尾添加如下内容：</p>
-<pre><code class="bash"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/php/bin:<span class="variable">$PATH</span>
-<span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/php/sbin:<span class="variable">$PATH</span>
-</code></pre>
-<p>保存后，终端输入命令：</p>
-<pre><code class="bash"><span class="built_in">source</span> ~/.bashrc
-</code></pre>
-<p>此时即可通过php –version查看php版本，看到如下内容：</p>
-<blockquote>
-<p>PHP 5.5.10 (cli) (built: Apr 26 2014 09:46:14)<br>Copyright (c) 1997-2014 The PHP Group<br>Zend Engine v2.5.0, Copyright (c) 1998-2014 Zend Technologies<br>即说明安装成功。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2015/11/30/Linux下PHP源码编译安装/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/30/Linux下PHP源码编译安装/">展开全文 >></a>
         </p>
       
 

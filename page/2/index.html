@@ -160,6 +160,105 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP内核源码阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/12/PHP内核源码阅读笔记/">PHP内核源码阅读笔记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/12/PHP内核源码阅读笔记/" class="archive-article-date">
+  	<time datetime="2017-01-12T11:15:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个工作一直拖延了很久，终于有时间拿出来写写。<br>本文主要是根据“TIPI深入理解PHP内核”一书进行阅读和分析</p>
+<h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>可以利用辅助的工具进行php代码阅读<br>例如vim或者sublimetext，重量级的可以用eclipse或者phpstorm这样的工具<br>本人用的是phpstorm进行代码阅读，CTRL+鼠标点击可以找到变量的定义位置，十分之方便</p>
+<h2 id="PG"><a href="#PG" class="headerlink" title="PG"></a>PG</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ZTS</span></div><div class="line"><span class="meta"># <span class="meta-keyword">define</span> PG(v) TSRMG(core_globals_id, php_core_globals *, v)</span></div><div class="line"><span class="keyword">extern</span> PHPAPI <span class="keyword">int</span> core_globals_id;</div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta"># <span class="meta-keyword">define</span> PG(v) (core_globals.v)</span></div><div class="line"><span class="keyword">extern</span> ZEND_API <span class="class"><span class="keyword">struct</span> _<span class="title">php_core_globals</span> <span class="title">core_globals</span>;</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p><code>PG</code>用于定义或获取全局变量<br><code>ZTS</code>是线程安全的标记</p>
+<p>在<code>main/php_globalsh</code>中定义了宏<code>PG</code>和结构体<code>_php_core_globals</code>，用于存放一些常用到的全局参数<br>举例如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">php_core_globals</span> &#123;</span></div><div class="line">	······省略</div><div class="line"></div><div class="line">    <span class="keyword">char</span> *user_ini_filename;    <span class="comment">//  用户的ini文件名</span></div><div class="line">    <span class="keyword">long</span> user_ini_cache_ttl;    <span class="comment">//  ini缓存过期限制</span></div><div class="line"></div><div class="line">    <span class="keyword">char</span> *request_order;    <span class="comment">//  优先级比variables_order高，在request变量生成时用到，个人觉得是历史遗留问题</span></div><div class="line"></div><div class="line">    zend_bool mail_x_header;    <span class="comment">//  仅在ext/standard/mail.c文件中使用，</span></div><div class="line">    <span class="keyword">char</span> *mail_log;</div><div class="line"></div><div class="line">    zend_bool in_error_log;</div><div class="line"></div><div class="line">    ········省略</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+        
+          <a class="article-more-a" href="/2017/01/12/PHP内核源码阅读笔记/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">内核</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/12/PHP内核源码阅读笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CodeIgniter源码阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -998,108 +1097,6 @@ php Delete.php
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/08/28/Swoole中的几个进程：Reactor、Worker、Task/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux——awk、sed、grep（鸟哥的私房菜）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/">linux——awk、sed、grep（鸟哥的私房菜）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/" class="archive-article-date">
-  	<time datetime="2016-08-19T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h1><pre><code class="bash">[dmtsai@study ~]$ grep [-A] [-B] [--color=auto] <span class="string">'搜尋字串'</span> filename
-選項與參數：
--A ：後面可加數字，為 after 的意思，除了列出該行外，後續的 n 行也列出來；
--B ：後面可加數字，為 befer 的意思，除了列出該行外，前面的 n 行也列出來；
---color=auto 可將正確的那個擷取資料列出顏色
-</code></pre>
-<p>範例一：用 dmesg 列出核心訊息，再以 grep 找出內含 qxl 那行</p>
-<pre><code class="bash">[dmtsai@study ~]$ dmesg | grep <span class="string">'qxl'</span>
-[    0.522749] [drm] qxl: 16M of VRAM memory size
-[    0.522750] [drm] qxl: 63M of IO pages memory ready (VRAM domain)
-[    0.522750] [drm] qxl: 32M of Surface memory size
-[    0.650714] fbcon: qxldrmfb (fb0) is primary device
-[    0.668487] qxl 0000:00:02.0: fb0: qxldrmfb frame buffer device
-<span class="comment"># dmesg 可列出核心產生的訊息！包括硬體偵測的流程也會顯示出來。</span>
-<span class="comment"># 鳥哥使用的顯卡是 QXL 這個虛擬卡，透過 grep 來 qxl 的相關資訊，可發現如上資訊。</span>
-</code></pre>
-        
-          <a class="article-more-a" href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/08/19/linux——awk、sed、grep（鸟哥的私房菜）/">展开全文 >></a>
         </p>
       
 

@@ -160,19 +160,19 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Sphinx的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-dirname(__FILE__) 的使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/Sphinx的安装/">Sphinx的安装</a>
+      <a class="article-title" href="/2015/11/16/dirname(__FILE__) 的使用总结/">dirname(__FILE__) 的使用总结</a>
     </h1>
   
 
         
-        <a href="/2015/11/16/Sphinx的安装/" class="archive-article-date">
+        <a href="/2015/11/16/dirname(__FILE__) 的使用总结/" class="archive-article-date">
   	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
 </a>
         
@@ -180,18 +180,19 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Sphinx不推荐在windows下使用</p>
-<p>在ubuntu和debian关于Sphinx的安装有两种途径，一种是通过deb包安装，另一种则是通过PPA的途径</p>
-<p>Deb包:</p>
-<p>利用apt-get安装libpq5拓展</p>
-<pre><code class="bash">$ sudo apt-get install mysql-client unixodbc libpq5
+        <p>dirname(<strong>FILE</strong>)<br>php中定义了一个很有用的常数，即<br><strong>file</strong></p>
+<p>这个内定常数是当前php程序的就是完整路径（路径+文件名）。</p>
+<p>即使这个文件被其他文件引用(include或require)，<strong>file</strong>始终是它所在文件的完整路径，而不是引用它的那个文件完整路径。</p>
+<p>请看下面例子：<br>/home/data/demo/test/a.php</p>
+<pre><code class="php">$the_full_name=<span class="keyword">__FILE__</span>;
+$the_dir=dirname(<span class="keyword">__FILE__</span>);
+<span class="keyword">echo</span> $the_full_name; <span class="comment">//返回/home/data/demo/test/a.php</span>
+<span class="keyword">echo</span> $the_dir;            <span class="comment">//返回/home/data/demo/test</span>
 </code></pre>
-<p>安装deb包</p>
-<pre><code class="bash">$ sudo dpkg -i sphinxsearch_2.3.1-beta-0ubuntu11~trusty_amd64.deb
-</code></pre>
-        
-          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/#more">more >></a>
-        
+<blockquote>
+<p><strong>FILE</strong>     返回当前 路径+文件名<br>dirname(<strong>FILE</strong>) 返回当前文件路径的 路径部分<br>dirname(dirname(<strong>FILE</strong>));得到的是文件上一层目录名（不含最后一个“/”号）</p>
+</blockquote>
+
       
 
       
@@ -204,7 +205,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Sphnix</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		
 		</ul>
@@ -216,7 +217,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Sphnix##分类/" class="article-tag-list-link color1">Sphnix##分类</a>
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
         		</li>
       		
 		</ul>
@@ -225,7 +226,7 @@ var _hmt = _hmt || [];
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/">展开全文 >></a>
+          <a class="article-more-a" href="/2015/11/16/dirname(__FILE__) 的使用总结/">展开全文 >></a>
         </p>
       
 
@@ -347,102 +348,6 @@ var _hmt = _hmt || [];
 
 
   
-    <article id="post-dirname(__FILE__) 的使用总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/16/dirname(__FILE__) 的使用总结/">dirname(__FILE__) 的使用总结</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/16/dirname(__FILE__) 的使用总结/" class="archive-article-date">
-  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>dirname(<strong>FILE</strong>)<br>php中定义了一个很有用的常数，即<br><strong>file</strong></p>
-<p>这个内定常数是当前php程序的就是完整路径（路径+文件名）。</p>
-<p>即使这个文件被其他文件引用(include或require)，<strong>file</strong>始终是它所在文件的完整路径，而不是引用它的那个文件完整路径。</p>
-<p>请看下面例子：<br>/home/data/demo/test/a.php</p>
-<pre><code class="php">$the_full_name=<span class="keyword">__FILE__</span>;
-$the_dir=dirname(<span class="keyword">__FILE__</span>);
-<span class="keyword">echo</span> $the_full_name; <span class="comment">//返回/home/data/demo/test/a.php</span>
-<span class="keyword">echo</span> $the_dir;            <span class="comment">//返回/home/data/demo/test</span>
-</code></pre>
-<blockquote>
-<p><strong>FILE</strong>     返回当前 路径+文件名<br>dirname(<strong>FILE</strong>) 返回当前文件路径的 路径部分<br>dirname(dirname(<strong>FILE</strong>));得到的是文件上一层目录名（不含最后一个“/”号）</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/16/dirname(__FILE__) 的使用总结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-JS破解微信防盗链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -513,6 +418,193 @@ $(<span class="string">'#content'</span>).append(<span class="string">'&lt;ifram
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/16/JS破解微信防盗链/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PHP爬虫（信软官网）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/PHP爬虫（信软官网）/">PHP爬虫（信软官网）</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/PHP爬虫（信软官网）/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>信软官网：<a href="http://info.scau.edu.cn" target="_blank" rel="external">点我</a></p>
+<p>源码：</p>
+        
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/PHP爬虫（信软官网）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Sphinx的安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/16/Sphinx的安装/">Sphinx的安装</a>
+    </h1>
+  
+
+        
+        <a href="/2015/11/16/Sphinx的安装/" class="archive-article-date">
+  	<time datetime="2015-11-16T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Sphinx不推荐在windows下使用</p>
+<p>在ubuntu和debian关于Sphinx的安装有两种途径，一种是通过deb包安装，另一种则是通过PPA的途径</p>
+<p>Deb包:</p>
+<p>利用apt-get安装libpq5拓展</p>
+<pre><code class="bash">$ sudo apt-get install mysql-client unixodbc libpq5
+</code></pre>
+<p>安装deb包</p>
+<pre><code class="bash">$ sudo dpkg -i sphinxsearch_2.3.1-beta-0ubuntu11~trusty_amd64.deb
+</code></pre>
+        
+          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Sphnix</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Sphnix##分类/" class="article-tag-list-link color1">Sphnix##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/11/16/Sphinx的安装/">展开全文 >></a>
         </p>
       
 

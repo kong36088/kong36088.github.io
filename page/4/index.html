@@ -160,6 +160,99 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Centos7下搭建gogs" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/24/Centos7下搭建gogs/">Centos7下搭建gogs</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/24/Centos7下搭建gogs/" class="archive-article-date">
+  	<time datetime="2016-05-24T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="新建用户"><a href="#新建用户" class="headerlink" title="新建用户"></a>新建用户</h1><p>Gogs 默认以 git 用户运行。<br>运行 <code>sudo adduser git</code> 新建好 git 用户。<br><code>su git</code> 以 <code>git</code> 用户登录，到 git 用户的主目录中新建好 <code>.ssh</code> 文件夹。<br>完成</p>
+<h1 id="下载二进制代码"><a href="#下载二进制代码" class="headerlink" title="下载二进制代码"></a>下载二进制代码</h1><p>在 <a href="https://gogs.io/docs/installation/install_from_binary" target="_blank" rel="external">这里</a> 可以根据系统下载二进制代码<br>之后解压到任意地方，在这里我选择解压到<code>/home/git</code> 下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ls /home/git/gogs/</div><div class="line">$ custom  data  gogs  LICENSE  <span class="built_in">log</span>  public  README.md  README_ZH.md  scripts  templates</div><div class="line">$ <span class="comment">#这里给把gogs目录权限赋予git用户</span></div><div class="line">$ sudo chown -R git:git /home/git/gogs/</div><div class="line">$ sudo chmod -R 760 /home/git/gogs/</div></pre></td></tr></table></figure></p>
+<h1 id="运行安装"><a href="#运行安装" class="headerlink" title="运行安装"></a>运行安装</h1><p>首先安装数据库，这里我们安装mariadb，在centos7中mariadb代替了mysql</p>
+        
+          <a class="article-more-a" href="/2016/05/24/Centos7下搭建gogs/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">gogs</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/gogs##分类/" class="article-tag-list-link color4">gogs##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/24/Centos7下搭建gogs/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-在JS中对异步数据请求进行封装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -991,99 +1084,6 @@ apt-get install docker.io
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/03/30/JS刷新页面的几种方式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CSRF攻击以及防范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/29/CSRF攻击以及防范/">CSRF攻击以及防范</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/29/CSRF攻击以及防范/" class="archive-article-date">
-  	<time datetime="2016-03-29T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CSRF简介"><a href="#CSRF简介" class="headerlink" title="CSRF简介"></a>CSRF简介</h1><p>CSRF一种网站的攻击方式，黑客利用网站对用户的信任进行伪造请求进而发出非用户发出的请求<br>简而言之，伪造用户的身份发出表单请求</p>
-<p>下面看一个例子：<br>一个网站用户Bob可能正在浏览聊天论坛，而同时另一个用户Alice也在此论坛中，并且后者刚刚发布了一个具有Bob银行链接的图片消息。设想一下，Alice编写了一个在Bob的银行站点上进行取款的form提交的链接，并将此链接作为图片src。如果Bob的银行在cookie中保存他的授权信息，并且此cookie没有过期，那么当Bob的浏览器尝试装载图片时将提交这个取款form和他的cookie，这样在没经Bob同意的情况下便授权了这次事务。</p>
-<p><img src="/uploads/CSRF.jpg" alt="CSRF攻击图例"></p>
-<p>可见这对于用户或系统都是严重的破坏，造成用户利益损失，账户被盗等。</p>
-<h1 id="几种CSRF的防范方法"><a href="#几种CSRF的防范方法" class="headerlink" title="几种CSRF的防范方法"></a>几种CSRF的防范方法</h1><h3 id="一、-在表单中加入一个cookie的Hash值"><a href="#一、-在表单中加入一个cookie的Hash值" class="headerlink" title="一、 在表单中加入一个cookie的Hash值"></a>一、 在表单中加入一个cookie的Hash值</h3><pre><code class="php">$value=<span class="string">"someValueHere"</span>;
-setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number">3600</span>);
-</code></pre>
-        
-          <a class="article-more-a" href="/2016/03/29/CSRF攻击以及防范/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/29/CSRF攻击以及防范/">展开全文 >></a>
         </p>
       
 

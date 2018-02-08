@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/kong36088/kong36088.github.io">
-  <title>ubuntu彻底卸载软件 | 江炜隆的后花园</title>
+  <title>江炜隆的后花园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在ubuntu中安装软件后通常想卸载都会卸载得不干净，以下献上把软件完全卸载干净的方法">
-<meta name="keywords" content="Ubuntu,卸载软件##文章关键词，多关键词格式为 keyword1,keywords2,...">
+  <meta name="description" content="title: MemCache源码探索categories: 网络协议##分类tags: [网络协议,计算机网络,WebSocket]##标签，多标签格式为 [tag1,tag2,…]keywords: 网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,…date: 2017/02/06 19:50:21—C 结构介绍MemCache分为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu彻底卸载软件">
-<meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2015/11/22/ubuntu彻底卸载软件/index.html">
+<meta property="og:title" content="江炜隆的后花园">
+<meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2018/02/06/Memcache源码探索/index.html">
 <meta property="og:site_name" content="江炜隆的后花园">
-<meta property="og:description" content="在ubuntu中安装软件后通常想卸载都会卸载得不干净，以下献上把软件完全卸载干净的方法">
-<meta property="og:updated_time" content="2016-11-03T15:34:22.092Z">
+<meta property="og:description" content="title: MemCache源码探索categories: 网络协议##分类tags: [网络协议,计算机网络,WebSocket]##标签，多标签格式为 [tag1,tag2,…]keywords: 网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,…date: 2017/02/06 19:50:21—C 结构介绍MemCache分为">
+<meta property="og:image" content="https://github.com/uploads/memcache/structs.jpg">
+<meta property="og:updated_time" content="2018-02-08T13:53:45.006Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu彻底卸载软件">
-<meta name="twitter:description" content="在ubuntu中安装软件后通常想卸载都会卸载得不干净，以下献上把软件完全卸载干净的方法">
+<meta name="twitter:title" content="江炜隆的后花园">
+<meta name="twitter:description" content="title: MemCache源码探索categories: 网络协议##分类tags: [网络协议,计算机网络,WebSocket]##标签，多标签格式为 [tag1,tag2,…]keywords: 网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,…date: 2017/02/06 19:50:21—C 结构介绍MemCache分为">
+<meta name="twitter:image" content="https://github.com/uploads/memcache/structs.jpg">
   
   
     <link rel="icon" href="/uploads/site/logo.jpg">
@@ -160,35 +161,33 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ubuntu彻底卸载软件" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Memcache源码探索" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      ubuntu彻底卸载软件
-    </h1>
-  
-
-        
-        <a href="/2015/11/22/ubuntu彻底卸载软件/" class="archive-article-date">
-  	<time datetime="2015-11-22T07:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-22</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在ubuntu中安装软件后通常想卸载都会卸载得不干净，以下献上把软件完全卸载干净的方法<br>首先找到你想卸载的软件：software（这个是你想要卸载的软件的名称）<br>然后打开teminal执行以下命令</p>
-<pre><code class="bash">sudo apt-get purge software
-</code></pre>
-<p>purge参数为彻底删除文件,然后执行</p>
-<pre><code class="bash">sudo apt-get autoremove software
-sudo apt-get clean software
-dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg -P software
-</code></pre>
-<p>这些命令之后就可以彻底卸载干净软件了</p>
+        <p>title: MemCache源码探索<br>categories: 网络协议##分类<br>tags: [网络协议,计算机网络,WebSocket]##标签，多标签格式为 [tag1,tag2,…]<br>keywords: 网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,…<br>date: 2017/02/06 19:50:21<br>—C</p>
+<h1 id="结构介绍"><a href="#结构介绍" class="headerlink" title="结构介绍"></a>结构介绍</h1><p>MemCache分为几个结构：<br><code>slab_class</code>、<code>slab</code>、<code>page</code>、<code>chunk</code></p>
+<p><img src="/uploads/memcache/structs.jpg" alt="structs"></p>
+<p><code>slab_class</code>：拥有同样chunk大小的slab被组织在一起，成为slab_class</p>
+<p><code>slab</code>：MemCache将内存空间分为一组slab，slab下面是若干个chunk</p>
+<p><code>chunk</code>：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。</p>
+<p>MemCache中的value过来存放的地方是由value的大小决定的，value总是会被存放到与chunk大小最接近的一个slab中，比如slabclass[1]的chunk大小为80字节、slabclass[2]的chunk大小为100字节、slabclass[3]的chunk大小为128字节（相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例），那么过来一个88字节的value，这个value将被放到2号slab中。放slab的时候，首先slab要申请内存，申请内存是以page为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的page被分配给该slab。申请到page后，slab会将这个page的内存按chunk的大小进行切分，这样就变成了一个chunk数组，最后从这个chunk数组中选择一个用于存储数据。</p>
+<h2 id="slab-class"><a href="#slab-class" class="headerlink" title="slab_class"></a>slab_class</h2><p>循着 <code>slabs_init()</code> 方法看下去发现，slab_class的个数是有限制的，数值定义在 <code>memcached.h</code> 文件当中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slab class max is a 6-bit number, -1. */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUMBER_OF_SLAB_CLASSES (63 + 1)</span></div></pre></td></tr></table></figure>
+<p>数值是直接写死的，也就是说我们没有办法改变它。</p>
+<p>这里是slab_class结构的定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> size;      <span class="comment">/* sizes of items */</span> <span class="comment">/* item的大小 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> perslab;   <span class="comment">/* how many items per slab */</span> <span class="comment">/* 每一个slab的item数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> *slots;           <span class="comment">/* list of item ptrs */</span>  <span class="comment">/* 空闲item(被回收的item)链表的指针 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> sl_curr;   <span class="comment">/* total free items in list */</span> <span class="comment">/* 空闲item的总数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> slabs;     <span class="comment">/* how many slabs were allocated for this class */</span> <span class="comment">/* 在这个slabclass中已分配slab的数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> **slab_list;       <span class="comment">/* array of slab pointers */</span>  <span class="comment">/* slab数组 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> list_size; <span class="comment">/* size of prev array */</span>      <span class="comment">/* 前一个数组的大小 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> killing;  <span class="comment">/* index+1 of dying slab, or zero if none */</span></div><div class="line">    <span class="keyword">size_t</span> requested; <span class="comment">/* The number of requested bytes */</span>  <span class="comment">/* 被访问到的字节数 */</span></div><div class="line">&#125; <span class="keyword">slabclass_t</span>;</div></pre></td></tr></table></figure>
+<p>main函数十分的长，有一千多到两千行的代码。其中有很大一部分是在解析命令行传入的参数，并且对全局的settings变量进行设置。</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> &#123;</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> *<span class="title">next</span>;</span>     <span class="comment">/* points within its own chain. */</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> *<span class="title">prev</span>;</span>     <span class="comment">/* can potentially point to the head. */</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">stritem</span>  *<span class="title">head</span>;</span>     <span class="comment">/* always points to the owner chunk */</span></div><div class="line">    <span class="keyword">int</span>              size;      <span class="comment">/* available chunk space in bytes */</span></div><div class="line">    <span class="keyword">int</span>              used;      <span class="comment">/* chunk space used */</span></div><div class="line">    <span class="keyword">int</span>              nbytes;    <span class="comment">/* used. */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span>   refcount;  <span class="comment">/* used? */</span></div><div class="line">    <span class="keyword">uint8_t</span>          orig_clsid; <span class="comment">/* For obj hdr chunks slabs_clsid is fake. */</span></div><div class="line">    <span class="keyword">uint8_t</span>          it_flags;  <span class="comment">/* ITEM_* above. */</span></div><div class="line">    <span class="keyword">uint8_t</span>          slabs_clsid; <span class="comment">/* Same as above. */</span></div><div class="line">    <span class="keyword">char</span> data[];</div><div class="line">&#125; item_chunk;</div></pre></td></tr></table></figure>
+<p>未完待续。。。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><p><a href="https://www.csdn.net/article/2016-03-16/2826609" target="_blank" rel="external">https://www.csdn.net/article/2016-03-16/2826609</a></p>
+</li>
+<li><p><a href="http://www.programering.com/a/MzM3MjMwATU.html" target="_blank" rel="external">http://www.programering.com/a/MzM3MjMwATU.html</a></p>
+</li>
+</ul>
 
       
 
@@ -228,33 +227,7 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Ubuntu</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux##分类/" class="article-tag-list-link color5">Linux##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -304,7 +277,7 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/kong36088/kong36088.github.io/2015/11/22/ubuntu彻底卸载软件/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/kong36088/kong36088.github.io/2018/02/06/Memcache源码探索/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,18 +291,9 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
   
 <nav id="article-nav">
   
-    <a href="/2015/11/25/计算机网络——应用层的协议总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          计算机网络——应用层的协议总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/11/22/java的一百多个练手小项目/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">java的一百多个练手小项目</div>
+    <a href="/2017/12/26/WebSocket协议小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WebSocket协议小记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -359,7 +323,7 @@ dpkg -l |grep ^rc|awk <span class="string">'{print $2}'</span> |sudo xargs dpkg 
   
 
   
-  <div id="SOHUCS" sid="ubuntu彻底卸载软件" ></div> 
+  <div id="SOHUCS" sid="Memcache源码探索" ></div> 
 <script type="text/javascript"> 
 (function(){ 
 var appid = "cyt9hYOky"; 

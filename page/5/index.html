@@ -160,6 +160,99 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CSRF攻击以及防范" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/29/CSRF攻击以及防范/">CSRF攻击以及防范</a>
+    </h1>
+  
+
+        
+        <a href="/2016/03/29/CSRF攻击以及防范/" class="archive-article-date">
+  	<time datetime="2016-03-29T06:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CSRF简介"><a href="#CSRF简介" class="headerlink" title="CSRF简介"></a>CSRF简介</h1><p>CSRF一种网站的攻击方式，黑客利用网站对用户的信任进行伪造请求进而发出非用户发出的请求<br>简而言之，伪造用户的身份发出表单请求</p>
+<p>下面看一个例子：<br>一个网站用户Bob可能正在浏览聊天论坛，而同时另一个用户Alice也在此论坛中，并且后者刚刚发布了一个具有Bob银行链接的图片消息。设想一下，Alice编写了一个在Bob的银行站点上进行取款的form提交的链接，并将此链接作为图片src。如果Bob的银行在cookie中保存他的授权信息，并且此cookie没有过期，那么当Bob的浏览器尝试装载图片时将提交这个取款form和他的cookie，这样在没经Bob同意的情况下便授权了这次事务。</p>
+<p><img src="/uploads/CSRF.jpg" alt="CSRF攻击图例"></p>
+<p>可见这对于用户或系统都是严重的破坏，造成用户利益损失，账户被盗等。</p>
+<h1 id="几种CSRF的防范方法"><a href="#几种CSRF的防范方法" class="headerlink" title="几种CSRF的防范方法"></a>几种CSRF的防范方法</h1><h3 id="一、-在表单中加入一个cookie的Hash值"><a href="#一、-在表单中加入一个cookie的Hash值" class="headerlink" title="一、 在表单中加入一个cookie的Hash值"></a>一、 在表单中加入一个cookie的Hash值</h3><pre><code class="php">$value=<span class="string">"someValueHere"</span>;
+setcookie(<span class="string">"cookie"</span>,$value,time()+<span class="number">3600</span>);
+</code></pre>
+        
+          <a class="article-more-a" href="/2016/03/29/CSRF攻击以及防范/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/03/29/CSRF攻击以及防范/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-centos6、centos7通过yum方式安装php7" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1021,132 +1114,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2016/02/06/python百度图片爬虫/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微信客服接口（主动向用户推送消息）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/30/微信客服接口（主动向用户推送消息）/">微信客服接口（主动向用户推送消息）</a>
-    </h1>
-  
-
-        
-        <a href="/2016/01/30/微信客服接口（主动向用户推送消息）/" class="archive-article-date">
-  	<time datetime="2016-01-30T15:50:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-01-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a>
-<pre><code class="php"><span class="function"><span class="keyword">function</span> <span class="title">http_post_data</span><span class="params">($url, $data)</span> </span>{
-    $curl = curl_init ();
-    curl_setopt ( $curl, CURLOPT_URL, $url );
-    curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, <span class="keyword">FALSE</span> );
-    curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, <span class="keyword">FALSE</span> );
-    curl_setopt ( $curl, CURLOPT_POST, <span class="number">1</span> );
-    curl_setopt ( $curl, CURLOPT_POSTFIELDS, $data );
-    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span> );
-    $result = curl_exec ( $curl );
-    <span class="keyword">if</span> (curl_errno ( $curl )) {
-        <span class="keyword">return</span> <span class="string">'Errno'</span> . curl_error ( $curl );
-    }
-    curl_close ( $curl );
-    <span class="keyword">return</span> $result;
-}
-
-$url = <span class="string">'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='</span> . ACCESS_TOKEN;
-$data = json_encode ( <span class="keyword">array</span> (
-        <span class="string">"touser"</span> =&gt; <span class="string">"oUc9GvzIY4ZZkb5yxIY8zGTUS0kI"</span>,
-        <span class="string">"msgtype"</span> =&gt; <span class="string">"text"</span>,
-        <span class="string">"text"</span> =&gt; <span class="keyword">array</span> (
-                <span class="string">"content"</span> =&gt; <span class="string">"abc"</span> 
-        ) 
-) );
-http_post_data($url,$data);
-</code></pre>
-<p>这里是利用curl来post数据到微信的服务器，其中需要access_token的支持，以下是access_token获取的方法</p>
-<pre><code class="php"><span class="function"><span class="keyword">function</span> <span class="title">get_access_token</span><span class="params">()</span> </span>{
-    $values = json_decode ( file_get_contents ( <span class="string">'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid='</span> . APPID . <span class="string">'&amp;secret='</span> . APPSECRET ) );
-    <span class="keyword">if</span> ($values) {
-        $access_token = $values-&gt;access_token;
-        <span class="keyword">return</span> $access_token;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-}
-</code></pre>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">微信</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/PHP##分类/" class="article-tag-list-link color3">PHP##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/01/30/微信客服接口（主动向用户推送消息）/">展开全文 >></a>
         </p>
       
 
