@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/kong36088/kong36088.github.io">
-  <title>Tag: WebSocket | 江炜隆的后花园</title>
+  <title>MemCache源码探索 | 江炜隆的后花园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="努力写出诗一样的代码。记录我的码农生涯~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="江炜隆的后花园">
-<meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/tags/WebSocket/index.html">
+  <meta name="description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
+<meta name="keywords" content="网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MemCache源码探索">
+<meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2018/02/06/Memcache源码探索/index.html">
 <meta property="og:site_name" content="江炜隆的后花园">
-<meta property="og:description" content="努力写出诗一样的代码。记录我的码农生涯~">
+<meta property="og:description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
+<meta property="og:image" content="https://github.com/uploads/memcache/structs.png">
+<meta property="og:image" content="https://github.com/uploads/memcache/slab.png">
+<meta property="og:updated_time" content="2018-02-09T08:21:28.215Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="江炜隆的后花园">
-<meta name="twitter:description" content="努力写出诗一样的代码。记录我的码农生涯~">
+<meta name="twitter:title" content="MemCache源码探索">
+<meta name="twitter:description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
+<meta name="twitter:image" content="https://github.com/uploads/memcache/structs.png">
   
   
     <link rel="icon" href="/uploads/site/logo.jpg">
@@ -158,36 +163,96 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Memcache源码探索" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      MemCache源码探索
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/06/Memcache源码探索/" class="archive-article-date">
+
+        
+        <a href="/2018/02/06/Memcache源码探索/" class="archive-article-date">
   	<time datetime="2018-02-06T11:50:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/06/Memcache源码探索/">MemCache源码探索</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="结构介绍"><a href="#结构介绍" class="headerlink" title="结构介绍"></a>结构介绍</h1><p>MemCache有几种结构概念：<br><code>slab_class</code>、<code>slab</code>、<code>chunk</code></p>
+<p><img src="/uploads/memcache/structs.png" alt="structs"></p>
+<p><img src="/uploads/memcache/slab.png" alt="slab"></p>
+<p><code>slab_class</code>：拥有同样chunk大小的slab被组织在一起，成为slab_class。</p>
+<p><code>slab</code>：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。</p>
+<p><code>chunk</code>：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-f指定，默认1.25，起始大小为48字节；</p>
+<p>MemCache中的value过来存放的地方是由value的大小决定的，value总是会被存放到与chunk大小最接近的一个slab中，比如slabclass[1]的chunk大小为80字节、slabclass[2]的chunk大小为100字节、slabclass[3]的chunk大小为128字节（相邻slab_class内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例），那么过来一个88字节的value，这个value将被放到2号slab中。放slab的时候，首先slab要申请内存，申请内存是以slab为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的内存被分配给该slab。申请到后，slab会将内存按chunk的大小进行切分，这样就变成了一个chunk数组，最后从这个chunk数组中选择一个用于存储数据。</p>
+<h2 id="slab-class"><a href="#slab-class" class="headerlink" title="slab_class"></a>slab_class</h2><p>循着 <code>slabs_init()</code> 方法看下去发现，slab_class的个数是有限制的，数值定义在 <code>memcached.h</code> 文件当中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slab class max is a 6-bit number, -1. */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUMBER_OF_SLAB_CLASSES (63 + 1)</span></div></pre></td></tr></table></figure>
+<p>数值是直接写死的，也就是说我们没有办法改变它。当然我们也没有必要去修改他，因为chunk最大值是有限制的，最大不可以超过slab的大小（不然如果chunk超过了slab的大小，slab还怎么放得下这个chunk呢？）。同时默认的设置中,item的最大值也是限制为了1MB</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">settings.item_size_max = <span class="number">1024</span> * <span class="number">1024</span>; <span class="comment">/* The famous 1MB upper limit. */</span></div></pre></td></tr></table></figure>
+<p>接下来我们看看slab_class的结构是怎么样的。这里是slab_class结构的定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> size;      <span class="comment">/* sizes of items */</span> <span class="comment">/* item的大小 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> perslab;   <span class="comment">/* how many items per slab */</span> <span class="comment">/* 每一个slab的item数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> *slots;           <span class="comment">/* list of item ptrs */</span>  <span class="comment">/* 空闲item(被回收的item)链表的指针 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> sl_curr;   <span class="comment">/* total free items in list */</span> <span class="comment">/* 空闲item的总数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> slabs;     <span class="comment">/* how many slabs were allocated for this class */</span> <span class="comment">/* 在这个slabclass中已分配slab的数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> **slab_list;       <span class="comment">/* array of slab pointers */</span>  <span class="comment">/* slab数组 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> list_size; <span class="comment">/* size of prev array */</span>      <span class="comment">/* 前一个数组的大小 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> killing;  <span class="comment">/* index+1 of dying slab, or zero if none */</span></div><div class="line">    <span class="keyword">size_t</span> requested; <span class="comment">/* The number of requested bytes */</span>  <span class="comment">/* 被访问到的字节数 */</span></div><div class="line">&#125; <span class="keyword">slabclass_t</span>;</div></pre></td></tr></table></figure>
+<p>main函数十分的长，有一千多到两千行的代码。其中有很大一部分是在解析命令行传入的参数，并且对全局的settings变量进行设置。</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> &#123;</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> *<span class="title">next</span>;</span>     <span class="comment">/* points within its own chain. */</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">strchunk</span> *<span class="title">prev</span>;</span>     <span class="comment">/* can potentially point to the head. */</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">stritem</span>  *<span class="title">head</span>;</span>     <span class="comment">/* always points to the owner chunk */</span></div><div class="line">    <span class="keyword">int</span>              size;      <span class="comment">/* available chunk space in bytes */</span></div><div class="line">    <span class="keyword">int</span>              used;      <span class="comment">/* chunk space used */</span></div><div class="line">    <span class="keyword">int</span>              nbytes;    <span class="comment">/* used. */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span>   refcount;  <span class="comment">/* used? */</span></div><div class="line">    <span class="keyword">uint8_t</span>          orig_clsid; <span class="comment">/* For obj hdr chunks slabs_clsid is fake. */</span></div><div class="line">    <span class="keyword">uint8_t</span>          it_flags;  <span class="comment">/* ITEM_* above. */</span></div><div class="line">    <span class="keyword">uint8_t</span>          slabs_clsid; <span class="comment">/* Same as above. */</span></div><div class="line">    <span class="keyword">char</span> data[];</div><div class="line">&#125; item_chunk;</div></pre></td></tr></table></figure>
+<p>未完待续。。。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>代码版本：</p>
+<p><code>MemCache 1.4.15</code></p>
+<p>这个是我阅读的源码版本，旧版的代码可读性比较强，同时也有童鞋对此版本代码做了比较详细的注释。</p>
+<p><a href="https://github.com/weiweikaikai/Mecached-Source-code-analysis">https://github.com/weiweikaikai/Mecached-Source-code-analysis</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><p><a href="https://www.csdn.net/article/2016-03-16/2826609" target="_blank" rel="external">https://www.csdn.net/article/2016-03-16/2826609</a></p>
+</li>
+<li><p><a href="http://www.programering.com/a/MzM3MjMwATU.html" target="_blank" rel="external">http://www.programering.com/a/MzM3MjMwATU.html</a></p>
+</li>
+<li><p><a href="http://blog.itpub.net/15480802/viewspace-1422370/" target="_blank" rel="external">http://blog.itpub.net/15480802/viewspace-1422370/</a></p>
+</li>
+<li><p><a href="https://github.com/weiweikaikai/Mecached-Source-code-analysis">https://github.com/weiweikaikai/Mecached-Source-code-analysis</a></p>
+</li>
+</ul>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/site/zhifubao-yilia.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/uploads/site/wechat-pay-yilia.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,7 +272,7 @@ var _hmt = _hmt || [];
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -220,84 +285,111 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://github.com/kong36088/kong36088.github.io/2018/02/06/Memcache源码探索/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/12/26/WebSocket协议小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WebSocket协议小记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/12/26/WebSocket协议小记/" class="archive-article-date">
-  	<time datetime="2017-12-26T13:52:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/12/26/WebSocket协议小记/">WebSocket协议小记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络协议</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WebSocket</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/网络协议##分类/" class="article-tag-list-link color4">网络协议##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+  <div id="SOHUCS" sid="Memcache源码探索" ></div> 
+<script type="text/javascript"> 
+(function(){ 
+var appid = "cyt9hYOky"; 
+var conf = "prod_9b69b5d78d5683fa65511cf5b3f45c5f"; 
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 960) { 
+window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("//changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+  
+
+  
 
 
           </div>
@@ -320,9 +412,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

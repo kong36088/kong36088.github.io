@@ -160,6 +160,114 @@ var _hmt = _hmt || [];
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Memcache源码探索" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/Memcache源码探索/">MemCache源码探索</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/Memcache源码探索/" class="archive-article-date">
+  	<time datetime="2018-02-06T11:50:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="结构介绍"><a href="#结构介绍" class="headerlink" title="结构介绍"></a>结构介绍</h1><p>MemCache有几种结构概念：<br><code>slab_class</code>、<code>slab</code>、<code>chunk</code></p>
+<p><img src="/uploads/memcache/structs.png" alt="structs"></p>
+<p><img src="/uploads/memcache/slab.png" alt="slab"></p>
+<p><code>slab_class</code>：拥有同样chunk大小的slab被组织在一起，成为slab_class。</p>
+<p><code>slab</code>：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。</p>
+<p><code>chunk</code>：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-f指定，默认1.25，起始大小为48字节；</p>
+<p>MemCache中的value过来存放的地方是由value的大小决定的，value总是会被存放到与chunk大小最接近的一个slab中，比如slabclass[1]的chunk大小为80字节、slabclass[2]的chunk大小为100字节、slabclass[3]的chunk大小为128字节（相邻slab_class内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例），那么过来一个88字节的value，这个value将被放到2号slab中。放slab的时候，首先slab要申请内存，申请内存是以slab为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的内存被分配给该slab。申请到后，slab会将内存按chunk的大小进行切分，这样就变成了一个chunk数组，最后从这个chunk数组中选择一个用于存储数据。</p>
+<h2 id="slab-class"><a href="#slab-class" class="headerlink" title="slab_class"></a>slab_class</h2><p>循着 <code>slabs_init()</code> 方法看下去发现，slab_class的个数是有限制的，数值定义在 <code>memcached.h</code> 文件当中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slab class max is a 6-bit number, -1. */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUMBER_OF_SLAB_CLASSES (63 + 1)</span></div></pre></td></tr></table></figure>
+<p>数值是直接写死的，也就是说我们没有办法改变它。当然我们也没有必要去修改他，因为chunk最大值是有限制的，最大不可以超过slab的大小（不然如果chunk超过了slab的大小，slab还怎么放得下这个chunk呢？）。同时默认的设置中,item的最大值也是限制为了1MB</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">settings.item_size_max = <span class="number">1024</span> * <span class="number">1024</span>; <span class="comment">/* The famous 1MB upper limit. */</span></div></pre></td></tr></table></figure>
+<p>接下来我们看看slab_class的结构是怎么样的。这里是slab_class结构的定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> size;      <span class="comment">/* sizes of items */</span> <span class="comment">/* item的大小 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> perslab;   <span class="comment">/* how many items per slab */</span> <span class="comment">/* 每一个slab的item数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> *slots;           <span class="comment">/* list of item ptrs */</span>  <span class="comment">/* 空闲item(被回收的item)链表的指针 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> sl_curr;   <span class="comment">/* total free items in list */</span> <span class="comment">/* 空闲item的总数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> slabs;     <span class="comment">/* how many slabs were allocated for this class */</span> <span class="comment">/* 在这个slabclass中已分配slab的数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> **slab_list;       <span class="comment">/* array of slab pointers */</span>  <span class="comment">/* slab数组 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> list_size; <span class="comment">/* size of prev array */</span>      <span class="comment">/* 前一个数组的大小 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> killing;  <span class="comment">/* index+1 of dying slab, or zero if none */</span></div><div class="line">    <span class="keyword">size_t</span> requested; <span class="comment">/* The number of requested bytes */</span>  <span class="comment">/* 被访问到的字节数 */</span></div><div class="line">&#125; <span class="keyword">slabclass_t</span>;</div></pre></td></tr></table></figure>
+<p>main函数十分的长，有一千多到两千行的代码。其中有很大一部分是在解析命令行传入的参数，并且对全局的settings变量进行设置。</p>
+        
+          <a class="article-more-a" href="/2018/02/06/Memcache源码探索/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络协议</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WebSocket</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/网络协议##分类/" class="article-tag-list-link color4">网络协议##分类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/Memcache源码探索/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-WebSocket协议小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -935,112 +1043,6 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/02/15/Ubuntu Docker升级以及设置加速器（业界良心）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Memcache源码探索" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/06/Memcache源码探索/">MemCache源码探索</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/06/Memcache源码探索/" class="archive-article-date">
-  	<time datetime="2017-02-06T11:50:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="结构介绍"><a href="#结构介绍" class="headerlink" title="结构介绍"></a>结构介绍</h1><p>MemCache分为几个结构：<br><code>slab_class</code>、<code>slab</code>、<code>page</code>、<code>chunk</code></p>
-<p><img src="/uploads/memcache/structs.jpg" alt="structs"></p>
-<p><code>slab_class</code>：拥有同样chunk大小的slab被组织在一起，成为slab_class</p>
-<p><code>slab</code>：MemCache将内存空间分为一组slab，slab下面是若干个chunk</p>
-<p><code>chunk</code>：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。</p>
-<p>MemCache中的value过来存放的地方是由value的大小决定的，value总是会被存放到与chunk大小最接近的一个slab中，比如slabclass[1]的chunk大小为80字节、slabclass[2]的chunk大小为100字节、slabclass[3]的chunk大小为128字节（相邻slab内的chunk基本以1.25为比例进行增长，MemCache启动时可以用-f指定这个比例），那么过来一个88字节的value，这个value将被放到2号slab中。放slab的时候，首先slab要申请内存，申请内存是以page为单位的，所以在放入第一个数据的时候，无论大小为多少，都会有1M大小的page被分配给该slab。申请到page后，slab会将这个page的内存按chunk的大小进行切分，这样就变成了一个chunk数组，最后从这个chunk数组中选择一个用于存储数据。</p>
-<h2 id="slab-class"><a href="#slab-class" class="headerlink" title="slab_class"></a>slab_class</h2><p>循着 <code>slabs_init()</code> 方法看下去发现，slab_class的个数是有限制的，数值定义在 <code>memcached.h</code> 文件当中。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* slab class max is a 6-bit number, -1. */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUMBER_OF_SLAB_CLASSES (63 + 1)</span></div></pre></td></tr></table></figure>
-<p>数值是直接写死的，也就是说我们没有办法改变它。</p>
-<p>这里是slab_class结构的定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> size;      <span class="comment">/* sizes of items */</span> <span class="comment">/* item的大小 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> perslab;   <span class="comment">/* how many items per slab */</span> <span class="comment">/* 每一个slab的item数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> *slots;           <span class="comment">/* list of item ptrs */</span>  <span class="comment">/* 空闲item(被回收的item)链表的指针 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> sl_curr;   <span class="comment">/* total free items in list */</span> <span class="comment">/* 空闲item的总数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> slabs;     <span class="comment">/* how many slabs were allocated for this class */</span> <span class="comment">/* 在这个slabclass中已分配slab的数量 */</span></div><div class="line"></div><div class="line">    <span class="keyword">void</span> **slab_list;       <span class="comment">/* array of slab pointers */</span>  <span class="comment">/* slab数组 */</span></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> list_size; <span class="comment">/* size of prev array */</span>      <span class="comment">/* 前一个数组的大小 */</span></div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> killing;  <span class="comment">/* index+1 of dying slab, or zero if none */</span></div><div class="line">    <span class="keyword">size_t</span> requested; <span class="comment">/* The number of requested bytes */</span>  <span class="comment">/* 被访问到的字节数 */</span></div><div class="line">&#125; <span class="keyword">slabclass_t</span>;</div></pre></td></tr></table></figure>
-<p>main函数十分的长，有一千多到两千行的代码。其中有很大一部分是在解析命令行传入的参数，并且对全局的settings变量进行设置。</p>
-        
-          <a class="article-more-a" href="/2017/02/06/Memcache源码探索/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络协议</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WebSocket</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/网络协议##分类/" class="article-tag-list-link color4">网络协议##分类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/06/Memcache源码探索/">展开全文 >></a>
         </p>
       
 
