@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/kong36088/kong36088.github.io">
-  <title>MemCache源码探索（一）——内存管理篇 | 江炜隆的后花园</title>
+  <title>MemCache源码探索 | 江炜隆的后花园</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
-<meta name="keywords" content="网络协议,计算机网络,WebSocket##文章关键词，多关键词格式为 keyword1,keywords2,...">
+<meta name="keywords" content="MemCache,源码,C##文章关键词，多关键词格式为 keyword1,keywords2,...">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MemCache源码探索（一）——内存管理篇">
+<meta property="og:title" content="MemCache源码探索">
 <meta property="og:url" content="https://github.com/kong36088/kong36088.github.io/2018/02/06/Memcache源码探索/index.html">
 <meta property="og:site_name" content="江炜隆的后花园">
 <meta property="og:description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
 <meta property="og:image" content="https://github.com/uploads/memcache/structs.png">
 <meta property="og:image" content="https://github.com/uploads/memcache/slab.png">
-<meta property="og:updated_time" content="2018-02-16T15:44:31.710Z">
+<meta property="og:updated_time" content="2018-02-19T14:22:27.605Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MemCache源码探索（一）——内存管理篇">
+<meta name="twitter:title" content="MemCache源码探索">
 <meta name="twitter:description" content="结构介绍MemCache有几种结构概念：slab_class、slab、chunk   slab_class：拥有同样chunk大小的slab被组织在一起，成为slab_class。 slab：MemCache将内存空间分为一组slab，slab下面是若干个chunk，默认大小为1M。 chunk：chunk是真正存储数据的地方，同一个slab里面chunk的大小是一样的。chunk的增长因子由-">
 <meta name="twitter:image" content="https://github.com/uploads/memcache/structs.png">
   
@@ -170,7 +170,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      MemCache源码探索（一）——内存管理篇
+      MemCache源码探索
     </h1>
   
 
@@ -207,6 +207,8 @@ var _hmt = _hmt || [];
 <p>未完待续。。。</p>
 <h1 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h1><p>由 <code>hash()</code> 方法计算出hv的值，然后 <code>primary_hashtable[hv &amp; hashmask(hashpower)] = item</code> 即为为hash表添加一个元素（item类型为 <code>item*</code>，类型为指针，减少hash表带来的开销）。<br>hashmask是一个宏，定义如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> hashsize(n) ((ub4)1&lt;&lt;(n))</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> hashmask(n) (hashsize(n)-1)</span></div></pre></td></tr></table></figure>
+<h1 id="cas属性"><a href="#cas属性" class="headerlink" title="cas属性"></a>cas属性</h1><p>cas即compare and set或者compare and swap,是实现乐观锁的一种技术，乐观锁是相对悲观锁来说的，所谓悲观锁是在数据处理过程中，完全锁定，这种能完全保证数据的一致性，但在多线程情况下，并发性能差，通常是使用各种锁技术实现；而乐观锁是通过版本号机制来实现数据一致性，过程中会使用CPU提供的原子操作指令，乐观锁能提高系统的并发性能，Memcached使用cas是保证数据的一致性，不是严格为了实现锁。</p>
+<p>Memcached是多客户端应用，在多个客户端修改同一个数据时，会出现相互覆盖的情况，在这种情况下，使用cas版本号验证，可以有效的保证数据的一致性，Memcached默认是打开cas属性的，每次存储数据时，都会生成其cas值并和item一起存储，后续的get操作会返回系统生成的cas值，在执行set等操作时，需要将cas值传入</p>
 <h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>代码版本：</p>
 <p><code>MemCache 1.4.15</code></p>
 <p>这个是我阅读的源码版本，旧版的代码可读性比较强，同时也有童鞋对此版本代码做了比较详细的注释，在此给大家分享一下。</p>
@@ -267,15 +269,15 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机网络</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">源码</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络协议</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WebSocket</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">MemCache</a>
         		</li>
       		
 		</ul>
@@ -287,7 +289,7 @@ var _hmt = _hmt || [];
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/网络协议##分类/" class="article-tag-list-link color4">网络协议##分类</a>
+        			<a href="/categories/MemCache##分类/" class="article-tag-list-link color3">MemCache##分类</a>
         		</li>
       		
 		</ul>
@@ -692,6 +694,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">WebSocket</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">MemCache</a>
               </li>
             
             <div class="clearfix"></div>
